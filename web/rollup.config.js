@@ -1,12 +1,13 @@
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
-import commonjs from '@rollup/plugin-commonjs';
-import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
+import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
-import json from '@rollup/plugin-json';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+const { preprocess } = require('./svelte.config');
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -31,6 +32,7 @@ export default {
         dev,
         hydratable: true,
         emitCss: true,
+        preprocess,
       }),
       resolve({
         browser: true,
@@ -40,33 +42,33 @@ export default {
       json(),
 
       legacy &&
-        babel({
-          extensions: ['.js', '.mjs', '.html', '.svelte'],
-          runtimeHelpers: true,
-          exclude: ['node_modules/@babel/**'],
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: '> 0.25%, not dead',
-              },
-            ],
+      babel({
+        extensions: ['.js', '.mjs', '.html', '.svelte'],
+        runtimeHelpers: true,
+        exclude: ['node_modules/@babel/**'],
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: '> 0.25%, not dead',
+            },
           ],
-          plugins: [
-            '@babel/plugin-syntax-dynamic-import',
-            [
-              '@babel/plugin-transform-runtime',
-              {
-                useESModules: true,
-              },
-            ],
+        ],
+        plugins: [
+          '@babel/plugin-syntax-dynamic-import',
+          [
+            '@babel/plugin-transform-runtime',
+            {
+              useESModules: true,
+            },
           ],
-        }),
+        ],
+      }),
 
       !dev &&
-        terser({
-          module: true,
-        }),
+      terser({
+        module: true,
+      }),
     ],
 
     onwarn,
@@ -83,6 +85,7 @@ export default {
       svelte({
         generate: 'ssr',
         dev,
+        preprocess,
       }),
       resolve({
         dedupe,
@@ -92,7 +95,7 @@ export default {
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||
-        Object.keys(process.binding('natives'))
+      Object.keys(process.binding('natives'))
     ),
 
     onwarn,
