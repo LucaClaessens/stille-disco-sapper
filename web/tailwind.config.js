@@ -3,6 +3,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
 
     purge: {
+        mode: 'all',
         content: ["./src/**/*.svelte", "./src/**/*.html"],
     },
     theme: {
