@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@sanity/cli": "^2.0.0",
+    "gsap": "^3.5.1",
     "lerna": "^3.14.0"
   }
 }

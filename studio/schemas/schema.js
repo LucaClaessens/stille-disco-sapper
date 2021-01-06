@@ -14,6 +14,7 @@ import bioPortableText from './objects/bioPortableText'
 import bodyPortableText from './objects/bodyPortableText'
 import excerptPortableText from './objects/excerptPortableText'
 import mainImage from './objects/mainImage'
+import sequenceImage from './objects/sequenceImage'
 
 
 
@@ -33,6 +34,7 @@ export default createSchema({
     category,
     author,
     mainImage,
+    sequenceImage,
     authorReference,
     bodyPortableText,
     bioPortableText,

@@ -27,6 +27,6 @@ export default {
           .url(),
         alt: node.alt,
       },
-    }),
+    })
   },
 };
