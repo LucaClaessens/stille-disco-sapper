@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/256c76ae-1e9a-49ee-87ec-7f63d07b35f8/deploy-status)](https://app.netlify.com/sites/stille-disco-sapper/deploys)
+
 # Stille disco
 
 _Fully customizable blog template with a Svelte.js front-end._
