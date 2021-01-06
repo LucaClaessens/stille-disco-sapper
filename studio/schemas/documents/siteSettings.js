@@ -26,11 +26,24 @@ export default {
       }
     },
     {
-      name: 'author',
-      type: 'reference',
-      description: 'Publish an author and set a reference to them here.',
-      title: 'Author',
-      to: [{ type: 'author' }]
+      name: 'sequence',
+      type: 'array',
+      title: 'Foto sequence',
+      of: [
+        {
+          type: 'sequenceImage'
+        }
+      ]
+    },
+    {
+      name: 'alt',
+      type: 'string',
+      title: 'Sequence alt',
+      description: 'Important for SEO and accessiblity.',
+      validation: Rule => Rule.error('You have to fill out the alternative text.').required(),
+      options: {
+        isHighlighted: true
+      }
     }
   ]
 }

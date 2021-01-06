@@ -1,5 +1,13 @@
 <script>
-  export let segment;
+  import gsap from "gsap";
+  import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+  import { onMount } from "svelte";
+
+  onMount(async () => {
+    const s = await import("scrollmagic");
+
+    ScrollMagicPluginGsap(s.default, gsap);
+  });
 </script>
 
 <style lang="postcss">
