@@ -51,6 +51,7 @@
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.11",
     "scrollmagic": "^2.0.8",
+    "scrollmagic-plugin-gsap": "^1.0.4",
     "svelte": "^3.20.1",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^4.6.1",
