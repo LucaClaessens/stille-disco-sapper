@@ -1,7 +1,5 @@
 [build]
-    functions = "functions"
-    publish = "web/__sapper__/export"
-    command = "npm run build"
+    functions = "/.netlify/functions/"
 [[redirects]]
     from = "/netlify/*"
     to="/.netlify/functions/:splat"

@@ -1,3 +1,4 @@
+
 export default {
     name: 'landingSettings',
     type: 'document',
@@ -5,24 +6,19 @@ export default {
     __experimental_actions: ['update', /* 'create', 'delete', */ 'publish'],
     fields: [
         {
-            name: 'sequence',
-            type: 'array',
-            title: 'Foto sequence',
-            of: [
-                {
-                    type: 'sequenceImage'
-                }
-            ]
-        },
-        {
-            name: 'alt',
+            name: 'caption',
             type: 'string',
-            title: 'Sequence alt',
-            description: 'Important for SEO and accessiblity.',
-            validation: Rule => Rule.error('You have to fill out the alternative text.').required(),
+            title: 'caption',
             options: {
-                isHighlighted: true
-            }
-        }
+                i18n: true,
+                base: 'en_US',
+                languages: ['en_US', 'nl_NL'],
+                css: (classNames) => `${classNames} custom-classname`,
+                messages: {
+                    loading: 'Loading languages...',
+                    missingTranslations: 'Missing translations message...',
+                },
+            },
+        },
     ]
 }

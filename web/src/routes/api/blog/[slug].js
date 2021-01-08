@@ -1,6 +1,6 @@
-import client from '../../../sanityClient'
+import client from '../../../sanityClient';
 
-export async function get (req, res) {
+export async function get(req, res) {
   try {
     // We have access to req.params.slug because the filename has [slug] in it.
     const { slug } = req.params;
@@ -29,6 +29,6 @@ export async function get (req, res) {
 
     res.end(JSON.stringify({
       message: err.message
-    }));  
+    }));
   }
 };

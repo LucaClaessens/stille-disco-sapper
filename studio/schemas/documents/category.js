@@ -13,5 +13,17 @@ export default {
       type: 'text',
       title: 'Description'
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      description: 'description'
+    },
+    prepare({ title = 'No title', description = 'No description' }) {
+      return {
+        title,
+        subtitle: description.slice(0, 50)
+      }
+    }
+  }
 }
