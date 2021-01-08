@@ -2,7 +2,7 @@ import { handler as getBooqableData } from './booqableData';
 
 exports.handler = async (event, context) => {
     if (event.httpMethod === 'GET') {
-        getBooqableData(event)
+        return getBooqableData(event);
     } else if (event.httpMethod === 'POST') {
         //... handle redirects or some ish like this
         return {

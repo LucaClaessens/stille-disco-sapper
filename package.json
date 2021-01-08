@@ -5,8 +5,7 @@
   "scripts": {
     "build": "lerna run build --parallel",
     "build-studio": "lerna bootstrap && (cd studio && npm run build)",
-    "build-web": "lerna bootstrap && (cd web && npm run export)",
-    "build-functions": "netlify-lambda build functions",
+    "build-web": "lerna bootstrap && netlify-lambda build functions && (cd web && npm run export)",
     "dev": "lerna run dev --parallel",
     "format": "lerna run format",
     "graphql-deploy": "lerna run graphql-deploy",
