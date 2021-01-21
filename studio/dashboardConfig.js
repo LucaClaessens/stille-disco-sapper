@@ -6,7 +6,7 @@ export default {
         templateRepoId: 'sanity-io/sanity-template-gatsby-blog'
       }
     },
-    {name: 'structure-menu'},
+    { name: 'structure-menu' },
     {
       name: 'project-info',
       options: {
@@ -39,15 +39,15 @@ export default {
             value: 'https://github.com/LucaClaessens/stille-disco-sapper',
             category: 'Code'
           },
-          {title: 'Frontend', value: 'https://stille-disco-sapper.netlify.app', category: 'apps'}
+          { title: 'Frontend', value: 'https://stille-disco-sapper.netlify.app', category: 'apps' }
         ]
       }
     },
-    {name: 'project-users', layout: {height: 'auto'}},
+    { name: 'project-users', layout: { height: 'auto' } },
     {
       name: 'document-list',
-      options: {title: 'Recent blog posts', order: '_createdAt desc', types: ['post']},
-      layout: {width: 'medium'}
+      options: { title: 'Recent blog posts', order: '_createdAt desc', types: ['post'] },
+      layout: { width: 'medium' }
     }
   ]
 }

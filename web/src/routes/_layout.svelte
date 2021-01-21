@@ -10,12 +10,12 @@
   });
 </script>
 
+<main class="h-full w-full overflow-hidden">
+  <slot />
+</main>
+
 <style lang="postcss">
   main {
     @apply bg-white;
   }
 </style>
-
-<main>
-  <slot />
-</main>

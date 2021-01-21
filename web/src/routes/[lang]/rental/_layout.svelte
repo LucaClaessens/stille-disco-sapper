@@ -1,0 +1,37 @@
+<script context="module">
+  import Banner from "../../../components/Banner.svelte";
+  import Footer from "../../../components/Footer.svelte";
+  import Header from "../../../components/Header.svelte";
+  import Radio from "../../../components/Radio.svelte";
+  import RegionLayout from "../../../components/RegionLayout.svelte";
+  import {
+    footerData,
+    globalSettings,
+    navigationData,
+  } from "./../../../stores/layout";
+  export async function preload({ params, path }) {
+    const { lang } = params;
+    return { lang, path };
+  }
+</script>
+
+<script>
+  export let lang;
+  export let path;
+</script>
+
+<RegionLayout {lang}>
+  <div slot="rental" class="w-full h-full">
+    <div class="h-full overflow-y-auto snap snap-y snap-mandatory">
+      <div class="snap-start">
+        <Header {lang} {path} {...$navigationData} />
+        <Banner {...$globalSettings.banner} />
+      </div>
+      <slot />
+      <Radio active={false} />
+      <div class="snap-end">
+        <Footer {lang} {...$footerData} />
+      </div>
+    </div>
+  </div>
+</RegionLayout>
