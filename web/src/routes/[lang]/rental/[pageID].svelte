@@ -31,8 +31,10 @@
   <SEO {host} {path} {seo} {lang} />
 </svelte:head>
 
-<BlockContent
-  blocks={content.body}
-  {serializers}
-  renderContainerOnSingleChild={true}
-/>
+{#if content.body}
+  <BlockContent blocks={content.body} {serializers} />
+{:else}
+  <div class="w-full h-full flex justify-center items-center">
+    <h2 class="text-3xl">404</h2>
+  </div>
+{/if}

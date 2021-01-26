@@ -12,6 +12,34 @@ export default {
             title: 'SEO'
         },
         {
+            name: "hero",
+            type: "object",
+            title: "Hero",
+            description: 'The first banner you see when landing on the rental page',
+            fields: [
+                {
+                    name: 'image',
+                    type: 'mainImage',
+                    title: 'Banner image'
+                },
+                {
+                    name: 'tagline',
+                    type: 'string',
+                    title: 'Tagline'
+                },
+                {
+                    name: 'body',
+                    type: 'text',
+                    title: 'Text body'
+                },
+                {
+                    name: 'buttonText',
+                    type: 'string',
+                    title: 'Button text'
+                }
+            ]
+        },
+        {
             name: 'body',
             type: 'blockPortableText',
             title: 'Body of the page'

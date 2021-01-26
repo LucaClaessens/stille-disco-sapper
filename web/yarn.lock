@@ -3160,6 +3160,10 @@ postcss@^8.1.6, postcss@^8.2.1, postcss@^8.2.2:
     nanoid "^3.1.20"
     source-map "^0.6.1"
 
+praecox-datepicker@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/praecox-datepicker/-/praecox-datepicker-1.0.4.tgz#77430e68a8192286ef6f37291bcab683d3b0d4da"
+
 pretty-hrtime@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
@@ -3591,6 +3595,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svelte-click-outside@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-click-outside/-/svelte-click-outside-1.0.0.tgz#94a823779e3613ae0bdadc53f26916fdd64cb09e"
+
 svelte-dev-helper@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/svelte-dev-helper/-/svelte-dev-helper-1.1.9.tgz#7d187db5c6cdbbd64d75a32f91b8998bde3273c3"
@@ -3622,6 +3630,10 @@ svelte-preprocess@^4.6.1:
     "@types/sass" "^1.16.0"
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
+
+svelte-slot-fill@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/svelte-slot-fill/-/svelte-slot-fill-0.1.0.tgz#cf9756b69dfe7259b83a46bec6138311575d2e6a"
 
 svelte@^3.20.1:
   version "3.31.2"

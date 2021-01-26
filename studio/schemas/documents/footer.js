@@ -49,6 +49,13 @@ export default {
                         required: true
                     },
                     {
+                        name: 'localHref',
+                        type: 'boolean',
+                        title: 'Local link (use i18n)',
+                        description: 'Defines whether or not to prefix the link with the user-selected language in the front-end',
+                        required: true,
+                    },
+                    {
                         name: 'link',
                         type: 'i18nLink',
                         title: 'Link',

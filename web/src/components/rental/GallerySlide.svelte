@@ -1,5 +1,6 @@
 <script>
   import { fade, fly } from "svelte/transition";
+  import ShrinkIn from "../ShrinkIn.svelte";
   import IntersectionObserver from "./../../components/IntersectionObserver.svelte";
   import { focusable } from "./../../core/directives/focusable";
   import serializeImage from "./../../utils/image/serializeImage";
@@ -14,20 +15,24 @@
   };
 </script>
 
-<article
-  use:focusable
-  class="bg-gradient-to-br from-red-pure via-green-pure to-blue-pure snap-center p-6 w-full h-full relative flex justify-{message.justify} items-{message.align}"
->
-  <IntersectionObserver let:intersecting once={true} top={700}>
+<article use:focusable class="snap-center p-6 w-full h-full relative">
+  <IntersectionObserver
+    let:intersecting
+    once={true}
+    top={700}
+    containerClasses="flex justify-{message.justify} items-{message.align}"
+  >
     {#if intersecting}
       <div class="absolute top-0 left-0 bottom-0 right-0 z-0">
-        <img
-          loading="lazy"
-          transition:fade={{ duration: 1000 }}
-          class="h-full w-full object-cover"
-          src={serializeImage(img)}
-          alt={img.alt}
-        />
+        <ShrinkIn>
+          <img
+            loading="lazy"
+            transition:fade={{ duration: 1000 }}
+            class="h-full w-full object-cover"
+            src={serializeImage(img)}
+            alt={img.alt}
+          />
+        </ShrinkIn>
       </div>
       <div
         transition:fly={{ y: -20, delay: 900, duration: 300 }}

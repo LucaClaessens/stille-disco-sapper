@@ -20,18 +20,15 @@
   export let path;
 </script>
 
-<RegionLayout {lang}>
-  <div slot="rental" class="w-full h-full">
-    <div class="h-full overflow-y-auto snap snap-y snap-mandatory">
-      <div class="snap-start">
-        <Header {lang} {path} {...$navigationData} />
-        <Banner {...$globalSettings.banner} />
-      </div>
-      <slot />
-      <Radio active={false} />
-      <div class="snap-end">
-        <Footer {lang} {...$footerData} />
-      </div>
-    </div>
+<RegionLayout {lang} {path}>
+  <div
+    slot="rental"
+    class="overflow-y-auto snap-y md:snap snap-proximity w-full h-full bg-gray-100"
+  >
+    <Header {lang} {path} {...$navigationData} />
+    <Banner {...$globalSettings.banner} />
+    <slot />
+    <Radio active={true} />
+    <Footer {lang} {...$footerData} />
   </div>
 </RegionLayout>

@@ -4,7 +4,13 @@ export async function get(req, res) {
     try {
         const { lang, collection, slug } = req.params;
         const filter = '*[_type == "page" && _lang == $lang && slug.current == $slug && parent == $collection][0]';
-        const settings = await client.fetch(filter, { lang, slug, collection });
+        const projection = `{
+            body[]{
+            ...,
+            location->
+            }
+        }`
+        const settings = await client.fetch(filter + projection, { lang, slug, collection });
         res.end(JSON.stringify({ ...settings }));
     } catch (err) {
         res.writeHead(500, {

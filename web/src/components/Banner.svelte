@@ -19,6 +19,7 @@
 
   function dispose() {
     active = false;
+    display = false;
     updateStorage(false);
   }
 

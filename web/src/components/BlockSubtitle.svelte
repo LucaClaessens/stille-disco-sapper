@@ -7,9 +7,5 @@
 </script>
 
 <h4 class="text-xl {usePadding ? 'p-6' : ''}">
-  <BlockContent
-    blocks={text}
-    {serializers}
-    renderContainerOnSingleChild={true}
-  />
+  <BlockContent blocks={text} {serializers} />
 </h4>

@@ -24,7 +24,7 @@
   on:change={updateLanguage}
   on:blur={updateLanguage}
   bind:value={lang}
-  class="block w-full py-2 pl-3 pr-8 border border-gray-300 dark:bg-black bg-white rounded-md shadow-sm">
+  class="block w-full py-2 pl-3 pr-8 border-none dark:bg-black bg-white rounded-md">
   <option value="en">English</option>
   <option value="nl">Nederlands</option>
   <option value="fr">Francais</option>

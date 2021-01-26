@@ -1,6 +1,7 @@
 <script>
   import { goto } from "@sapper/app";
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
   import projectLanguage from "../utils/i18n/projectLanguage";
   import { languages } from "./../../../studio/schemas/languages";
 
@@ -23,5 +24,12 @@
 </svelte:head>
 
 {#each languageParams as param}
-  <a href={param}>{param}</a>
+  <a href={param} class="hidden">{param}</a>
 {/each}
+
+<div
+  transition:fade
+  class="bg-black w-full h-full flex items-center justify-center"
+>
+  <p class="text-white">🙂</p>
+</div>

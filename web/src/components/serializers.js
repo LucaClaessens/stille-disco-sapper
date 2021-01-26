@@ -5,6 +5,7 @@ import serializeImage from './../utils/image/serializeImage';
 import Block from './Block.svelte';
 import BlockSubtitle from './BlockSubtitle.svelte';
 import BlockTitle from './BlockTitle.svelte';
+import CheckoutPreview from './CheckoutPreview.svelte';
 import ContactSection from './ContactSection.svelte';
 import I18nLink from "./I18nLink.svelte";
 import Image from './Image.svelte';
@@ -76,11 +77,25 @@ export default {
       childNodes: children,
       props: {
         ...node,
-        image: {
-          ...node.image,
-          url: serializeImage(node.image, 800)
+        location: {
+          ...node.location,
+          image: {
+            ...node.location.image,
+            url: serializeImage(node.location.image, 800)
+          }
         }
       }
     }),
+    checkoutPreview: ({ node, children }) => ({
+      component: CheckoutPreview,
+      childNodes: children,
+      props: {
+        ...node,
+        backgroundImage: {
+          ...node.backgroundImage,
+          url: serializeImage(node.backgroundImage, 800)
+        }
+      }
+    })
   },
 };

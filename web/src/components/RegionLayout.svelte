@@ -12,22 +12,9 @@
 </script>
 
 <script>
-  import { stores } from "@sapper/app";
-  import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import { activeSection, hoveredSection } from "./../stores/layout";
   import Radio from "./Radio.svelte";
-
-  const { page } = stores();
-
-  const unsubscribe = page.subscribe((page) => {
-    const { path, params } = page;
-    const { lang } = params;
-    const suffix = path.replace(`/${lang}/`, "");
-    const idx = suffix.indexOf("/") > -1 ? suffix.indexOf("/") : suffix.length;
-    const section = suffix.slice(0, idx) || null;
-    activeSection.set(section);
-  });
 
   export let lang;
 
@@ -50,14 +37,12 @@
       return activeRef === match ? "flex-2" : "flex-0";
     }
   };
-
-  onDestroy(unsubscribe);
 </script>
 
 <div
   id="landing"
   class="flex flex-col md:flex-row h-full w-full"
-  out:fade={{ delay: 300 }}
+  out:fade={{ delay: 500 }}
 >
   <div
     class="{scaleSection(
@@ -71,9 +56,7 @@
     on:mouseleave={leave}
   >
     {#if $activeSection !== "rental"}
-      <slot name="events">
-        <p>No content for the events slot provided</p>
-      </slot>
+      <slot name="events" />
     {/if}
   </div>
   {#if $activeSection !== "rental"}
@@ -92,9 +75,7 @@
     )} transition-all duration-500 flex justify-center items-center overflow-y-auto"
   >
     {#if $activeSection !== "events"}
-      <slot name="rental">
-        <p>No content for the rental slot provided</p>
-      </slot>
+      <slot name="rental" />
     {/if}
   </div>
 </div>

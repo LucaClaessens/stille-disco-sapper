@@ -45,14 +45,6 @@ export default {
                     },
                 ]
             }],
-        },
-        {
-            name: 'translations',
-            required: true,
-            type: 'array',
-            title: 'Translations',
-            description: 'A list of selectable translations',
-            of: []
-        },
+        }
     ],
 }

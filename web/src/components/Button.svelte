@@ -4,7 +4,7 @@
 
   export let invert = false;
   export let cta = false;
-  export let px = 2;
+  export let px = 6;
   export let py = 2;
   export let type = "button";
   export let disabled = false;
@@ -22,6 +22,6 @@
   on:click={(event) => dispatch("click", { target: event.target })}
   {type}
   {disabled}
-  class="disabled:opacity-50 rounded-md px-{px} py-{py} inline-flex items-center justify-center {colorClasses}">
+  class="rounded-md disabled:opacity-50 px-{px} py-{py} inline-flex items-center justify-center {colorClasses}">
   <slot>Button text</slot>
 </button>

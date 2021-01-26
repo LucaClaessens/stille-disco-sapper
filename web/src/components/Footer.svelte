@@ -1,4 +1,5 @@
 <script>
+  import { activeSection } from "./../stores/layout";
   import Link from "./Link.svelte";
 
   export let lang;
@@ -14,15 +15,17 @@
     <nav class="py-6">
       <ul>
         {#each links as link}
-          <li class="text-xl mb-2 font-light">
-            <Link
-              href={link.href.startsWith("http")
-                ? link.href
-                : `/${lang}${link.href}`}
-              target={link.target}
-            >{link.text}</Link
-            >
-          </li>
+          {#if link.visibility == "all" || link.visibility === $activeSection}
+            <li class="text-xl mb-2 font-light">
+              <Link
+                href={link.href.startsWith("http")
+                  ? link.href
+                  : `/${lang}${link.href}`}
+                target={link.target}
+              >{link.text}</Link
+              >
+            </li>
+          {/if}
         {/each}
       </ul>
     </nav>

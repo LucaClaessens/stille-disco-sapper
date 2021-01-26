@@ -20,13 +20,11 @@ export async function get(req, res) {
                 images,
                 "messages": messages[]{
                     startFrame,
-                    endFrame,
-                    message{
-                    align,
-                    justify,
-            				"button": heading[$lang]['button'],
-                    "text": heading[$lang]['text']
-                    }
+					endFrame,
+					"align": message.align,
+					"justify": message.justify,
+					"button": message.heading[$lang]['button'],
+					"text": message.heading[$lang]['text']
                 }
             }
           }`

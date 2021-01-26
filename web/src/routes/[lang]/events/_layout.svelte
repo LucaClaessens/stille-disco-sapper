@@ -15,7 +15,7 @@
   export let path;
 </script>
 
-<RegionLayout {lang}>
+<RegionLayout {lang} {path}>
   <div slot="events" class="w-full h-full flex flex-col">
     <Header {lang} {path} {...$navigationData} />
     <Banner {...$globalSettings.banner} />

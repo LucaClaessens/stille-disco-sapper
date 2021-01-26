@@ -1,9 +1,9 @@
 import S from '@sanity/desk-tool/structure-builder';
-import { MdDesktopMac, MdFolder, MdMenu, MdPermContactCalendar, MdPhoneAndroid, MdPublic, MdSettings, MdShoppingBasket, MdViewStream, MdWallpaper } from "react-icons/md";
+import { MdAddShoppingCart, MdDesktopMac, MdFolder, MdMenu, MdPermContactCalendar, MdPhoneAndroid, MdPublic, MdSettings, MdShoppingCart, MdViewStream, MdWallpaper } from "react-icons/md";
 import * as I18nS from 'sanity-plugin-intl-input/lib/structure';
 
 const hiddenDocTypes = listItem =>
-  !['page', 'product', 'landing', 'rental', 'navigation', 'location', 'footer', 'settings', 'events', 'sequence', 'gallery'].includes(listItem.getId())
+  !['page', 'product', 'landing', 'rental', 'navigation', 'location', 'footer', 'settings', 'events', 'sequence', 'gallery', 'checkout'].includes(listItem.getId())
 
 
 const i18nDocumentEditor = (documentId, schemaType, title) => S
@@ -75,8 +75,13 @@ export default () =>
             .child(documentEditor('gallery', 'gallery', 'Gallery')),
         ])),
       S.listItem()
+        .title('Checkout settings')
+        .icon(MdShoppingCart)
+        .schemaType('checkout')
+        .child(i18nDocumentEditor('checkout', 'checkout', 'Checkout')),
+      S.listItem()
         .title('Products')
-        .icon(MdShoppingBasket)
+        .icon(MdAddShoppingCart)
         .schemaType('product')
         .child(S.documentTypeList('product').title('Products')),
       S.listItem()

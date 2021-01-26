@@ -18,6 +18,12 @@ export default {
             description: 'Content of the tagline to show for the events page'
         },
         {
+            name: 'emptyStateText',
+            type: 'string',
+            title: 'Empty list text',
+            description: 'Text to be displayed when no events can be found'
+        },
+        {
             name: 'searchPlaceholder',
             type: 'string',
             title: 'Search placeholder',

@@ -1,5 +1,6 @@
 <script context="module">
   import { fly } from "svelte/transition";
+  import FadeInBottom from "../../../components/FadeInBottom.svelte";
   import Callout from "./../../../components/Callout.svelte";
   import EventList from "./../../../components/events/EventList.svelte";
   import SEO from "./../../../components/SEO.svelte";
@@ -34,15 +35,17 @@
 
   let offset = 0;
 
-  const events = [
-    { id: "5543c", date: "22 Feb", location: "Haarlem", venue: "Patronaat" },
-    { id: "3hgk", date: "29 Feb", location: "Amsterdam", venue: "Paradiso" },
-    { id: "3bg3", date: "29 Feb", location: "Eindhoven", venue: "Café de bie" },
-    { id: "3hg4", date: "29 Feb", location: "Aalst", venue: "Onder 't dak" },
-    { id: "4hgk", date: "29 Feb", location: "Rotterdam", venue: "Slinge yard" },
-    { id: "5hgk", date: "29 Feb", location: "Arnhem", venue: "Slootwaterhok" },
-    { id: "hhnk", date: "29 Feb", location: "Nijmegen", venue: "Hottentent" },
-  ];
+  // const events = [
+  //   { id: "5543c", date: "22 Feb", location: "Haarlem", venue: "Patronaat" },
+  //   { id: "3hgk", date: "29 Feb", location: "Amsterdam", venue: "Paradiso" },
+  //   { id: "3bg3", date: "29 Feb", location: "Eindhoven", venue: "Café de bie" },
+  //   { id: "3hg4", date: "29 Feb", location: "Aalst", venue: "Onder 't dak" },
+  //   { id: "4hgk", date: "29 Feb", location: "Rotterdam", venue: "Slinge yard" },
+  //   { id: "5hgk", date: "29 Feb", location: "Arnhem", venue: "Slootwaterhok" },
+  //   { id: "hhnk", date: "29 Feb", location: "Nijmegen", venue: "Hottentent" },
+  // ];
+
+  let events = [];
 
   $: py = offset <= 10 ? 24 : 12;
   $: activeEventIndex = events.findIndex((e) => e.id === eid);
@@ -60,7 +63,7 @@
   {#if activeEventIndex === -1}
     <span transition:fly={{ duration: 500, y: -500 }}>
       <Callout px={6} {py}>
-        <h3 class="text-2xl">{content.tagline}</h3>
+        <h3 class="text-2xl"><FadeInBottom>{content.tagline}</FadeInBottom></h3>
       </Callout>
     </span>
   {/if}
@@ -70,12 +73,18 @@
     id="events"
     class="p-6 flex-1"
   >
-    <EventList
-      {lang}
-      {events}
-      placeholder={content.searchPlaceholder}
-      ticketButtonText={content.ticketButtonText}
-      {activeEventIndex}
-    />
+    {#if events.length > 0}
+      <EventList
+        {lang}
+        {events}
+        placeholder={content.searchPlaceholder}
+        ticketButtonText={content.ticketButtonText}
+        {activeEventIndex}
+      />
+    {:else}
+      <div class="w-full h-full flex justify-center items-center">
+        <p>{content.emptyStateText}</p>
+      </div>
+    {/if}
   </section>
 </div>

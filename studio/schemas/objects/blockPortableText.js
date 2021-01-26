@@ -75,6 +75,9 @@ export default {
         },
         {
             type: 'mainImage'
+        },
+        {
+            type: 'checkoutPreview'
         }
     ]
 }

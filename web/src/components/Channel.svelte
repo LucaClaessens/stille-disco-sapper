@@ -25,16 +25,29 @@
   on:mouseenter={() => dispatch("focus", { key })}
   on:focus={() => dispatch("focus", { key })}
   id="channel-{key}"
-  class="hover:opacity-75 transition-all bg-{key}-pure w-full h-{scale} md:w-{scale} md:h-full flex items-center justify-between text-{textColor} px-6 md:px-0">
+  class="hover:opacity-75 transition-all bg-{key}-pure w-full h-{scale} md:w-{scale} md:h-full flex items-center justify-between text-{textColor} px-6 md:px-0 md:items-start md:flex-col">
   {#if active}
-    <span class="mr-6" in:fade={{ delay: 200 }}>
+    <span
+      class="mr-6 md:transform md:rotate-90 md:p-3"
+      in:fade={{ delay: 200 }}>
       <Icon solid={true}>
         <PlayButton />
       </Icon>
     </span>
     <div class="flex-1" in:fade={{ delay: 200 }}>
       <!-- svelte-ignore a11y-distracting-elements -->
-      <marquee class="w-full">{text}</marquee>
+      <marquee
+        class="w-full md:transform md:rotate-90 md:w-screen-oppose md:h-9 md:origin-top-left md:w-full md:translate-x-8"
+        >{text}</marquee
+      >
     </div>
   {/if}
 </a>
+
+<style>
+  @media (min-width: 768px) {
+    marquee {
+      width: calc(100vh - 30px);
+    }
+  }
+</style>

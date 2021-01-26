@@ -1,18 +1,20 @@
 <script context="module">
+  import * as sapper from "@sapper/app";
   import { language } from "./../../stores/language";
   import {
+    activeSection,
     footerData,
     globalSettings,
     navigationData,
   } from "./../../stores/layout";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
 
-  export async function preload({ params }) {
+  export async function preload({ params, path }) {
     const { lang } = params;
     try {
       const res = await this.fetch(`api/${projectLanguage(lang)}/layout`);
       const globalData = await res.json();
-      return { globalData, lang };
+      return { globalData, lang, path };
     } catch (err) {
       this.error(500, err);
     }
@@ -22,6 +24,19 @@
 <script>
   export let globalData;
   export let lang;
+
+  const sectionFromPath = (path) => {
+    const suffix = path.replace(`/${lang}/`, "");
+    const idx = suffix.indexOf("/") > -1 ? suffix.indexOf("/") : suffix.length;
+    const section = suffix.slice(0, idx) || null;
+    return section;
+  };
+
+  const { page } = sapper.stores();
+
+  page.subscribe((page) => {
+    activeSection.set(sectionFromPath(page.path));
+  });
 
   language.set(lang);
   navigationData.set(globalData.navigation);

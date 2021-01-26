@@ -33,7 +33,7 @@
   <SEO {host} {path} {seo} {lang} />
 </svelte:head>
 
-<RegionLayout {lang}>
+<RegionLayout {lang} {path}>
   <a
     aria-label={events.label}
     on:focus={hover}

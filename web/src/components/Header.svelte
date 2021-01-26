@@ -4,6 +4,7 @@
   import Menu from "./../components/icons/Menu.svelte";
   import LanguagePicker from "./../components/LanguagePicker.svelte";
   import LinkButton from "./../components/linkButton.svelte";
+  import { activeSection } from "./../stores/layout";
 
   export let path;
   export let lang;
@@ -12,7 +13,7 @@
 </script>
 
 <header
-  class="w-full p-5 flex justify-between items-center dark:bg-black bg-white"
+  class="snap-start w-full p-5 flex justify-between items-center dark:bg-black bg-white"
 >
   <LinkButton url={lang}>
     <h1 aria-label="Return to homepage">Stille disco</h1>
@@ -31,9 +32,11 @@
         <LanguagePicker {lang} {path} />
       </span>
       {#each links as link}
-        <span class="ml-6">
-          <LinkButton url="{lang}{link.href}" text={link.text} />
-        </span>
+        {#if link.visibility == "all" || link.visibility === $activeSection}
+          <span class="ml-6">
+            <LinkButton url="{lang}{link.href}" text={link.text} />
+          </span>
+        {/if}
       {/each}
     </div>
   </nav>
@@ -73,12 +76,14 @@
     >
       <div class="py-2">
         {#each links as link}
-          <LinkButton
-            layout="block px-6 py-3 mb-3"
-            role="menuitem"
-            url="{lang}{link.href}"
-            text={link.text}
-          />
+          {#if link.visibility == "all" || link.visibility === $activeSection}
+            <LinkButton
+              layout="block px-6 py-3 mb-3"
+              role="menuitem"
+              url="{lang}{link.href}"
+              text={link.text}
+            />
+          {/if}
         {/each}
       </div>
       <div class="py-1">

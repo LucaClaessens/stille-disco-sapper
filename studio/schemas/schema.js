@@ -2,6 +2,7 @@
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 import createSchema from 'part:@sanity/base/schema-creator'
+import checkout from './documents/checkout'
 import events from './documents/events'
 import footer from './documents/footer'
 import gallery from "./documents/gallery"
@@ -20,6 +21,7 @@ import blockNode from './objects/blockNode'
 import blockPortableText from './objects/blockPortableText'
 import blockSubtitle from './objects/blockSubtitle'
 import blockTitle from './objects/blockTitle'
+import checkoutPreview from './objects/checkoutPreview'
 import contactDetails from './objects/contactDetails'
 import galleryImage from './objects/galleryImage'
 import galleryMessage from './objects/galleryMessage'
@@ -28,6 +30,7 @@ import inputForm from './objects/inputForm'
 import landingCategory from './objects/landingCategory'
 import link from './objects/link'
 import mainImage from './objects/mainImage'
+import productVariation from './objects/productVariation'
 import qaBlock from './objects/qaBlock'
 import qaBlockPortableText from './objects/qaBlockPortableText'
 import qaItem from './objects/qaItem'
@@ -54,6 +57,7 @@ export default createSchema({
     location,
     sequence,
     gallery,
+    checkout,
     // portable texts
     qaBlockPortableText,
     blockPortableText,
@@ -78,6 +82,8 @@ export default createSchema({
     galleryImage,
     galleryMessage,
     radioChannel,
-    banner
+    banner,
+    checkoutPreview,
+    productVariation
   ])
 })

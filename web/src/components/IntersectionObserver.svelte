@@ -6,6 +6,8 @@
   export let bottom = 0;
   export let left = 0;
   export let right = 0;
+  export let wrap = true;
+  export let containerClasses = "";
 
   let intersecting = false;
   let container;
@@ -48,6 +50,9 @@
   });
 </script>
 
-<div bind:this={container}>
+<div
+  bind:this={container}
+  class="{wrap ? 'w-full h-full' : ''} {containerClasses}"
+>
   <slot {intersecting} />
 </div>

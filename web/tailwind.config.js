@@ -11,6 +11,20 @@ module.exports = {
             'sans': ['IBM\\ Plex\\ Sans', ...defaultTheme.fontFamily.sans]
         },
         extend: {
+            keyframes: {
+                'shrink-in': {
+                    '0%': { transform: 'scale(1.1)' },
+                    '100%': { transform: 'scale(1)' },
+                },
+                'fadein-bottom': {
+                    '0%': { transform: 'translateY(50px)', opacity: '0' },
+                    '100%': { transform: 'translateY(0px)', opacity: '1' },
+                }
+            },
+            animation: {
+                'shrink-in': 'shrink-in 0.6s ease-out',
+                'fadein-bottom': 'fadein-bottom 1s ease-out'
+            },
             backgroundImage: theme => ({
                 'landing-events': "url('/landing/events.jpg')",
                 'landing-rental': "url('/landing/rental.png')",
@@ -35,11 +49,13 @@ module.exports = {
             },
             flex: {
                 '2': '2 2 0%',
+                '3': '3 3 0%',
                 'hidden': '0px'
             }
         },
     },
     variants: {
+        scrollSnapType: ['responsive'],
         extend: {
             opacity: ['disabled'],
             backgroundImage: ['hover', 'focus'],

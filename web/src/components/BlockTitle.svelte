@@ -14,7 +14,7 @@
   {usePadding
     ? 'p-6'
     : ''} 
-   text-gray-500 sticky top-0 bg-white dark:bg-black"
+   text-gray-700 sticky top-0 bg-gray-100 dark:bg-black md:text-2xl"
 >
   {text}
 </h4>
