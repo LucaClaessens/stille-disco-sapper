@@ -3,7 +3,7 @@
   import Icon from "./../components/Icon.svelte";
   import Menu from "./../components/icons/Menu.svelte";
   import LanguagePicker from "./../components/LanguagePicker.svelte";
-  import LinkButton from "./../components/linkButton.svelte";
+  import LinkButton from "./../components/LinkButton.svelte";
   import { activeSection } from "./../stores/layout";
 
   export let path;
