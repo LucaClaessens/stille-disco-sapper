@@ -63,7 +63,6 @@
     "svelte-loader": "^2.13.6",
     "svelte-media": "^0.0.3",
     "svelte-preprocess": "^4.6.1",
-    "svelte-slot-fill": "^0.1.0",
     "tailwindcss": "^2.0.2",
     "tailwindcss-scroll-snap": "^1.0.3"
   }
