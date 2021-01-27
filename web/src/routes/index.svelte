@@ -1,41 +1,35 @@
-<script context="module">
-  export async function preload() {
-    try {
-      const res = await this.fetch("api/settings");
-      const settings = await res.json();
-      return { settings };
-    } catch (err) {
-      this.error(500, err);
-    }
-  }
-</script>
-
 <script>
-  import Scrollanimation from "../components/Scrollanimation.svelte";
+  import { goto } from "@sapper/app";
+  import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import projectLanguage from "../utils/i18n/projectLanguage";
+  import { languages } from "./../../../studio/schemas/languages";
 
-  export let settings;
+  const languageParams = languages.map((lang) =>
+    projectLanguage(lang.name, true)
+  );
+
+  onMount(async () => {
+    const navigatorLanguage = navigator.language;
+    const parsedLanguage = projectLanguage(
+      navigatorLanguage.replace("-", "_"),
+      true
+    );
+    await goto("/" + parsedLanguage);
+  });
 </script>
-
-<!-- index.svelte -->
-<style lang="postcss">
-  .spacer {
-    height: 100vh;
-    background-color: red;
-    width: 100vw;
-  }
-</style>
 
 <svelte:head>
   <title>Stille disco</title>
 </svelte:head>
 
-<div class="space-y-10 text-center">
-  <h1 class="text-7xl uppercase font-bold">{settings.title}</h1>
-  <p>{settings.description}</p>
+{#each languageParams as param}
+  <a href={param} class="hidden">{param}</a>
+{/each}
+
+<div
+  transition:fade
+  class="bg-black w-full h-full flex items-center justify-center"
+>
+  <p class="text-white">🙂</p>
 </div>
-
-<div class="spacer" />
-
-<Scrollanimation images={settings.sequence} />
-
-<div class="spacer" />

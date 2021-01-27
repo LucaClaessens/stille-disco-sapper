@@ -1,11 +1,10 @@
 import S from '@sanity/desk-tool/structure-builder';
-import { MdDashboard, MdList, MdPerson, MdToday } from "react-icons/md";
+import { MdAddShoppingCart, MdDesktopMac, MdFolder, MdMenu, MdPermContactCalendar, MdPhoneAndroid, MdPublic, MdSettings, MdShoppingCart, MdViewStream, MdWallpaper } from "react-icons/md";
 import * as I18nS from 'sanity-plugin-intl-input/lib/structure';
-
-const i18nSchemas = ['post'];
+import { i18n } from './schemas/documentTranslation';
 
 const hiddenDocTypes = listItem =>
-  !['category', 'author', 'post', 'siteSettings', 'landingSettings'].includes(listItem.getId())
+  !['page', 'product', 'landing', 'rental', 'navigation', 'location', 'footer', 'settings', 'events', 'sequence', 'gallery', 'checkout'].includes(listItem.getId())
 
 
 const i18nDocumentEditor = (documentId, schemaType, title) => S
@@ -15,81 +14,102 @@ const i18nDocumentEditor = (documentId, schemaType, title) => S
   .views(I18nS.getDocumentNodeViewsForSchemaType(schemaType))
   .title(title)
 
+const documentEditor = (documentId, schemaType, title) => S
+  .document(documentId)
+  .documentId(documentId)
+  .schemaType(schemaType)
+  .views(S.view.form())
+  .title(title)
+
 export const getDefaultDocumentNode = (props) => {
-  return I18nS.getDefaultDocumentNode(props);
+  if (props.schemaType === 'page') {
+    return S.document().views(I18nS.getDocumentNodeViewsForSchemaType(props.schemaType));
+  }
+  return S.document();
 };
-// export default Structure.default;
 export default () =>
   S.list()
     .id('__root__')
     .title('Content')
     .items([
       S.listItem()
-        .id('siteSettings')
-        .title('DEV SETTINGS')
-        .schemaType('siteSettings')
+        .title('Frontpage')
+        .icon(MdViewStream)
+        .schemaType('landing')
+        .child(i18nDocumentEditor('landing', 'landing', 'Homepage')),
+      S.listItem()
+        .title('Rental frontpage')
+        .icon(MdPermContactCalendar)
+        .schemaType('rental')
+        .child(i18nDocumentEditor('rental', 'rental', 'Rental')),
+      S.listItem()
+        .title('Events frontpage')
+        .icon(MdPermContactCalendar)
+        .schemaType('events')
+        .child(i18nDocumentEditor('events', 'events', 'Events')),
+      S.listItem()
+        .title('Pages')
+        .icon(MdFolder)
+        .schemaType('page')
         .child(
-          S.documentList()
-            .id('siteSettings')
-            .title('Site Settings')
-            .schemaType('siteSettings')
-            .filter('_id == $id && _type == $type')
-            .params({
-              id: 'siteSettings',
-              type: 'siteSettings',
+          S.documentTypeList('page')
+            .title('Pages')
+            .filter('_type == "page" && (!defined(_lang) || _lang == $baseLang)')
+            .params({ baseLang: i18n.base })
+            .canHandleIntent((_name, params, _context) => {
+              return params.type === 'page'
             })
-            .menuItems([
-              {
-                title: 'Create new',
-                intent: {
-                  type: 'create',
-                  params: {
-                    id: 'siteSettings',
-                    type: 'siteSettings',
-                    template: 'siteSettings'
-                  }
-                }
-              }
-            ])
         ),
       S.listItem()
-        .title('Content')
-        .icon(MdDashboard)
-        .child(
-          S.list()
-            .title('Content')
-            .items([
-              S.listItem()
-                .title('Landing')
-                .child(
-                  S.editor()
-                    .id('landingSettings')
-                    .schemaType('landingSettings')
-                    .documentId('landingSettings')
-                ),
-              S.listItem()
-                .title('Settings')
-                .child(i18nDocumentEditor('siteSettings', 'siteSettings', 'Pagina instellingen')),
-            ])
-        ),
+        .title('Navigation')
+        .icon(MdMenu)
+        .schemaType('navigation')
+        .child(documentEditor('navigation', 'navigation', 'Navigation')),
       S.listItem()
-        .title('Events')
-        .icon(MdToday)
-        .schemaType('post')
-        .child(S.documentTypeList('post').title('Events')),
+        .title('Footer')
+        .icon(MdMenu)
+        .schemaType('footer')
+        .child(documentEditor('footer', 'footer', 'Footer')),
+      S.divider(),
       S.listItem()
-        .title('Authors')
-        .icon(MdPerson)
-        .schemaType('author')
-        .child(S.documentTypeList('author').title('Authors')),
+        .title('Showcase')
+        .icon(MdWallpaper)
+        .child(S.list().title('Showcase').items([
+          S.listItem()
+            .title('Sequence')
+            .icon(MdDesktopMac)
+            .schemaType('sequence')
+            .child(documentEditor('sequence', 'sequence', 'Sequence')),
+          S.listItem()
+            .title('Gallery')
+            .icon(MdPhoneAndroid)
+            .schemaType('gallery')
+            .child(documentEditor('gallery', 'gallery', 'Gallery')),
+        ])),
       S.listItem()
-        .title('Categories')
-        .icon(MdList)
-        .schemaType('category')
-        .child(S.documentTypeList('category').title('Categories')),
+        .title('Checkout settings')
+        .icon(MdShoppingCart)
+        .schemaType('checkout')
+        .child(i18nDocumentEditor('checkout', 'checkout', 'Checkout')),
+      S.listItem()
+        .title('Products')
+        .icon(MdAddShoppingCart)
+        .schemaType('product')
+        .child(S.documentTypeList('product').title('Products')),
+      S.listItem()
+        .title('Locations')
+        .icon(MdPublic)
+        .schemaType('location')
+        .child(S.documentTypeList('location').title('Locations')),
+      S.divider(),
+      S.listItem()
+        .title('Site settings')
+        .icon(MdSettings)
+        .schemaType('settings')
+        .child(documentEditor('settings', 'settings', 'Site settings')),
       S.divider(),
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above
-      ...S.documentTypeListItems().filter(hiddenDocTypes)
+      ...I18nS.getFilteredDocumentTypeListItems().filter(hiddenDocTypes)
     ])

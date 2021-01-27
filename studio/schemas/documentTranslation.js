@@ -31,3 +31,14 @@ export const i18n = {
     },
     fields: []
 }
+
+export const i18nOptions = {
+    i18n: true,
+    base: baseLanguage.name,
+    languages,
+    css: (classNames) => `${classNames} custom-classname`,
+    messages: {
+        loading: 'Loading languages...',
+        missingTranslations: 'Missing translations message...',
+    },
+}
