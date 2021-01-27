@@ -1,6 +1,7 @@
 import S from '@sanity/desk-tool/structure-builder';
 import { MdAddShoppingCart, MdDesktopMac, MdFolder, MdMenu, MdPermContactCalendar, MdPhoneAndroid, MdPublic, MdSettings, MdShoppingCart, MdViewStream, MdWallpaper } from "react-icons/md";
 import * as I18nS from 'sanity-plugin-intl-input/lib/structure';
+import { i18n } from './schemas/documentTranslation';
 
 const hiddenDocTypes = listItem =>
   !['page', 'product', 'landing', 'rental', 'navigation', 'location', 'footer', 'settings', 'events', 'sequence', 'gallery', 'checkout'].includes(listItem.getId())
@@ -21,7 +22,10 @@ const documentEditor = (documentId, schemaType, title) => S
   .title(title)
 
 export const getDefaultDocumentNode = (props) => {
-  return I18nS.getDefaultDocumentNode(props);
+  if (props.schemaType === 'page') {
+    return S.document().views(I18nS.getDocumentNodeViewsForSchemaType(props.schemaType));
+  }
+  return S.document();
 };
 export default () =>
   S.list()
@@ -47,7 +51,15 @@ export default () =>
         .title('Pages')
         .icon(MdFolder)
         .schemaType('page')
-        .child(S.documentTypeList('page').title('Pages')),
+        .child(
+          S.documentTypeList('page')
+            .title('Pages')
+            .filter('_type == "page" && (!defined(_lang) || _lang == $baseLang)')
+            .params({ baseLang: i18n.base })
+            .canHandleIntent((_name, params, _context) => {
+              return params.type === 'page'
+            })
+        ),
       S.listItem()
         .title('Navigation')
         .icon(MdMenu)

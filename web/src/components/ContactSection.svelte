@@ -36,7 +36,7 @@
         <p>{location.streetAddress}</p>
         <p>{location.city}, {location.postalCode}</p>
         <p>{location.country}</p>
-        <p><a href="tel:{location.phone}">{location.phone}</a></p>
+        <p><a href="tel:{location.phoneNo}">{location.phoneNo}</a></p>
       </div>
     </Block>
     <Block>
@@ -44,7 +44,7 @@
         <BlockTitle usePadding uppercase={false} text={socialsTitle} />
       </span>
       <div slot="content" id="socials-details" class="p-6">
-        {#each location.socials as social}
+        {#each location.socials || [] as social}
           <div>
             <Link {...social}>{social.text}</Link>
           </div>

@@ -1,8 +1,12 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { rentFrom, rentTill } from "../stores/checkout";
   import serializeImage from "../utils/image/serializeImage";
   import { focusable } from "./../core/directives/focusable";
+  import { language } from "./../stores/language";
+  import projectLanguage from "./../utils/i18n/projectLanguage";
   import slugify from "./../utils/slugify";
+  import AvailabilityChip from "./AvailabilityChip.svelte";
   import Icon from "./Icon.svelte";
   import Image from "./Image.svelte";
   import ShrinkIn from "./ShrinkIn.svelte";
@@ -18,20 +22,48 @@
   export let image = {};
 
   let form;
+  let availability = {};
+
+  $: lang = $language;
+  $: from = $rentFrom;
+  $: till = $rentTill;
 
   $: selectedVariation = firstVariation();
-  $: amountValueValid =
-    amountValue > 0 && amountValue <= selectedVariation.maxAmount;
+  $: amountValueValid = amountValue > 0 && amountValue <= maxSelectable;
+  $: updateProductAvailability(variations, active);
+  $: itemsInStock = availableFor(selectedVariation.id);
+  $: availableFor = (id) =>
+    availability[id]?.products.reduce((a, v) => {
+      const productItemsInStock =
+        v.stock_counts.total - v.stock_counts.unavailable;
+      return a + productItemsInStock;
+    }, 0);
+
+  $: maxSelectable = Math.min(itemsInStock, selectedVariation.maxAmount);
 
   let amountDirty = false;
   const dispatch = createEventDispatcher();
-  const firstVariation = () => variations[0];
 
-  const isValid = () => amountValueValid && selectedVariation;
+  const updateProductAvailability = async (variations, active) => {
+    if (variations.length > 0 && active) {
+      for (const variation of variations) {
+        const { id } = variation;
+        fetch(
+          `api/${projectLanguage(lang)}/product/${id}?till=${till}&from=${from}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            availability[id] = data;
+          });
+      }
+    }
+  };
+
+  const firstVariation = () => variations[0];
 
   const dispatchState = () =>
     dispatch("stateChange", {
-      valid: isValid(),
+      valid: amountValueValid && selectedVariation,
       productSlug: slug.current,
       selectedVariation,
       amountValue,
@@ -103,6 +135,7 @@
                     for="push_everything"
                     class="ml-3 block text-sm font-medium text-gray-700">
                     {variation.info}
+                    <AvailabilityChip amount={availableFor(variation.id)} />
                   </label>
                 </div>
               {/each}
@@ -112,8 +145,12 @@
         <div>
           <label
             for="amount"
-            class="block text-sm font-medium text-gray-700 mb-2">Quantity</label
-          >
+            class="block text-sm font-medium text-gray-700 mb-2">
+            Quantity
+            {#if variations.length === 1}
+              <AvailabilityChip amount={itemsInStock} />
+            {/if}
+          </label>
           <p class="text-sm text-gray-500 mb-4">
             {selectedVariation.quantityHelper}
           </p>
@@ -133,7 +170,7 @@
               dispatchState();
             }}
             bind:value={amountValue}
-            max={selectedVariation.maxAmount}
+            max={maxSelectable}
             class="mb-2 block w-48 sm:text-sm  rounded-md {!amountValueValid &&
             amountDirty
               ? 'border-red-pure'
@@ -141,7 +178,7 @@
           />
           {#if !amountValueValid && amountDirty}
             <p class="text-sm text-red-pure">
-              Amount must be between 1 and {selectedVariation.maxAmount}
+              Amount must be between 1 and {maxSelectable}
             </p>
           {/if}
         </div>

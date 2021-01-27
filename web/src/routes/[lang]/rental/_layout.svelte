@@ -28,7 +28,7 @@
     <Header {lang} {path} {...$navigationData} />
     <Banner {...$globalSettings.banner} />
     <slot />
-    <Radio active={true} />
+    <Radio active={true} breakMd={false} />
     <Footer {lang} {...$footerData} />
   </div>
 </RegionLayout>

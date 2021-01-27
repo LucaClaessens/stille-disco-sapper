@@ -26,7 +26,12 @@
 </script>
 
 <script>
-  export let content;
+  export let content = {
+    tagline: "Tagline default value",
+    searchPlaceholder: "Search placeholder",
+    ticketButtonText: "Placeholder",
+    emptyStateText: "Empty state text placeholder",
+  };
   export let host;
   export let path;
   export let lang;

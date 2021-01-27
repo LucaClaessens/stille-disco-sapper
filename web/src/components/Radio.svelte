@@ -4,6 +4,7 @@
   import Channel from "./Channel.svelte";
 
   export let active = false;
+  export let breakMd = true;
 
   let activeChannelKey = "red";
   let channels = [];
@@ -24,9 +25,10 @@
   onDestroy(unsubscribe);
 </script>
 
-<div class="flex flex-col md:flex-row flex-none">
+<div class="flex flex-col {breakMd ? 'md:flex-row' : ''} flex-none">
   {#each channels as channel}
     <Channel
+      {breakMd}
       on:focus={focusChannel}
       scale={calculateScale(active, activeChannelKey, channel.key)}
       active={active && activeChannelKey === channel.key}

@@ -1,6 +1,8 @@
 <script>
   import { onDestroy } from "svelte";
-  import { userShoppingCart } from "../stores/checkout";
+  import { rentFrom, rentTill, userShoppingCart } from "../stores/checkout";
+  import { language } from "../stores/language";
+  import projectLanguage from "../utils/i18n/projectLanguage";
   import { focusable } from "./../core/directives/focusable";
   import CheckoutDatePicker, { formatDate } from "./CheckoutDatePicker.svelte";
   import CheckoutStep from "./CheckoutStep.svelte";
@@ -22,6 +24,10 @@
 
   $: hasPrevious = flowIndex > 0;
   $: hasNext = flowIndex < steps - 1;
+
+  $: from = $rentFrom;
+  $: till = $rentTill;
+  $: lang = $language;
 
   $: formattedSelection =
     selectedDates.length === 0
@@ -55,9 +61,13 @@
     flowIndex++;
   };
 
-  const checkout = () => {
+  const checkout = async () => {
     updateCart();
-    console.info(cartToPayload());
+    const { order } = await createOrder();
+    window.open(
+      `https://stille-disco.booqable.shop/checkout/${order.id}/info`,
+      "_blank"
+    );
   };
 
   const cartToPayload = () => {
@@ -66,6 +76,22 @@
       payload[variationId] = amount;
     });
     return payload;
+  };
+
+  const createOrder = async () => {
+    const order = {
+      starts_at: `${from} 9:00`,
+      stops_at: `${till} 23:00`,
+    };
+    const ids = cartToPayload();
+
+    const orderData = await fetch(`api/${projectLanguage(lang)}/order`, {
+      method: "post",
+      body: JSON.stringify({ order, ids }),
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => res.json());
+
+    return orderData;
   };
 
   const prev = () => flowIndex--;

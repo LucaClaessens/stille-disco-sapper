@@ -4,13 +4,14 @@
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    return year + "-" + month + "-" + day;
+    return `${day}-${month}-${year}`;
   }
 </script>
 
 <script>
   import DatePicker from "praecox-datepicker";
   import { onMount } from "svelte";
+  import { rentFrom, rentTill } from "../stores/checkout";
   import serializeImage from "../utils/image/serializeImage";
   import Image from "./Image.svelte";
   import ShrinkIn from "./ShrinkIn.svelte";
@@ -29,6 +30,9 @@
   export let tagline = "When do you want to rent equipment?";
   export let inputInfo = "We chare a fixed fee per day you rent equipment";
   export let inputPlaceholder = "Select what days you want to rent equipment";
+
+  $: rentFrom.set(selected.length > 0 ? formatDate(selected[0]) : null);
+  $: rentTill.set(selected.length > 0 ? formatDate(selected[1]) : null);
 
   $: formattedSelection =
     selected.length === 0
@@ -97,32 +101,35 @@
           this={clickOutsideComponent}
           on:clickoutside={() => (showDatePicker = false)}
         >
-          <input
-            on:click={handleClick}
-            type="text"
-            name="date_from"
-            id="date_from"
-            value={formattedSelection}
-            placeholder={inputPlaceholder}
-            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-          />
-          {#if showDatePicker}
-            <div
-              bind:this={datePicker}
-              id="date_picker"
-              class="absolute bottom-14 md:top-28 left-0 z-50"
-              on:click={getResult}
-            >
-              <DatePicker
-                theme="light"
-                pickerRule="range"
-                reSelected
-                bind:selected
-                bind:pickerDone
-                {disabled}
-              />
-            </div>
-          {/if}
+          <div class="relative">
+            <input
+              on:click={handleClick}
+              type="text"
+              name="date_from"
+              id="date_from"
+              value={formattedSelection}
+              placeholder={inputPlaceholder}
+              autocomplete="off"
+              class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+            {#if showDatePicker}
+              <div
+                bind:this={datePicker}
+                id="date_picker"
+                class="absolute bottom-14 md:top-14 left-0 z-50"
+                on:click={getResult}
+              >
+                <DatePicker
+                  theme="light"
+                  pickerRule="range"
+                  reSelected
+                  bind:selected
+                  bind:pickerDone
+                  {disabled}
+                />
+              </div>
+            {/if}
+          </div>
         </svelte:component>
       </div>
     </div>
