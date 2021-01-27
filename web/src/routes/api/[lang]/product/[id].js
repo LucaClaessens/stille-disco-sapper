@@ -4,7 +4,8 @@ export async function get(req, res) {
     try {
         const { lang, id } = req.params;
         const domain = 'lookaluca';
-        const endpoint = `https://${domain}.booqable.com/api/1/product_groups/${id}?api_key=734d9e647c1d9df4b7411595a2b32550`
+        const key = 'Haha no';
+        const endpoint = `https://${domain}.booqable.com/api/1/product_groups/${id}?api_key=${key}`
         const data = await fetch(endpoint).then(res => res.json());
         console.log(data);
         res.end(JSON.stringify(data));

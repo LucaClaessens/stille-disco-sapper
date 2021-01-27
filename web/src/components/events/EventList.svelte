@@ -25,7 +25,6 @@
 
 <form
   in:fade={{ delay: 250, duration: 500 }}
-  out:fade
   id="search"
   role="search"
   aria-label={placeholder}
@@ -64,13 +63,12 @@
 >
   {#each filteredEvents as event, index (event.id)}
     {#if index === activeEventIndex}
-      <div class="relative" transition:fade>
+      <div class="relative" in:fade>
         <EventDetails {...activeEvent} {index} {ticketButtonText} />
       </div>
     {:else}
       <a
         in:fly={{ y: -20, duration: 300 }}
-        out:fly={{ y: 20, duration: 300 }}
         href="{lang}/events?eid={event.id}"
         class="px-2 py-2 w-100 flex hover:opacity-75 transition-opacity rounded-md opacity-{activeEventIndex ===
           -1 || index === activeEventIndex

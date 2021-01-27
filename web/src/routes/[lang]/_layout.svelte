@@ -2,6 +2,7 @@
   import * as sapper from "@sapper/app";
   import { language } from "./../../stores/language";
   import {
+    activePath,
     activeSection,
     footerData,
     globalSettings,
@@ -35,6 +36,7 @@
   const { page } = sapper.stores();
 
   page.subscribe((page) => {
+    activePath.set(page.path);
     activeSection.set(sectionFromPath(page.path));
   });
 

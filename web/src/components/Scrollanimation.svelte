@@ -58,7 +58,7 @@
   bind:this={sectionRef}
   id="animation"
   class="bg-{bgColor}-300 relative bg-gray-100 pointer-events-none"
-  transition:fade
+  in:fade
 >
   {#each sequence.messages as message}
     {#if message.startFrame <= curIndex && message.endFrame >= curIndex}
@@ -69,7 +69,7 @@
           class="w-full h-full flex justify-{message.justify} items-{message.align}"
         >
           <div
-            transition:fly={{ y: -20, delay: 900, duration: 300 }}
+            transition:fly|local={{ y: -20, delay: 900, duration: 300 }}
             class="pointer-events-auto max-w-xs relative z-10 flex flex-col justify-start items-start"
           >
             <h3 class="mb-3 text-xl">{@html message.text}</h3>

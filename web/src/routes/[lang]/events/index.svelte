@@ -4,7 +4,6 @@
   import Callout from "./../../../components/Callout.svelte";
   import EventList from "./../../../components/events/EventList.svelte";
   import SEO from "./../../../components/SEO.svelte";
-  import { captureScroll } from "./../../../core/directives/captureScroll";
   import projectLanguage from "./../../../utils/i18n/projectLanguage";
 
   let layout, _lang;
@@ -33,8 +32,6 @@
   export let lang;
   export let eid;
 
-  let offset = 0;
-
   // const events = [
   //   { id: "5543c", date: "22 Feb", location: "Haarlem", venue: "Patronaat" },
   //   { id: "3hgk", date: "29 Feb", location: "Amsterdam", venue: "Paradiso" },
@@ -47,7 +44,6 @@
 
   let events = [];
 
-  $: py = offset <= 10 ? 24 : 12;
   $: activeEventIndex = events.findIndex((e) => e.id === eid);
 </script>
 
@@ -55,21 +51,17 @@
   <SEO {host} {path} seo={content.seo} {lang} />
 </svelte:head>
 
-<div
-  class="w-full h-full overflow-y-auto flex flex-col justify-between"
-  use:captureScroll
-  on:move={(e) => (offset = e.detail.y)}
->
+<div class="w-full h-full overflow-y-auto flex flex-col justify-between">
   {#if activeEventIndex === -1}
-    <span transition:fly={{ duration: 500, y: -500 }}>
-      <Callout px={6} {py}>
+    <span in:fly={{ duration: 500, y: -500 }}>
+      <Callout px={6} py={12}>
         <h3 class="text-2xl"><FadeInBottom>{content.tagline}</FadeInBottom></h3>
       </Callout>
     </span>
   {/if}
 
   <section
-    transition:fly={{ duration: 500, delay: 20, y: 500 }}
+    in:fly={{ duration: 500, delay: 20, y: 500 }}
     id="events"
     class="p-6 flex-1"
   >

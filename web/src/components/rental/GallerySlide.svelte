@@ -27,7 +27,7 @@
         <ShrinkIn>
           <img
             loading="lazy"
-            transition:fade={{ duration: 1000 }}
+            in:fade={{ duration: 1000 }}
             class="h-full w-full object-cover"
             src={serializeImage(img)}
             alt={img.alt}
@@ -35,7 +35,7 @@
         </ShrinkIn>
       </div>
       <div
-        transition:fly={{ y: -20, delay: 900, duration: 300 }}
+        in:fly={{ y: -20, delay: 900, duration: 300 }}
         class="max-w-xs relative z-10 flex flex-col justify-start items-start"
       >
         <h3 class="mb-3 text-xl">{@html message.text}</h3>

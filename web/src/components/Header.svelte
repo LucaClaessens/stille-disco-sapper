@@ -34,7 +34,7 @@
       {#each links as link}
         {#if link.visibility == "all" || link.visibility === $activeSection}
           <span class="ml-6">
-            <LinkButton url="{lang}{link.href}" text={link.text} />
+            <LinkButton url="/{lang}{link.href}" text={link.text} />
           </span>
         {/if}
       {/each}
@@ -80,7 +80,7 @@
             <LinkButton
               layout="block px-6 py-3 mb-3"
               role="menuitem"
-              url="{lang}{link.href}"
+              url="/{lang}{link.href}"
               text={link.text}
             />
           {/if}
