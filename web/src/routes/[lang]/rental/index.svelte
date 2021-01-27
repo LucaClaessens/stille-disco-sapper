@@ -39,7 +39,7 @@
   let ScrollAnimationComponent;
 
   onMount(async () => {
-    const module = await import("./../../../components/ScrollAnimation.svelte");
+    const module = await import("./../../../components/Scrollanimation.svelte");
     ScrollAnimationComponent = module.default;
   });
 </script>

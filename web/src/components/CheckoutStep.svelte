@@ -33,7 +33,8 @@
   $: updateProductAvailability(variations, active);
   $: itemsInStock = availableFor(selectedVariation.id);
   $: availableFor = (id) =>
-    availability[id]?.products.reduce((a, v) => {
+    availability[id] &&
+    availability[id].products.reduce((a, v) => {
       const productItemsInStock =
         v.stock_counts.total - v.stock_counts.unavailable;
       return a + productItemsInStock;
