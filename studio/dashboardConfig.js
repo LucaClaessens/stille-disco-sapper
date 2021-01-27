@@ -1,6 +1,5 @@
 export default {
   widgets: [
-    { name: 'structure-menu' },
     {
       name: 'project-info',
       options: {
@@ -19,7 +18,7 @@ export default {
                 },
                 {
                   buildHookId: '5ff471e938a80e00977c64ea',
-                  title: 'Blog Website',
+                  title: 'Stille Disco Websites',
                   name: 'stille-disco-sapper',
                   apiId: '256c76ae-1e9a-49ee-87ec-7f63d07b35f8'
                 }
