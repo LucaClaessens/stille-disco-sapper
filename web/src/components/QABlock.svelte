@@ -5,6 +5,8 @@
   export let bg = "white";
   export let title = "Title for the QA Block";
   export let content = {};
+  export let hasForm = false;
+  export let formId = "";
 </script>
 
 <section
@@ -13,7 +15,13 @@
   <div class="bg-gray-300 md:rounded-md md:p-12 md:max-w-xl md:w-full">
     <div class="w-full md:w-max-lg">
       <h4 class="text-2xl mb-6">{title}</h4>
-      <BlockContent blocks={content} {serializers} />
+      {#if hasForm}
+        <form id={formId} netlify>
+          <BlockContent blocks={content} {serializers} />
+        </form>
+      {:else}
+        <BlockContent blocks={content} {serializers} />
+      {/if}
     </div>
   </div>
 </section>

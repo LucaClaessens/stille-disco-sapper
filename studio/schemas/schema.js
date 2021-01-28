@@ -37,6 +37,7 @@ import qaItem from './objects/qaItem'
 import radioChannel from './objects/radioChannel'
 import seoFields from './objects/seoFields'
 import sequenceImage from './objects/sequenceImage'
+import spacer from './objects/spacer'
 import subtitlePortableText from './objects/subtitlePortableText'
 import textareaForm from './objects/textareaForm'
 
@@ -84,6 +85,7 @@ export default createSchema({
     radioChannel,
     banner,
     checkoutPreview,
-    productVariation
+    productVariation,
+    spacer
   ])
 })

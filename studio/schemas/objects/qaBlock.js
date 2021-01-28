@@ -23,6 +23,20 @@ export default {
             title: 'Heading of the block',
         },
         {
+            name: 'hasForm',
+            required: true,
+            type: 'string',
+            title: 'Block has a form',
+            describe: 'By toggling this to \'on\' if the block has a form (inputForm, textareaForm), form submissions will be stored and/or sent per email'
+        },
+        {
+            name: 'formId',
+            required: true,
+            type: 'string',
+            title: "Unique form identifier",
+            describe: 'A name referring to the contents / function of the inner form, has to be unique'
+        },
+        {
             name: 'content',
             required: false,
             type: 'qaBlockPortableText',

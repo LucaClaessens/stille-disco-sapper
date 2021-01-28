@@ -20,7 +20,7 @@
       {placeholder}
     />
     <div class="absolute inset-y-0 right-0 flex items-center">
-      <Button px={6} cta={true}>{buttonText}</Button>
+      <Button type="submit" px={6} cta={true}>{buttonText}</Button>
     </div>
   </div>
 </div>

@@ -13,6 +13,7 @@ import InputForm from './InputForm.svelte';
 import Link from './Link.svelte';
 import QABlock from "./QABlock.svelte";
 import QAItem from "./QAItem.svelte";
+import Spacer from "./Spacer.svelte";
 import TextareaForm from './TextareaForm.svelte';
 
 export default {
@@ -98,4 +99,9 @@ export default {
       }
     })
   },
+  spacer: ({ node, children }) => ({
+    component: Spacer,
+    childNodes: children,
+    props: node
+  })
 };

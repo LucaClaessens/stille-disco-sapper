@@ -18,7 +18,9 @@
     if (!layout || _lang !== lang) {
       _lang = lang;
       try {
-        const res = await this.fetch(`api/${projectLanguage(lang)}/rental`);
+        const res = await this.fetch(
+          `api/${projectLanguage(lang)}/rental-query`
+        );
         const content = await res.json();
         return { content, lang, host, path };
       } catch (err) {

@@ -10,7 +10,7 @@
     const { lang } = params;
 
     try {
-      const res = await this.fetch(`api/${projectLanguage(lang)}`);
+      const res = await this.fetch(`api/${projectLanguage(lang)}/landing`);
       const content = await res.json();
       return { content, lang, host, path };
     } catch (err) {

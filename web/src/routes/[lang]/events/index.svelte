@@ -15,7 +15,9 @@
     if (!layout || _lang !== lang) {
       _lang = lang;
       try {
-        const res = await this.fetch(`api/${projectLanguage(lang)}/events`);
+        const res = await this.fetch(
+          `api/${projectLanguage(lang)}/events-query`
+        );
         const content = await res.json();
         return { content, lang, host, path, eid };
       } catch (err) {
@@ -37,17 +39,17 @@
   export let lang;
   export let eid;
 
-  // const events = [
-  //   { id: "5543c", date: "22 Feb", location: "Haarlem", venue: "Patronaat" },
-  //   { id: "3hgk", date: "29 Feb", location: "Amsterdam", venue: "Paradiso" },
-  //   { id: "3bg3", date: "29 Feb", location: "Eindhoven", venue: "Café de bie" },
-  //   { id: "3hg4", date: "29 Feb", location: "Aalst", venue: "Onder 't dak" },
-  //   { id: "4hgk", date: "29 Feb", location: "Rotterdam", venue: "Slinge yard" },
-  //   { id: "5hgk", date: "29 Feb", location: "Arnhem", venue: "Slootwaterhok" },
-  //   { id: "hhnk", date: "29 Feb", location: "Nijmegen", venue: "Hottentent" },
-  // ];
+  const events = [
+    { id: "5543c", date: "22 Feb", location: "Haarlem", venue: "Patronaat" },
+    { id: "3hgk", date: "29 Feb", location: "Amsterdam", venue: "Paradiso" },
+    { id: "3bg3", date: "29 Feb", location: "Eindhoven", venue: "Café de bie" },
+    { id: "3hg4", date: "29 Feb", location: "Aalst", venue: "Onder 't dak" },
+    { id: "4hgk", date: "29 Feb", location: "Rotterdam", venue: "Slinge yard" },
+    { id: "5hgk", date: "29 Feb", location: "Arnhem", venue: "Slootwaterhok" },
+    { id: "hhnk", date: "29 Feb", location: "Nijmegen", venue: "Hottentent" },
+  ];
 
-  let events = [];
+  // let events = [];
 
   $: activeEventIndex = events.findIndex((e) => e.id === eid);
 </script>
