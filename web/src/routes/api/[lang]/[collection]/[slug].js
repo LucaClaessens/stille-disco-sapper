@@ -7,7 +7,8 @@ export async function get(req, res) {
         const projection = `{
             body[]{
             ...,
-            location->
+            location->,
+            referral->
             }
         }`
         const settings = await client.fetch(filter + projection, { lang, slug, collection });

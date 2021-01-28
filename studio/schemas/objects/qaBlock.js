@@ -25,16 +25,23 @@ export default {
         {
             name: 'hasForm',
             required: true,
-            type: 'string',
+            type: 'boolean',
             title: 'Block has a form',
-            describe: 'By toggling this to \'on\' if the block has a form (inputForm, textareaForm), form submissions will be stored and/or sent per email'
+            description: 'By toggling this to \'on\' if the block has a form (inputForm, textareaForm), form submissions will be stored and/or sent per email'
+        },
+        {
+            name: 'referral',
+            type: 'reference',
+            to: { type: 'page' },
+            title: 'Refer to page (on success)',
+            decription: 'If empty, routes to default page after submitting form'
         },
         {
             name: 'formId',
             required: true,
             type: 'string',
             title: "Unique form identifier",
-            describe: 'A name referring to the contents / function of the inner form, has to be unique'
+            description: 'A name referring to the contents / function of the inner form, has to be unique'
         },
         {
             name: 'content',

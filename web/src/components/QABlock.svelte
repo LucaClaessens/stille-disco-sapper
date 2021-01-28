@@ -1,5 +1,6 @@
 <script>
   import BlockContent from "@movingbrands/svelte-portable-text";
+  import { language } from "../stores/language";
   import serializers from "./serializers";
 
   export let bg = "white";
@@ -7,6 +8,13 @@
   export let content = {};
   export let hasForm = false;
   export let formId = "";
+  export let referral = {};
+
+  $: lang = $language;
+
+  $: action = referral.slug
+    ? `${lang}/${referral.parent}/${referral.slug.current}`
+    : null;
 </script>
 
 <section
@@ -16,7 +24,7 @@
     <div class="w-full md:w-max-lg">
       <h4 class="text-2xl mb-6">{title}</h4>
       {#if hasForm}
-        <form id={formId} netlify>
+        <form name={formId} id={formId} method="POST" {action} netlify>
           <BlockContent blocks={content} {serializers} />
         </form>
       {:else}
