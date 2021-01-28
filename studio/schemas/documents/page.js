@@ -15,6 +15,7 @@ export default {
             name: 'slug',
             type: 'slug',
             title: 'Slug',
+            description: 'The route of the page, e.g. when parent is set to `Rental` and slug is `toc`, it would make `/{$language}/rental/toc`',
             options: {
                 source: 'seo.title',
                 maxLength: 96

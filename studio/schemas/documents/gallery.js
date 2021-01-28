@@ -9,6 +9,9 @@ export default {
             type: 'array',
             title: 'Gallery',
             description: 'Gallery of images, rendered on mobile',
+            options: {
+                editModal: 'fullscreen',
+            },
             of: [{ type: 'galleryImage' }],
         },
     ]

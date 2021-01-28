@@ -25,6 +25,7 @@ export default {
             type: 'string',
             title: 'Background color',
             required: true,
+            description: 'The background color of the banner',
             options: {
                 list: ['red-pure', 'blue-pure', 'green-pure']
             }
@@ -50,6 +51,7 @@ export default {
             name: 'href',
             type: 'string',
             title: 'The page you want to link to',
+            description: 'The page the button on the side of the banner links to, local links can be written like `/local/link`, outside links have to start with `http(s)://`',
             required: true,
             fieldset: 'linkConfig'
         },
@@ -63,24 +65,27 @@ export default {
                     name: 'default',
                     type: 'string',
                     title: 'Default text',
+                    description: 'The text that will show on the banner in mobile screens',
                     required: true
                 },
                 {
                     name: 'large',
                     type: 'string',
                     title: 'Large text',
+                    description: 'The text that will show on the banner in large screens',
                     required: true
                 },
                 {
                     name: 'dismiss',
                     type: 'string',
-                    title: 'Dismiss text (screenreader)',
+                    title: 'Dismiss text (screenreader only)',
                     required: true
                 },
                 {
                     name: 'button',
                     type: 'string',
                     title: 'Button text',
+                    description: 'Text to display in button on the side of the banner',
                     required: true
                 },
             ]

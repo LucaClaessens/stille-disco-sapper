@@ -13,7 +13,8 @@ export default {
             name: 'tagline',
             type: 'string',
             title: 'Tagline',
-            required: true
+            required: true,
+            description: 'Text to be displayed on top of the background image'
         },
         {
             name: 'textColor',
@@ -33,7 +34,7 @@ export default {
                     name: 'title',
                     type: 'string',
                     title: 'Title',
-                    required: true
+                    required: true,
                 },
                 {
                     name: 'subtitle',

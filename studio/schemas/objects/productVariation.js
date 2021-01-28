@@ -6,6 +6,7 @@ export default {
         {
             name: 'name',
             type: 'string',
+            description: 'A name describing this variation of the product',
             title: 'Variation name',
             required: true,
         },

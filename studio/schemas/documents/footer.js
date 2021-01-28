@@ -20,6 +20,7 @@ export default {
         {
             name: 'links',
             type: 'array',
+            description: 'A list of links to be displayed in the navigation bar',
             of: [{
                 name: 'entry',
                 type: 'object',
@@ -79,6 +80,7 @@ export default {
             title: 'Bottom text',
             fieldset: 'details',
             fields: [{
+                description: 'Text to be displayed under the link in the footer',
                 name: 'text',
                 type: 'string'
             }]

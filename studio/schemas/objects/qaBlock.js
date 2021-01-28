@@ -21,6 +21,7 @@ export default {
             required: true,
             type: 'string',
             title: 'Heading of the block',
+            description: 'Title text of the block, displayed in bold'
         },
         {
             name: 'hasForm',
@@ -47,7 +48,7 @@ export default {
             name: 'content',
             required: false,
             type: 'qaBlockPortableText',
-            title: 'Content of the block',
+            title: 'Contents of the block',
         }
     ],
     preview: {

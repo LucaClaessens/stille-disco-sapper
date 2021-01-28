@@ -34,6 +34,12 @@ export default {
             type: 'string',
             title: 'Ticket button text',
             description: 'Translation for the \'Buy now\' ticket when opening an event'
+        },
+        {
+            name: 'maxProspectEvents',
+            type: 'number',
+            title: 'Maximum prospect time of events',
+            description: 'The maximum amount of time into the future that upcoming events will be displayed, in weeks'
         }
     ],
     preview: {

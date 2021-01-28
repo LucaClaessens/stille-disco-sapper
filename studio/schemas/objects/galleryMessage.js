@@ -39,13 +39,15 @@ export default {
                     title: 'Text',
                     name: 'text',
                     type: 'text',
-                    required: true
+                    required: true,
+                    description: 'Text that the message displays, you can write HTML here.'
                 },
                 {
                     title: 'Button',
                     name: 'button',
                     type: 'string',
-                    required: true
+                    required: true,
+                    description: 'The text to display in the button underneath the message'
                 }
             ]
         }

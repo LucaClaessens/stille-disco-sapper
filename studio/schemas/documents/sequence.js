@@ -8,6 +8,9 @@ export default {
             name: 'images',
             required: true,
             type: 'array',
+            options: {
+                editModal: 'fullscreen',
+            },
             of: [{ type: 'sequenceImage' }],
             title: 'Image sequence (desktop)',
             description: 'Configures what frames should be used for the image sequence',
@@ -16,6 +19,9 @@ export default {
             name: 'messages',
             required: true,
             type: 'array',
+            options: {
+                editModal: 'fullscreen',
+            },
             of: [{
                 type: 'object',
                 name: 'message',

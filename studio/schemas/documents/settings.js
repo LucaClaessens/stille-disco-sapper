@@ -30,6 +30,7 @@ export default {
             fields: [
                 {
                     name: 'name',
+                    description: 'The base name of the website/brand, configurable per language',
                     title: 'Name of website',
                     type: 'string'
                 }
@@ -45,6 +46,7 @@ export default {
                     name: 'defaultChannel',
                     title: 'Default channel',
                     type: 'string',
+                    description: 'The default channel to select when opening the website (red/green/blue)',
                     options: {
                         list: ['red', 'green', 'blue']
                     }
@@ -53,6 +55,7 @@ export default {
                     name: 'channels',
                     title: 'Channels',
                     type: 'object',
+                    description: 'Configuration of the individual radio channels',
                     fields: [
                         {
                             name: 'red',

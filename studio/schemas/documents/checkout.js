@@ -1,3 +1,4 @@
+import { MdPictureInPicture } from "react-icons/md";
 import { i18n } from "../documentTranslation";
 
 export default {
@@ -14,6 +15,10 @@ export default {
         {
             name: 'checkoutFlow',
             type: 'array',
+            description: 'The steps in the checkout displayed inbetween date selection and the overview, the order these are sorted in defines the order in which they appear on the website',
+            options: {
+                editModal: 'fullscreen',
+            },
             of: [{
                 name: 'checkoutStep',
                 type: 'object',
@@ -21,13 +26,15 @@ export default {
                 fields: [
                     {
                         name: 'product',
+                        description: 'The product that we want to connect to this step',
                         type: 'reference',
                         to: [{ type: 'product' }]
                     },
                     {
                         name: 'heading',
                         type: 'text',
-                        title: 'Product heading'
+                        title: 'Product heading',
+                        description: 'Bigger text to describe what this step of the checkout does'
                     },
                     {
                         name: 'variationDescriptor',
@@ -44,6 +51,7 @@ export default {
                     },
                     prepare({ index, title, subtitle, variation }) {
                         return {
+                            media: MdPictureInPicture,
                             title: `Checkout step: ${title}`,
                             subtitle: variation || subtitle || 'Missing details'
                         }
@@ -59,12 +67,14 @@ export default {
                 {
                     name: 'image',
                     type: 'mainImage',
-                    title: 'Date selection Image'
+                    title: 'Date selection Image',
+                    description: 'The image to show on the first step, date selection'
                 },
                 {
                     name: 'tagline',
                     type: 'string',
-                    title: 'Tagline'
+                    title: 'Tagline',
+                    description: 'Bigger text to describe what this step of the checkout does, defaults to `When would you like to rent equipment?`'
                 },
                 {
                     name: 'from',
@@ -83,12 +93,14 @@ export default {
                 {
                     name: 'inputInfo',
                     type: 'string',
-                    title: 'Input info'
+                    title: 'Input info',
+                    description: 'Information on what the date selection means for the pricing of the products'
                 },
                 {
                     name: 'inputPlaceholder',
                     type: 'string',
-                    title: 'Input placeholder'
+                    title: 'Input placeholder',
+                    description: 'Placeholder text to show in the date selector'
                 },
                 {
                     name: 'noDatesSelected',

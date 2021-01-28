@@ -15,7 +15,7 @@ export default {
             name: "hero",
             type: "object",
             title: "Hero",
-            description: 'The first banner you see when landing on the rental page',
+            description: 'The banner you see when landing on the rental page',
             fields: [
                 {
                     name: 'image',
@@ -25,17 +25,20 @@ export default {
                 {
                     name: 'tagline',
                     type: 'string',
-                    title: 'Tagline'
+                    title: 'Tagline',
+                    description: 'The big title displayed in the Hero'
                 },
                 {
                     name: 'body',
                     type: 'text',
-                    title: 'Text body'
+                    title: 'Text body',
+                    description: 'A smaler text to be displayed under the title'
                 },
                 {
                     name: 'buttonText',
                     type: 'string',
-                    title: 'Button text'
+                    title: 'Button text',
+                    description: 'Text to display on the button inside the hero'
                 }
             ]
         },

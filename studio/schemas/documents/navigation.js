@@ -9,6 +9,7 @@ export default {
         {
             name: 'links',
             type: 'array',
+            description: 'A list of links to be displayed in the navigation bar',
             of: [{
                 name: 'entry',
                 type: 'object',
