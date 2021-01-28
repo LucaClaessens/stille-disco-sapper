@@ -24,7 +24,7 @@
     <div class="w-full md:w-max-lg">
       <h4 class="text-2xl mb-6">{title}</h4>
       {#if hasForm}
-        <form name={formId} {action} netlify>
+        <form name={formId} {action} method="POST" netlify>
           <input type="hidden" name="form-name" value={formId} />
           <BlockContent blocks={content} {serializers} />
         </form>
