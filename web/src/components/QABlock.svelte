@@ -25,6 +25,7 @@
       <h4 class="text-2xl mb-6">{title}</h4>
       {#if hasForm}
         <form name={formId} {action} netlify>
+          <input type="hidden" name="form-name" value={formId} />
           <BlockContent blocks={content} {serializers} />
         </form>
       {:else}
