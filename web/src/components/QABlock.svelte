@@ -14,7 +14,7 @@
 
   $: action = referral.slug
     ? `/${lang}/${referral.parent}/${referral.slug.current}`
-    : "";
+    : null;
 </script>
 
 <section
@@ -24,7 +24,7 @@
     <div class="w-full md:w-max-lg">
       <h4 class="text-2xl mb-6">{title}</h4>
       {#if hasForm}
-        <form name={formId} method="GET" {action} netlify>
+        <form name={formId} {action} netlify>
           <BlockContent blocks={content} {serializers} />
         </form>
       {:else}
