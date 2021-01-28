@@ -6,6 +6,7 @@
   export let bottomText;
   export let email = "e@mail.com";
   export let links = [];
+  export let pages;
 
   const year = new Date().getFullYear();
 </script>
@@ -41,3 +42,9 @@
     </div>
   </div>
 </footer>
+<div class="hidden">
+  For crawling reasons, a map of hidden links is rendered here
+  {#each pages as page}
+    <a href="{lang}/{page.parent}/{page.slug.current}">👽</a>
+  {/each}
+</div>

@@ -20,6 +20,10 @@ export async function get(req, res) {
 							"href": link.href,
 							"target": link.target,
 							"text": link.text[$lang]['text']
+						},
+						"pages": *[_type == "page" && _lang == $lang]{
+							parent,
+						  	slug
 						}
 					},
 					"settings": *[_type == "settings"][0]{
