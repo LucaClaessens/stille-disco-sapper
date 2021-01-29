@@ -44,7 +44,7 @@
   let loadingEvents = true;
 
   onMount(async () => {
-    const res = await fetch(`/netlify/stager`);
+    const res = await fetch(`/netlify/events`);
     events = await res.json();
     loadingEvents = false;
   });
