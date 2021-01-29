@@ -1,3 +1,10 @@
+[dev]
+    command="yarn dev"
+    port=8888
+    targetPort=3001
+    framework='#custom'
+    publish="./web/__sapper/__/build"
+    autoLaunch = true
 [build]
     functions = "/.netlify/functions/"
 [[redirects]]

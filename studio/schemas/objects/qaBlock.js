@@ -3,7 +3,7 @@ import { MdNote } from "react-icons/md";
 export default {
     name: 'qaBlock',
     type: 'object',
-    title: 'Question / Answer styled block',
+    title: 'Form styled content block',
     fields: [
         {
             name: 'bg',

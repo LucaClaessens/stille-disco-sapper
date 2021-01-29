@@ -4,7 +4,6 @@
   import serializeImage from "../utils/image/serializeImage";
   import { focusable } from "./../core/directives/focusable";
   import { language } from "./../stores/language";
-  import projectLanguage from "./../utils/i18n/projectLanguage";
   import slugify from "./../utils/slugify";
   import AvailabilityChip from "./AvailabilityChip.svelte";
   import Icon from "./Icon.svelte";
@@ -49,9 +48,7 @@
     if (variations.length > 0 && active) {
       for (const variation of variations) {
         const { id } = variation;
-        fetch(
-          `api/${projectLanguage(lang)}/product/${id}?till=${till}&from=${from}`
-        )
+        fetch(`/netlify/product?${id}?till=${till}&from=${from}`)
           .then((res) => res.json())
           .then((data) => {
             availability[id] = data;
@@ -134,7 +131,8 @@
                   />
                   <label
                     for="push_everything"
-                    class="ml-3 block text-sm font-medium text-gray-700">
+                    class="ml-3 block text-sm font-medium text-gray-700"
+                  >
                     {variation.info}
                     <AvailabilityChip amount={availableFor(variation.id)} />
                   </label>
@@ -146,7 +144,8 @@
         <div>
           <label
             for="amount"
-            class="block text-sm font-medium text-gray-700 mb-2">
+            class="block text-sm font-medium text-gray-700 mb-2"
+          >
             Quantity
             {#if variations.length === 1}
               <AvailabilityChip amount={itemsInStock} />

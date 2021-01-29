@@ -9,3 +9,6 @@
 
 # build artefacts
 /.netlify
+
+# Local Netlify folder
+.netlify

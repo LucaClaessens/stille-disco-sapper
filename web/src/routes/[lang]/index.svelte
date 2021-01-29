@@ -39,7 +39,8 @@
     on:focus={hover}
     slot="events"
     href="{lang}/events"
-    class="relative w-full h-full flex justify-center items-center bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+    class="relative w-full h-full flex justify-center items-center bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+  >
     {#if $hoveredSection === "events"}
       <div
         transition:fade|local
@@ -58,17 +59,20 @@
         $hoveredSection,
         'rental'
       )} z-50 transition-all duration-300"
-    >{events.title}</h2>
+    >
+      {events.title}
+    </h2>
   </a>
   <a
     aria-label={rental.label}
     on:focus={hover}
     slot="rental"
     href="{lang}/rental"
-    class="relative w-full h-full flex justify-center items-center bg-white text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+    class="relative w-full h-full flex justify-center items-center bg-white text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+  >
     {#if $hoveredSection === "rental"}
       <div
-        in:fade|local
+        transition:fade|local
         class="absolute top-0 right-0 bottom-0 left-0 opacity-30 z-0"
       >
         <img
@@ -84,6 +88,8 @@
         $hoveredSection,
         'events'
       )} z-50 transition-all duration-300"
-    >{rental.title}</h2>
+    >
+      {rental.title}
+    </h2>
   </a>
 </RegionLayout>

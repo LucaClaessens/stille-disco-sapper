@@ -4,31 +4,27 @@
   import { focusable } from "../../core/directives/focusable";
   import Icon from "../Icon.svelte";
   import Search from "../icons/Search.svelte";
-  import EventDetails from "./EventDetails.svelte";
+  import EventDetails, { formatDate } from "./EventDetails.svelte";
 
   export let lang;
   export let events;
   export let activeEventIndex;
   export let placeholder = "placeholder";
   export let ticketButtonText = "Buy now";
+  export let soldOutText = "Sold out";
   let query = "";
 
   const match = (search, part) =>
     search.trim().toLowerCase().includes(part.trim().toLowerCase());
 
   $: filteredEvents = events.filter(
-    (e) => match(e.location, query) || match(e.venue, query)
+    (e) => match(e.venue.city, query) || match(e.venue.name, query)
   );
 
   $: activeEvent = events[activeEventIndex];
 </script>
 
-<form
-  in:fade={{ delay: 250, duration: 500 }}
-  id="search"
-  role="search"
-  aria-label={placeholder}
->
+<form id="search" role="search" aria-label={placeholder}>
   <label for="price" class="sr-only">Search for an event here</label>
   <div class="mt-1 relative rounded-md shadow-sm">
     <div
@@ -61,29 +57,36 @@
   role="region"
   class="max-h-screen md:max-h-screen overflow-y-auto transition-all"
 >
-  {#each filteredEvents as event, index (event.id)}
-    {#if index === activeEventIndex}
+  {#each filteredEvents as event, index (event.eventId)}
+    {#if index === activeEventIndex && !event.soldOut}
       <div class="relative" in:fade>
         <EventDetails {...activeEvent} {index} {ticketButtonText} />
       </div>
     {:else}
       <a
-        in:fly={{ y: -20, duration: 300 }}
-        href="{lang}/events?eid={event.id}"
-        class="px-2 py-2 w-100 flex hover:opacity-75 transition-opacity rounded-md opacity-{activeEventIndex ===
+        out:fly={{ y: -20, duration: 300 }}
+        href="{lang}/events?eid={event.eventId}"
+        class="{event.soldOut
+          ? 'pointer-events-none'
+          : ''} px-2 py-2 w-100 flex hover:opacity-75 transition-opacity rounded-md opacity-{activeEventIndex ===
           -1 || index === activeEventIndex
           ? 100
           : 50}"
-        use:focusable>
+        use:focusable
+      >
         <div
           in:receive={{ key: `event-list-item-${index}` }}
           out:send={{ key: `event-list-item-${index}` }}
           class="flex-1 flex justify-between items-center"
         >
-          <span class="text-gray-100">{event.date}</span>
+          {#if !event.soldOut}
+            <span class="text-gray-100">{formatDate(event.startDate)}</span>
+          {:else}
+            <span class="text-red-300">{soldOutText}</span>
+          {/if}
           <span class="text-gray-50 text-xl"
-            >{event.venue},
-            {event.location}</span
+            >{event.venue.name},
+            {event.venue.city}</span
           >
         </div>
       </a>

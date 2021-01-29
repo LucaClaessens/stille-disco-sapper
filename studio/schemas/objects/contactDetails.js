@@ -1,7 +1,7 @@
 export default {
     name: 'contactDetails',
     type: 'object',
-    title: 'contact details',
+    title: 'Contact details section',
     description: 'Details on how to contact you',
     fields: [
         {

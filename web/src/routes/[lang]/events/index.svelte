@@ -1,4 +1,5 @@
 <script context="module">
+  import { onMount } from "svelte";
   import { fly } from "svelte/transition";
   import FadeInBottom from "../../../components/FadeInBottom.svelte";
   import Callout from "./../../../components/Callout.svelte";
@@ -19,7 +20,7 @@
           `api/${projectLanguage(lang)}/events-query`
         );
         const content = await res.json();
-        return { content, lang, host, path, eid };
+        return { content, lang, host, path, eid: Number(eid) };
       } catch (err) {
         this.error(500, err);
       }
@@ -39,19 +40,16 @@
   export let lang;
   export let eid;
 
-  const events = [
-    { id: "5543c", date: "22 Feb", location: "Haarlem", venue: "Patronaat" },
-    { id: "3hgk", date: "29 Feb", location: "Amsterdam", venue: "Paradiso" },
-    { id: "3bg3", date: "29 Feb", location: "Eindhoven", venue: "Café de bie" },
-    { id: "3hg4", date: "29 Feb", location: "Aalst", venue: "Onder 't dak" },
-    { id: "4hgk", date: "29 Feb", location: "Rotterdam", venue: "Slinge yard" },
-    { id: "5hgk", date: "29 Feb", location: "Arnhem", venue: "Slootwaterhok" },
-    { id: "hhnk", date: "29 Feb", location: "Nijmegen", venue: "Hottentent" },
-  ];
+  let events = [];
+  let loadingEvents = true;
 
-  // let events = [];
+  onMount(async () => {
+    const res = await fetch(`/netlify/stager`);
+    events = await res.json();
+    loadingEvents = false;
+  });
 
-  $: activeEventIndex = events.findIndex((e) => e.id === eid);
+  $: activeEventIndex = events.findIndex((e) => e.eventId === eid);
 </script>
 
 <svelte:head>
@@ -70,9 +68,33 @@
   <section
     in:fly={{ duration: 500, delay: 20, y: 500 }}
     id="events"
-    class="p-6 flex-1"
+    class="p-6 flex-1 max-w-2xl"
   >
-    {#if events.length > 0}
+    {#if loadingEvents}
+      <div class="animate-pulse">
+        <div class="w-48 h-8 mt-1 mb-6 rounded-md bg-gray-700" />
+        <div class="flex w-full justify-between mb-6">
+          <div class="w-16 h-8 rounded bg-gray-700" />
+          <div class="w-48 h-8 rounded bg-gray-700" />
+        </div>
+        <div class="flex w-full justify-between mb-6">
+          <div class="w-16 h-8 rounded bg-gray-700" />
+          <div class="w-48 h-8 rounded bg-gray-700" />
+        </div>
+        <div class="flex w-full justify-between mb-6">
+          <div class="w-16 h-8 rounded bg-gray-700" />
+          <div class="w-48 h-8 rounded bg-gray-700" />
+        </div>
+        <div class="flex w-full justify-between mb-6">
+          <div class="w-16 h-8 rounded bg-gray-700" />
+          <div class="w-48 h-8 rounded bg-gray-700" />
+        </div>
+        <div class="flex w-full justify-between mb-6">
+          <div class="w-16 h-8 rounded bg-gray-700" />
+          <div class="w-48 h-8 rounded bg-gray-700" />
+        </div>
+      </div>
+    {:else if events.length > 0}
       <EventList
         {lang}
         {events}

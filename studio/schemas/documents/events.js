@@ -1,4 +1,4 @@
-import { i18n } from "../documentTranslation";
+import { i18n, i18nOptions } from "../documentTranslation";
 
 export default {
     name: 'events',
@@ -33,13 +33,46 @@ export default {
             name: 'ticketButtonText',
             type: 'string',
             title: 'Ticket button text',
-            description: 'Translation for the \'Buy now\' ticket when opening an event'
+            description: 'Translation for the \'Buy now\' button when opening an event'
+        },
+        {
+            name: 'soldOutText',
+            type: 'string',
+            title: 'Sold out text',
+            description: 'Translation for \'Sold out\''
         },
         {
             name: 'maxProspectEvents',
             type: 'number',
             title: 'Maximum prospect time of events',
             description: 'The maximum amount of time into the future that upcoming events will be displayed, in weeks'
+        },
+        {
+            name: 'eventTypeTranslations',
+            options: i18nOptions,
+            type: 'object',
+            fields: [
+                {
+                    name: 'concert',
+                    title: 'Concert',
+                    type: 'string'
+                },
+                {
+                    name: 'dansavond',
+                    title: 'Dance night',
+                    type: 'string'
+                },
+                {
+                    name: 'voorstelling',
+                    title: 'Show',
+                    type: 'string'
+                },
+                {
+                    name: 'festival',
+                    title: 'Festival',
+                    type: 'string'
+                },
+            ]
         }
     ],
     preview: {

@@ -4,6 +4,7 @@
   "version": "1.0.26",
   "scripts": {
     "build": "lerna run build --parallel",
+    "build-functions": "netlify-lambda build functions",
     "build-studio": "lerna bootstrap && (cd studio && npm run build)",
     "build-web": "lerna bootstrap && netlify-lambda build functions && (cd web && npm run export)",
     "dev": "lerna run dev --parallel",
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@sanity/cli": "^2.0.0",
     "lerna": "^3.14.0",
-    "netlify-lambda": "^2.0.2"
+    "netlify-lambda": "^2.0.2",
+    "node-fetch": "^2.6.1"
   }
 }
