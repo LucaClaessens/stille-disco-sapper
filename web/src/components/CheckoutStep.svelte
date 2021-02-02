@@ -48,7 +48,7 @@
     if (variations.length > 0 && active) {
       for (const variation of variations) {
         const { id } = variation;
-        fetch(`/netlify/product?${id}?till=${till}&from=${from}`)
+        fetch(`/netlify/product?id=${id}&till=${till}&from=${from}`)
           .then((res) => res.json())
           .then((data) => {
             availability[id] = data;
