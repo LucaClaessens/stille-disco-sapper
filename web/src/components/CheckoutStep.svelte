@@ -23,6 +23,17 @@
   let form;
   let availability = {};
 
+  const mockData = {
+    products: [
+      {
+        stock_counts: {
+          total: 3,
+          unavailable: 0,
+        },
+      },
+    ],
+  };
+
   $: lang = $language;
   $: from = $rentFrom;
   $: till = $rentTill;
@@ -30,8 +41,8 @@
   $: selectedVariation = firstVariation();
   $: amountValueValid = amountValue > 0 && amountValue <= maxSelectable;
   $: updateProductAvailability(variations, active);
-  $: itemsInStock = availableFor(selectedVariation.id);
-  $: availableFor = (id) =>
+  $: itemsInStock = stockById(selectedVariation.id);
+  $: stockById = (id) =>
     availability[id] &&
     availability[id].products.reduce((a, v) => {
       const productItemsInStock =
@@ -51,7 +62,11 @@
         fetch(`/netlify/product?id=${id}&till=${till}&from=${from}`)
           .then((res) => res.json())
           .then((data) => {
-            availability[id] = data;
+            if (!data.products) {
+              availability[id] = mockData;
+            } else {
+              availability[id] = data;
+            }
           });
       }
     }
@@ -134,7 +149,7 @@
                     class="ml-3 block text-sm font-medium text-gray-700"
                   >
                     {variation.info}
-                    <AvailabilityChip amount={availableFor(variation.id)} />
+                    <AvailabilityChip amount={stockById(variation.id)} />
                   </label>
                 </div>
               {/each}

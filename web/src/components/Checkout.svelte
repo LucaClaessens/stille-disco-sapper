@@ -2,7 +2,6 @@
   import { onDestroy } from "svelte";
   import { rentFrom, rentTill, userShoppingCart } from "../stores/checkout";
   import { language } from "../stores/language";
-  import projectLanguage from "../utils/i18n/projectLanguage";
   import { focusable } from "./../core/directives/focusable";
   import CheckoutDatePicker, { formatDate } from "./CheckoutDatePicker.svelte";
   import CheckoutStep from "./CheckoutStep.svelte";
@@ -63,11 +62,8 @@
 
   const checkout = async () => {
     updateCart();
-    const { order } = await createOrder();
-    window.open(
-      `https://stille-disco.booqable.shop/checkout/${order.id}/info`,
-      "_blank"
-    );
+    const { cart } = await createOrder();
+    window.open(cart.checkout_url, "_blank");
   };
 
   const cartToPayload = () => {
@@ -80,12 +76,12 @@
 
   const createOrder = async () => {
     const order = {
-      starts_at: `${from} 9:00`,
-      stops_at: `${till} 23:00`,
+      starts_at: `${from}T9:00:00.000Z`,
+      stops_at: `${till}T23:00:00.000Z`,
     };
     const ids = cartToPayload();
 
-    const orderData = await fetch(`api/${projectLanguage(lang)}/order`, {
+    const orderData = await fetch(`/netlify/order`, {
       method: "post",
       body: JSON.stringify({ order, ids }),
       headers: { "Content-Type": "application/json" },
@@ -129,7 +125,8 @@
       use:focusable
       class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20 hover:opacity-75"
       on:click={prev}
-      disabled={!hasPrevious}>
+      disabled={!hasPrevious}
+    >
       <Icon>
         <path
           stroke-linecap="round"
@@ -146,7 +143,8 @@
           : selectedDates.length === 0}
         use:focusable
         on:click={next}
-        class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20 hover:opacity-75">
+        class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20 hover:opacity-75"
+      >
         <Icon>
           <path
             stroke-linecap="round"
@@ -161,7 +159,8 @@
         disabled={!flowStepData.valid}
         use:focusable
         on:click={checkout}
-        class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20  hover:opacity-75">
+        class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20  hover:opacity-75"
+      >
         <Icon>
           <path
             stroke-linecap="round"
