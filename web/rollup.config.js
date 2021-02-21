@@ -28,7 +28,7 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.SANITY_STUDIO_API_DATASET': sanityDataset
+        'process.env.SANITY_STUDIO_API_DATASET': JSON.stringify(sanityDataset)
       }),
       svelte({
         dev,
@@ -83,7 +83,7 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
-        'process.env.SANITY_STUDIO_API_DATASET': sanityDataset
+        'process.env.SANITY_STUDIO_API_DATASET': JSON.stringify(sanityDataset)
       }),
       svelte({
         generate: 'ssr',
