@@ -32,22 +32,28 @@ export default {
             name: 'heading',
             title: 'Heading',
             type: 'object',
-            description: 'Text content to be displayed in the message',
-            options: i18nOptions,
+            description: 'Content to be displayed in the message',
             fields: [
                 {
-                    title: 'Text',
+                    title: "Text",
                     name: 'text',
-                    type: 'text',
-                    required: true,
-                    description: 'Text that the message displays, you can write HTML here.'
+                    type: 'object',
+                    options: i18nOptions,
+                    fields: [
+                        {
+                            title: 'Text',
+                            name: 'text',
+                            type: 'text',
+                            required: true,
+                            description: 'Text that the message displays, you can write HTML here.'
+                        },
+                    ]
                 },
                 {
                     title: 'Button',
                     name: 'button',
-                    type: 'string',
-                    required: true,
-                    description: 'The text to display in the button underneath the message'
+                    type: 'i18nLink',
+                    required: true
                 }
             ]
         }

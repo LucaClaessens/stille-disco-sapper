@@ -6,15 +6,18 @@ export async function get(req, res) {
 		const filter = '*[_type == "rental" && _lang == $lang][0]';
 		const projection = `{
             ...,
-						"gallery": *[_type == 'gallery'][0].gallery[]
-						{
-							img,
-							message{
-								align, 
-								justify,
-								"button": heading[$lang]['button'],
-								"text": heading[$lang]['text']
-							}
+		"gallery": *[_type == 'gallery'][0].gallery[]
+			{
+			img,
+			message{
+				align, 
+				justify,
+				"button": heading['button']{
+					...,
+					"text": text[$lang]['text']
+				},
+				"text": heading['text'][$lang]['text'],
+			}
             },
           "sequence": *[_type == 'sequence'][0]{
                 images,

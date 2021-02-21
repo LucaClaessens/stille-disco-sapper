@@ -12,6 +12,13 @@ export default {
             title: 'SEO'
         },
         {
+            name: 'displayGallery',
+            type: 'boolean',
+            title: 'Display the gallery instead of the image sequence',
+            description: 'Defines whether or not to show the gallery instead of the image sequence',
+            required: true,
+        },
+        {
             name: "hero",
             type: "object",
             title: "Hero",

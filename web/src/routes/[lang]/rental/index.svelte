@@ -44,6 +44,10 @@
     const module = await import("./../../../components/Scrollanimation.svelte");
     ScrollAnimationComponent = module.default;
   });
+
+  $: {
+    console.log({ content });
+  }
 </script>
 
 <svelte:head>
@@ -79,7 +83,7 @@
   </div>
 </div>
 
-{#if innerWidth < 768}
+{#if content.displayGallery}
   {#each content.gallery as slide}
     <GallerySlide {...slide} />
   {/each}
