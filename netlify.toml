@@ -11,3 +11,11 @@
     from = "/netlify/*"
     to="/.netlify/functions/:splat"
     status=200
+[context.test]
+  command = "npm run build-studio:dev && cp studio/netlify.toml studio/dist"
+[context.test.environment]
+  SANITY_STUDIO_API_DATASET = 'development'
+[context.main]
+  command = "npm run build-studio:prd && cp studio/netlify.toml studio/dist"
+[context.main.environment]
+  SANITY_STUDIO_API_DATASET = 'production'

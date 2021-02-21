@@ -5,7 +5,7 @@
   "main": "package.json",
   "author": "Sanity <hello@sanity.io>",
   "scripts": {
-    "dev": "sanity start",
+    "dev": "SANITY_STUDIO_API_DATASET=development sanity start",
     "format": "prettier-eslint --write \"**/*.js\" \"!node_modules/**\"",
     "build": "sanity build",
     "graphql-deploy": "sanity graphql deploy --playground",
