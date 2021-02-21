@@ -12,6 +12,7 @@ const { preprocess } = require('./svelte.config');
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
+const sanityDataset = process.env.SANITY_STUDIO_API_DATASET;
 
 const onwarn = (warning, onwarn) =>
   (warning.code === 'CIRCULAR_DEPENDENCY' &&
@@ -27,6 +28,7 @@ export default {
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.SANITY_STUDIO_API_DATASET': sanityDataset
       }),
       svelte({
         dev,
@@ -81,6 +83,7 @@ export default {
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode),
+        'process.env.SANITY_STUDIO_API_DATASET': sanityDataset
       }),
       svelte({
         generate: 'ssr',

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "run-p watch:*",
     "watch:css": "postcss src/assets/global.pcss -o static/global.css -w",
-    "watch:dev": "sapper dev",
+    "watch:dev": "SANITY_STUDIO_API_DATASET=development sapper dev",
     "build": "run-s build:css build:export",
     "build:css": "NODE_ENV=production postcss src/assets/global.pcss -o static/global.css",
     "build:export": "sapper export --legacy",
