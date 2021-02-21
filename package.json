@@ -5,8 +5,7 @@
   "scripts": {
     "build": "lerna run build --parallel",
     "build-functions": "netlify-lambda build functions",
-    "build-studio:dev": "lerna bootstrap && (cd studio && SANITY_STUDIO_API_DATASET=development npm run build)",
-    "build-studio:prd": "lerna bootstrap && (cd studio && SANITY_STUDIO_API_DATASET=production npm run build)",
+    "build-studio": "lerna bootstrap && (cd studio && npm run build)",
     "build-web": "lerna bootstrap && netlify-lambda build functions && (cd web && npm run export)",
     "dev": "lerna run dev --parallel",
     "format": "lerna run format",
