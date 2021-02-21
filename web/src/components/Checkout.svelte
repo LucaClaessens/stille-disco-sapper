@@ -17,6 +17,7 @@
   let _cart;
   let flowIndex = 0;
   let flowStepData = {};
+  let checkoutPending = false;
 
   $: currentStep = flowIndex + 1;
   $: steps = flow.length + 1;
@@ -62,7 +63,9 @@
 
   const checkout = async () => {
     updateCart();
+    checkoutPending = true;
     const { cart } = await createOrder();
+    checkoutPending = false;
     window.open(cart.checkout_url, "_blank");
   };
 
@@ -162,12 +165,21 @@
         class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20  hover:opacity-75"
       >
         <Icon>
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          />
+          {#if checkoutPending}
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+            />
+          {:else}
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          {/if}
         </Icon>
       </button>
     {/if}
