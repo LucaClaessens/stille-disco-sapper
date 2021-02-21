@@ -4,6 +4,7 @@
   import { language } from "../stores/language";
   import { focusable } from "./../core/directives/focusable";
   import CheckoutDatePicker, { formatDate } from "./CheckoutDatePicker.svelte";
+  import CheckoutMisc from "./CheckoutMisc.svelte";
   import CheckoutStep from "./CheckoutStep.svelte";
   import Icon from "./Icon.svelte";
 
@@ -20,10 +21,10 @@
   let checkoutPending = false;
 
   $: currentStep = flowIndex + 1;
-  $: steps = flow.length + 1;
+  $: steps = flow.length + 2;
 
   $: hasPrevious = flowIndex > 0;
-  $: hasNext = flowIndex < steps - 1;
+  $: hasNext = flowIndex < steps;
 
   $: from = $rentFrom;
   $: till = $rentTill;
@@ -38,6 +39,14 @@
     console.log({ cart });
     _cart = cart;
   });
+
+  $: {
+    console.log({
+      flowIndex,
+      steps,
+      currentStep,
+    });
+  }
 
   const updateValidity = (e) => {
     const { detail } = e;
@@ -94,8 +103,13 @@
   };
 
   const prev = () => flowIndex--;
-  const propertyAt = (index, property) =>
-    index === 0 ? "Date selection" : flow[index - 1][property];
+  const propertyAt = (index, property) => {
+    return index === 0
+      ? "Date selection"
+      : index === steps - 1
+      ? "Misc items"
+      : flow[index - 1][property];
+  };
 
   onDestroy(unsubscribe);
 </script>
@@ -114,6 +128,7 @@
         on:stateChange={updateValidity}
       />
     {/each}
+    <CheckoutMisc active={flowIndex == steps.length} />
   </div>
   <div id="controls" class="flex flex-0">
     <div class="flex-1 flex flex-col justify-start items-start p-6">
