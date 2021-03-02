@@ -22,7 +22,7 @@ const documentEditor = (documentId, schemaType, title) => S
   .title(title)
 
 export const getDefaultDocumentNode = (props) => {
-  if (props.schemaType === 'page') {
+  if (props.schemaType === 'page' || props.schemaType === 'product') {
     return S.document().views(I18nS.getDocumentNodeViewsForSchemaType(props.schemaType));
   }
   return S.document();
@@ -95,7 +95,15 @@ export default () =>
         .title('Products')
         .icon(MdAddShoppingCart)
         .schemaType('product')
-        .child(S.documentTypeList('product').title('Products')),
+        .child(
+          S.documentTypeList('product')
+            .title('Products')
+            .filter('_type == "product" && (!defined(_lang) || _lang == $baseLang)')
+            .params({ baseLang: i18n.base })
+            .canHandleIntent((_name, params, _context) => {
+              return params.type === 'page'
+            })
+        ),
       S.listItem()
         .title('Locations')
         .icon(MdPublic)

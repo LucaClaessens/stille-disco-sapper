@@ -21,11 +21,11 @@
   export let lang;
   export let content;
 
-  const { seo, checkoutFlow, dateSelection } = content;
+  const { seo, checkoutFlow, dateSelection, uiFields } = content;
 </script>
 
 <svelte:head>
   <SEO {host} {path} {seo} {lang} />
 </svelte:head>
 
-<Checkout flow={checkoutFlow} {dateSelection} />
+<Checkout flow={checkoutFlow} {dateSelection} {uiFields} />

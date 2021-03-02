@@ -19,6 +19,7 @@
   export let info;
   export let details;
   export let image = {};
+  export let uiFields = {};
 
   let form;
   let availability = {};
@@ -54,6 +55,9 @@
 
   let amountDirty = false;
   const dispatch = createEventDispatcher();
+
+  const composeError = (string, maxAmount) =>
+    string.replace("{maxAmount}", maxAmount);
 
   const updateProductAvailability = async (variations, active) => {
     if (variations.length > 0 && active) {
@@ -161,7 +165,7 @@
             for="amount"
             class="block text-sm font-medium text-gray-700 mb-2"
           >
-            Quantity
+            {uiFields.quantity}
             {#if variations.length === 1}
               <AvailabilityChip amount={itemsInStock} />
             {/if}
@@ -193,7 +197,7 @@
           />
           {#if !amountValueValid && amountDirty}
             <p class="text-sm text-red-pure">
-              Amount must be between 1 and {maxSelectable}
+              {composeError(uiFields.amountError, maxSelectable)}
             </p>
           {/if}
         </div>
