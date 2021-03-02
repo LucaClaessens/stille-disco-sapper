@@ -35,7 +35,7 @@
   $: lang = $language;
 </script>
 
-{#if display}
+{#if display && text}
   <div class="bg-{bgColor} text-{textColor}">
     <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between flex-wrap">
@@ -48,7 +48,8 @@
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              aria-hidden="true">
+              aria-hidden="true"
+            >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -58,9 +59,9 @@
             </svg>
           </span>
           <p class="ml-3 dark:bext-white truncate">
-            <span class="md:hidden">{text.default}</span>
+            <span class="md:hidden">{text.default || ""}</span>
             <span class="hidden md:inline">
-              {text.large}
+              {text.large || ""}
             </span>
           </p>
         </div>
@@ -69,13 +70,14 @@
         >
           <a
             href="{localHref ? lang : ''}{href}"
-            class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm  hover:opacity-50">
-            {text.button}
+            class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm  hover:opacity-50"
+          >
+            {text.button || ""}
           </a>
         </div>
         <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
           <Button on:click={dispose}>
-            <span class="sr-only">{text.dismiss}</span>
+            <span class="sr-only">{text.dismiss || ""}</span>
             <Icon>
               <path
                 stroke-linecap="round"

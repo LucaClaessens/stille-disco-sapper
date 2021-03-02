@@ -36,17 +36,8 @@
       : `${formatDate(selectedDates[0])} → ${formatDate(selectedDates[1])}`;
 
   const unsubscribe = userShoppingCart.subscribe((cart) => {
-    console.log({ cart });
     _cart = cart;
   });
-
-  $: {
-    console.log({
-      flowIndex,
-      steps,
-      currentStep,
-    });
-  }
 
   const updateValidity = (e) => {
     const { detail } = e;
