@@ -1,4 +1,4 @@
-import buildHooks from "./config/buildHooks";
+import { getEnvSites } from "./config/buildHooks";
 
 export default {
   widgets: [
@@ -11,7 +11,7 @@ export default {
             options: {
               description:
                 'NOTE: Because these sites are static builds, they need to be re-deployed to see the changes when documents are published.',
-              sites: buildHooks
+              sites: getEnvSites(process.env.SANITY_STUDIO_ACTIVE_ENV)
             }
           }
         ],
