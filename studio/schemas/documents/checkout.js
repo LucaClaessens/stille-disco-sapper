@@ -60,6 +60,43 @@ export default {
             }]
         },
         {
+            name: 'uiFields',
+            type: 'object',
+            title: ' UI Fields',
+            fields: [
+                {
+                    name: 'step',
+                    type: 'string',
+                    title: 'Step',
+                    description: 'Translation for the word `step`'
+                },
+                {
+                    name: 'dateSelection',
+                    type: 'string',
+                    title: 'Date selection',
+                    description: 'Translation for the words `Date selection`'
+                },
+                {
+                    name: 'miscItems',
+                    type: 'string',
+                    title: 'Miscellaneous items',
+                    description: 'Translation for the words `Miscellaneous items`'
+                },
+                {
+                    name: 'quantity',
+                    type: 'string',
+                    title: 'Quantity',
+                    description: 'Translation for the words `Quantity`'
+                },
+                {
+                    name: 'amountError',
+                    type: 'string',
+                    title: 'Amount error',
+                    description: 'Translation for the text `Amount must be between 1 and {maxAmount}`'
+                }
+            ]
+        },
+        {
             name: 'dateSelection',
             type: 'object',
             title: 'Date Selection',

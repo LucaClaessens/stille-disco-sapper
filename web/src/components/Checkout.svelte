@@ -8,6 +8,12 @@
   import CheckoutStep from "./CheckoutStep.svelte";
   import Icon from "./Icon.svelte";
 
+  export let uiFields = {
+    step: "step",
+    dateSelection: "Date selection",
+    miscItems: "Misc items",
+  };
+
   export let dateSelection = {
     noDatesSelected: "No dates selected yet",
   };
@@ -36,17 +42,8 @@
       : `${formatDate(selectedDates[0])} → ${formatDate(selectedDates[1])}`;
 
   const unsubscribe = userShoppingCart.subscribe((cart) => {
-    console.log({ cart });
     _cart = cart;
   });
-
-  $: {
-    console.log({
-      flowIndex,
-      steps,
-      currentStep,
-    });
-  }
 
   const updateValidity = (e) => {
     const { detail } = e;
@@ -105,9 +102,9 @@
   const prev = () => flowIndex--;
   const propertyAt = (index, property) => {
     return index === 0
-      ? "Date selection"
+      ? uiFields.dateSelection
       : index === steps - 1
-      ? "Misc items"
+      ? uiFields.miscItems
       : flow[index - 1][property];
   };
 
@@ -124,6 +121,7 @@
     {#each flow as checkoutStep, index (checkoutStep._key)}
       <CheckoutStep
         {...checkoutStep}
+        {uiFields}
         active={flowIndex == index + 1}
         on:stateChange={updateValidity}
       />
@@ -135,8 +133,9 @@
       <span class="text-sm text-gray-500">
         {formattedSelection || dateSelection.noDatesSelected}
       </span>
-      <span class="text-base md:text-xl font-medium"
-        >Step {currentStep}/{steps}: {propertyAt(flowIndex, "name")}</span
+      <span class="text-base md:text-xl font-medium capitalize"
+        >{uiFields.step}
+        {currentStep}/{steps}: {propertyAt(flowIndex, "name")}</span
       >
     </div>
     <button

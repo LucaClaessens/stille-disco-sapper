@@ -26,6 +26,10 @@
   export let globalData;
   export let lang;
 
+  $: {
+    updateStaticComponents(globalData);
+  }
+
   const sectionFromPath = (path) => {
     const suffix = path.replace(`/${lang}/`, "");
     const idx = suffix.indexOf("/") > -1 ? suffix.indexOf("/") : suffix.length;
@@ -35,15 +39,18 @@
 
   const { page } = sapper.stores();
 
+  const updateStaticComponents = (data) => {
+    navigationData.set(data.navigation);
+    footerData.set(data.footer);
+    globalSettings.set(data.settings);
+  };
+
   page.subscribe((page) => {
     activePath.set(page.path);
     activeSection.set(sectionFromPath(page.path));
   });
 
   language.set(lang);
-  navigationData.set(globalData.navigation);
-  footerData.set(globalData.footer);
-  globalSettings.set(globalData.settings);
 </script>
 
 <slot />

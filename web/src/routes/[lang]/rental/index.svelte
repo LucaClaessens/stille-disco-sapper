@@ -44,10 +44,6 @@
     const module = await import("./../../../components/Scrollanimation.svelte");
     ScrollAnimationComponent = module.default;
   });
-
-  $: {
-    console.log({ content });
-  }
 </script>
 
 <svelte:head>

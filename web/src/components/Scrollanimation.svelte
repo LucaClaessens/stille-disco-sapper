@@ -18,8 +18,6 @@
 
   let curIndex = 0;
 
-  $: console.log({ curIndex });
-
   ScrollMagicPluginGsap(ScrollMagic, TweenMax);
 
   onMount(async () => {
