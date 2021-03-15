@@ -13,7 +13,9 @@
     status=200
 [context.test.environment]
   SANITY_STUDIO_API_DATASET = 'development'
+  SANITY_ACTIVE_ENV = 'development'
   SANITY_STUDIO_PROJECT_NAME = 'stille disco (DEV)'
 [context.main.environment]
   SANITY_STUDIO_API_DATASET = 'production'
+  SANITY_ACTIVE_ENV = 'production'
   SANITY_STUDIO_PROJECT_NAME = 'stille disco'
