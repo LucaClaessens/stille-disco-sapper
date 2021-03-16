@@ -12,6 +12,7 @@
   /*Ωignore_startΩ*/
   /*Ωignore_startΩ*/
   /*Ωignore_startΩ*/
+  /*Ωignore_startΩ*/
 
   export async function preload({ host, params, path }) {
     const { lang } = params;
@@ -44,7 +45,7 @@
   id="site-logo"
   class="absolute top-2 left-1/2 z-50 translate-y-1/2 transform"
 >
-  <h2>Logo</h2>
+  <h2 class="font-heading">Logo</h2>
 </div>
 
 <RegionLayout {lang} {path}>
@@ -72,7 +73,7 @@
       class="{scaleText(
         $hoveredSection,
         'rental'
-      )} z-50 transition-all duration-300"
+      )} z-50 transition-all duration-300 font-heading"
     >
       {events.title}
     </h2>
@@ -101,7 +102,7 @@
       class="{scaleText(
         $hoveredSection,
         'events'
-      )} z-50 transition-all duration-300"
+      )} z-50 transition-all duration-300 font-heading"
     >
       {rental.title}
     </h2>

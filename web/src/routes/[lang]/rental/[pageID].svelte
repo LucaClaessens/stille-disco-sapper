@@ -36,6 +36,6 @@
 {:else}
   <div class="w-full h-full flex justify-center items-center flex-col">
     <p />
-    <h2 class="text-3xl md:text-5xl mb-6">404</h2>
+    <h2 class="text-3xl md:text-5xl mb-6 font-heading">404</h2>
   </div>
 {/if}

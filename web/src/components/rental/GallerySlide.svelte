@@ -46,7 +46,7 @@
         in:fly={{ y: -20, delay: 900, duration: 300 }}
         class="max-w-xs relative z-10 flex flex-col justify-start items-start"
       >
-        <h3 class="mb-3 text-xl">{@html message.text}</h3>
+        <h3 class="mb-3 text-xl font-heading">{@html message.text}</h3>
         <Link
           href={message.button.href.startsWith("http")
             ? message.button.href

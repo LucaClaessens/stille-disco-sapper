@@ -7,9 +7,6 @@ module.exports = {
         content: ["./src/**/*.svelte", "./src/**/*.html"],
     },
     theme: {
-        fontFamily: {
-            'sans': ['IBM\\ Plex\\ Sans', ...defaultTheme.fontFamily.sans]
-        },
         extend: {
             keyframes: {
                 'shrink-in': {
@@ -51,7 +48,11 @@ module.exports = {
                 '2': '2 2 0%',
                 '3': '3 3 0%',
                 'hidden': '0px'
-            }
+            },
+            fontFamily: {
+                'sans': ['Libre Franklin', ...defaultTheme.fontFamily.sans],
+                'heading': ['Roquefort', ' sans-serif']
+            },
         },
     },
     variants: {

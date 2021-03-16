@@ -22,7 +22,9 @@
     class="md:flex-1 w-full h-96 md:h-auto relative flex items-end justify-start z-0"
   >
     <Image classes="w-full h-full" {...backgroundImage} />
-    <h3 class="absolute left-6 top-6 z-1 text-{textColor} text-2xl max-w-sm">
+    <h3
+      class="absolute left-6 top-6 z-1 text-{textColor} text-2xl max-w-sm font-heading"
+    >
       {tagline}
     </h3>
     <div
@@ -33,7 +35,8 @@
         href="{$language}/checkout?composition=custom"
         use:focusable
         id="custom-checkout"
-        class="flex hover:opacity-75">
+        class="flex hover:opacity-75"
+      >
         <div class="flex-1 p-6 flex flex-col">
           <span class="text-xs">{customComposition.subtitle}</span>
           <p>{customComposition.title}</p>

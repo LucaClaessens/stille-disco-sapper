@@ -1,10 +1,11 @@
 <script>
-  import { gsap, TweenMax } from "gsap";
-  import ScrollMagic from "scrollmagic";
-  import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-  import { onMount } from "svelte";
-  import { fade, fly } from "svelte/transition";
-  import Button from "./Button.svelte";
+  import { gsap,TweenMax } from "gsap";
+import ScrollMagic from "scrollmagic";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { onMount } from "svelte";
+import { fade,fly } from "svelte/transition";
+import Button from "./Button.svelte";
+
 
   let imgPath;
   let sectionRef;
@@ -70,7 +71,7 @@
             transition:fly|local={{ y: -20, delay: 900, duration: 300 }}
             class="pointer-events-auto max-w-xs relative z-10 flex flex-col justify-start items-start"
           >
-            <h3 class="mb-3 text-xl">{@html message.text}</h3>
+            <h3 class="mb-3 text-xl font-heading">{@html message.text}</h3>
             <Button cta={true}>{message.button}</Button>
           </div>
         </div>

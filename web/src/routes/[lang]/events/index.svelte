@@ -60,7 +60,9 @@
   {#if activeEventIndex === -1}
     <span in:fly={{ duration: 500, y: -500 }}>
       <Callout px={6} py={12}>
-        <h3 class="text-2xl"><FadeInBottom>{content.tagline}</FadeInBottom></h3>
+        <h3 class="text-2xl font-heading">
+          <FadeInBottom>{content.tagline}</FadeInBottom>
+        </h3>
       </Callout>
     </span>
   {/if}

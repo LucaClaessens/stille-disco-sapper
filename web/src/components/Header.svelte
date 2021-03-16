@@ -16,7 +16,7 @@
   class="snap-start w-full p-5 flex justify-between items-center dark:bg-black bg-white"
 >
   <LinkButton url={lang}>
-    <h1 aria-label="Return to homepage">Stille disco</h1>
+    <h1 class="font-heading" aria-label="Return to homepage">Stille disco</h1>
   </LinkButton>
   <div class="md:hidden">
     <Button on:click={() => (menuExpanded = true)}>
@@ -54,7 +54,7 @@
   >
     <div class="p-5 flex items-center justify-between">
       <LinkButton url={lang}>
-        <h1>Stille disco</h1>
+        <h1 class="font-heading">Stille disco</h1>
       </LinkButton>
       <Button on:click={() => (menuExpanded = false)}>
         <span class="sr-only">Close menu</span>

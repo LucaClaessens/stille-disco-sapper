@@ -57,7 +57,7 @@
 >
   <div class="flex flex-col px-6 py-12 justify-center align-start max-w-md">
     <FadeInBottom>
-      <h2 class="text-4xl mb-12">
+      <h2 class="text-4xl mb-12 font-heading">
         {content.hero.tagline}
       </h2>
     </FadeInBottom>
