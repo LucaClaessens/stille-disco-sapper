@@ -24,5 +24,11 @@ export default {
             title: 'Rental',
             required: true,
         },
+        {
+            name: 'landingImage',
+            type: 'mainImage',
+            title: 'Landing screen logo image',
+            required: true
+        }
     ]
 }

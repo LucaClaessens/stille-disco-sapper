@@ -32,7 +32,7 @@
   export let path;
   export let lang;
   export let content;
-  const { events, rental, seo } = content;
+  const { events, rental, seo, landingImage } = content;
 
   const scaleText = (ref, match) => (ref === match ? "text-2xl" : "text-5xl");
 </script>
@@ -43,9 +43,14 @@
 
 <div
   id="site-logo"
-  class="absolute top-2 left-1/2 z-50 translate-y-1/2 transform"
+  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform"
 >
-  <h2 class="font-heading">Logo</h2>
+  <img
+    loading="lazy"
+    class="object-cover w-full h-full"
+    src={serializeImage(landingImage)}
+    alt={landingImage.alt}
+  />
 </div>
 
 <RegionLayout {lang} {path}>
