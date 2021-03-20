@@ -1,18 +1,9 @@
 <script context="module">
-  import { fade } from "svelte/transition";
   import RegionLayout, { hover } from "../../components/RegionLayout.svelte";
-  import { hoveredSection } from "../../stores/layout"; /*Ωignore_startΩ*/
+  import { hoveredSection } from "../../stores/layout";
   import SEO from "./../../components/SEO.svelte";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
   import serializeImage from "./../../utils/image/serializeImage";
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
-  /*Ωignore_startΩ*/
 
   export async function preload({ host, params, path }) {
     const { lang } = params;
@@ -43,7 +34,7 @@
 
 <div
   id="site-logo"
-  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform"
+  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none"
 >
   <img
     loading="lazy"
@@ -61,24 +52,24 @@
     href="{lang}/events"
     class="relative w-full h-full flex justify-center items-center bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
   >
-    {#if $hoveredSection === "events"}
-      <div
-        transition:fade|local
-        class="absolute top-0 right-0 bottom-0 left-0 opacity-30 z-0"
-      >
-        <img
-          loading="lazy"
-          class="object-cover w-full h-full"
-          src={serializeImage(events.image)}
-          alt={events.image.alt}
-        />
-      </div>
-    {/if}
+    <div
+      class="transform transition-opacity absolute top-0 right-0 bottom-0 left-0 {$hoveredSection ===
+      'rental'
+        ? 'opacity-90 filter-blur scale-105'
+        : ''} z-0"
+    >
+      <img
+        loading="lazy"
+        class="object-cover w-full h-full"
+        src={serializeImage(events.image)}
+        alt={events.image.alt}
+      />
+    </div>
     <h2
       class="{scaleText(
         $hoveredSection,
         'rental'
-      )} z-50 transition-all duration-300 font-heading"
+      )} z-50 transition-all duration-300 font-heading uppercase"
     >
       {events.title}
     </h2>
@@ -90,26 +81,32 @@
     href="{lang}/rental"
     class="relative w-full h-full flex justify-center items-center bg-white text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
   >
-    {#if $hoveredSection === "rental"}
-      <div
-        transition:fade|local
-        class="absolute top-0 right-0 bottom-0 left-0 opacity-30 z-0"
-      >
-        <img
-          loading="lazy"
-          class="object-cover w-full h-full"
-          src={serializeImage(rental.image, 1200)}
-          alt={rental.image.alt}
-        />
-      </div>
-    {/if}
+    <div
+      class="transform transition-opacity absolute top-0 right-0 bottom-0 left-0 {$hoveredSection ===
+      'events'
+        ? 'opacity-90 filter-blur scale-105'
+        : ''} z-0"
+    >
+      <img
+        loading="lazy"
+        class="object-cover w-full h-full"
+        src={serializeImage(rental.image, 1200)}
+        alt={rental.image.alt}
+      />
+    </div>
     <h2
       class="{scaleText(
         $hoveredSection,
         'events'
-      )} z-50 transition-all duration-300 font-heading"
+      )} z-50 transition-all duration-300 font-heading uppercase"
     >
       {rental.title}
     </h2>
   </a>
 </RegionLayout>
+
+<style>
+  .filter-blur {
+    filter: blur(15px);
+  }
+</style>
