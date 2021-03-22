@@ -17,7 +17,9 @@
 
   $: textColor = invert ? "black" : "white";
   $: mdClasses = breakMd
-    ? `md:items-start md:flex-col md:w-${scale} md:h-full md:px-0`
+    ? `md:items-start md:flex-col ${
+        scale === 2 ? "md:w-2" : "md:w-10"
+      } md:h-full md:px-0`
     : "";
 </script>
 
@@ -29,11 +31,13 @@
   on:mouseenter={() => dispatch("focus", { key })}
   on:focus={() => dispatch("focus", { key })}
   id="channel-{key}"
-  class="hover:opacity-75 transition-all bg-{key}-pure w-full h-{scale} flex items-center justify-between text-{textColor} px-6 {mdClasses}">
+  class="hover:opacity-75 transition-all bg-{key}-pure w-full h-{scale} flex items-center justify-between text-{textColor} px-6 {mdClasses}"
+>
   {#if active}
     <span
       class="mr-6 {breakMd ? 'md:transform md:rotate-90 md:p-3' : ''}"
-      in:fade={{ delay: 200 }}>
+      in:fade={{ delay: 200 }}
+    >
       <Icon solid={true}>
         <PlayButton />
       </Icon>
