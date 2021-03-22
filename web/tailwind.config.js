@@ -5,6 +5,12 @@ module.exports = {
     purge: {
         mode: 'all',
         content: ["./src/**/*.svelte", "./src/**/*.html"],
+        options: {
+            safelist: ['bg-red-pure', 'bg-blue-pure', 'bg-green-pure', 'h-10', 'h-2', 'text-black', 'text-white', 'md:w-2', 'md:w-10'],
+            blocklist: [/^debug-/],
+            keyframes: true,
+            fontFace: true,
+        },
     },
     theme: {
         extend: {

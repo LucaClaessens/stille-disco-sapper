@@ -40,7 +40,7 @@
             loading="lazy"
             in:fade={{ duration: 1000 }}
             class="h-full w-full object-cover"
-            src={serializeImage(img)}
+            src={serializeImage(img, 2400)}
             alt={img.alt}
           />
         </ShrinkIn>

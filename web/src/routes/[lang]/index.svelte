@@ -39,7 +39,7 @@
   <img
     loading="lazy"
     class="object-cover w-full h-full"
-    src={serializeImage(landingImage, 150)}
+    src={serializeImage(landingImage, 350)}
     alt={landingImage.alt}
   />
 </div>
@@ -61,7 +61,7 @@
       <img
         loading="lazy"
         class="object-cover w-full h-full"
-        src={serializeImage(events.image)}
+        src={serializeImage(events.image, 1200)}
         alt={events.image.alt}
       />
     </div>
