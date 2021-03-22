@@ -22,12 +22,12 @@ module.exports = {
                 'shrink-in': 'shrink-in 0.6s ease-out',
                 'fadein-bottom': 'fadein-bottom 1s ease-out'
             },
-            backgroundImage: theme => ({
-                'landing-events': "url('/landing/events.jpg')",
-                'landing-rental': "url('/landing/rental.png')",
-            }),
             zIndex: {
                 '-1': '-1'
+            },
+            fontFamily: {
+                'sans': ['Libre Franklin', ...defaultTheme.fontFamily.sans],
+                'heading': ['Roquefort', ' sans-serif']
             },
             colors: {
                 orange: {
@@ -45,14 +45,10 @@ module.exports = {
                 }
             },
             flex: {
-                '2': '2 2 0%',
-                '3': '3 3 0%',
+                2: '2 2 0%',
+                3: '3 3 0%',
                 'hidden': '0px'
-            },
-            fontFamily: {
-                'sans': ['Libre Franklin', ...defaultTheme.fontFamily.sans],
-                'heading': ['Roquefort', ' sans-serif']
-            },
+            }
         },
     },
     variants: {

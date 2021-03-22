@@ -20,7 +20,7 @@
   export let socialsTitle = "Socials";
 </script>
 
-<div class="w-full h-full md:h-5/6 bg-gray-100 flex flex-col md:flex-row">
+<div class="md:h-5/6 bg-gray-100 flex flex-col md:flex-row">
   <div class="relative flex-1 md:flex-3 md:p-24 h-2/3 md:h-auto">
     <h2
       class="hidden font-semibold font-heading md:block absolute top-12 left-12 text-6xl text-gray-700 z-50"

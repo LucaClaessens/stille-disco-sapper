@@ -34,12 +34,12 @@
 
 <div
   id="site-logo"
-  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none"
+  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none w-80"
 >
   <img
     loading="lazy"
     class="object-cover w-full h-full"
-    src={serializeImage(landingImage)}
+    src={serializeImage(landingImage, 150)}
     alt={landingImage.alt}
   />
 </div>

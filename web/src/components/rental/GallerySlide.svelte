@@ -23,12 +23,15 @@
   $: lang = $language;
 </script>
 
-<article use:focusable class="snap-center p-6 w-full h-full relative">
+<article
+  use:focusable
+  class="snap-center p-6 md:p-12 lg:p-24 w-full h-full relative"
+>
   <IntersectionObserver
     let:intersecting
     once={true}
     top={700}
-    containerClasses="flex justify-{message.justify} items-{message.align}"
+    containerClasses="flex justify-center items-center"
   >
     {#if intersecting}
       <div class="absolute top-0 left-0 bottom-0 right-0 z-0">
@@ -44,17 +47,19 @@
       </div>
       <div
         in:fly={{ y: -20, delay: 900, duration: 300 }}
-        class="max-w-xs relative z-10 flex flex-col justify-start items-start"
+        class="w-full relative z-10 flex flex-col justify-{message.align} items-{message.justify} container"
       >
-        <h3 class="mb-3 text-xl font-heading">{@html message.text}</h3>
-        <Link
-          href={message.button.href.startsWith("http")
-            ? message.button.href
-            : `/${lang}${message.button.href}`}
-          target={message.button.target}
-        >
-          <Button cta={true}>{message.button.text}</Button></Link
-        >
+        <div>
+          <h3 class="mb-3 text-xl font-heading">{@html message.text}</h3>
+          <Link
+            href={message.button.href.startsWith("http")
+              ? message.button.href
+              : `/${lang}${message.button.href}`}
+            target={message.button.target}
+          >
+            <Button cta={true}>{message.button.text}</Button></Link
+          >
+        </div>
       </div>
     {/if}
   </IntersectionObserver>
