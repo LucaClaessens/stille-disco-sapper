@@ -25,7 +25,7 @@
   onDestroy(unsubscribe);
 </script>
 
-<div class="flex flex-col {breakMd ? 'md:flex-row' : ''} flex-none">
+<div class="z-10 flex flex-col {breakMd ? 'md:flex-row' : ''} flex-none">
   {#each channels as channel}
     <Channel
       {breakMd}

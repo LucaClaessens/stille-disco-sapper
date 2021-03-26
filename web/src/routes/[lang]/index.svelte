@@ -50,63 +50,75 @@
     on:focus={hover}
     slot="events"
     href="{lang}/events"
-    class="relative w-full h-full flex justify-center items-center bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+    class="overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
   >
     <div
-      class="transform transition-opacity absolute top-0 right-0 bottom-0 left-0 {$hoveredSection ===
-      'rental'
-        ? 'opacity-90 filter-blur scale-105'
-        : ''} z-0"
+      class="clip-events absolute w-full h-full flex justify-center items-center"
     >
-      <img
-        loading="lazy"
-        class="object-cover w-full h-full"
-        src={serializeImage(events.image, 1200)}
-        alt={events.image.alt}
-      />
-    </div>
-    <h2
-      class="{scaleText(
-        $hoveredSection,
+      <div
+        class="pointer-events-none transition-opacity fixed top-0 right-0 bottom-0 left-0 {$hoveredSection ===
         'rental'
-      )} z-50 transition-all duration-300 font-heading uppercase"
-    >
-      {events.title}
-    </h2>
+          ? 'opacity-90 filter-blur'
+          : ''} z-0"
+      >
+        <img
+          loading="lazy"
+          class="object-cover w-full h-full"
+          src={serializeImage(events.image, 1200)}
+          alt={events.image.alt}
+        />
+      </div>
+      <h2
+        class="{scaleText(
+          $hoveredSection,
+          'rental'
+        )} z-50 transition-all duration-300 font-heading uppercase"
+      >
+        {events.title}
+      </h2>
+    </div>
   </a>
   <a
     aria-label={rental.label}
     on:focus={hover}
     slot="rental"
     href="{lang}/rental"
-    class="relative w-full h-full flex justify-center items-center bg-white text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+    class="overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
   >
     <div
-      class="transform transition-opacity absolute top-0 right-0 bottom-0 left-0 {$hoveredSection ===
-      'events'
-        ? 'opacity-90 filter-blur scale-105'
-        : ''} z-0"
+      class="clip-rental absolute w-full h-full flex justify-center items-center"
     >
-      <img
-        loading="lazy"
-        class="object-cover w-full h-full"
-        src={serializeImage(rental.image, 1200)}
-        alt={rental.image.alt}
-      />
-    </div>
-    <h2
-      class="{scaleText(
-        $hoveredSection,
+      <div
+        class="pointer-events-none transform transition-opacity fixed top-0 right-0 bottom-0 left-0 {$hoveredSection ===
         'events'
-      )} z-50 transition-all duration-300 font-heading uppercase"
-    >
-      {rental.title}
-    </h2>
+          ? 'opacity-90 filter-blur'
+          : ''} z-0"
+      >
+        <img
+          loading="lazy"
+          class="object-cover w-full h-full"
+          src={serializeImage(rental.image, 1200)}
+          alt={rental.image.alt}
+        />
+      </div>
+      <h2
+        class="{scaleText(
+          $hoveredSection,
+          'events'
+        )} z-50 transition-all duration-300 font-heading uppercase"
+      >
+        {rental.title}
+      </h2>
+    </div>
   </a>
 </RegionLayout>
 
 <style>
   .filter-blur {
     filter: blur(15px);
+  }
+  .clip-events,
+  .clip-rental {
+    clip: rect(0, auto, auto, 0);
   }
 </style>
