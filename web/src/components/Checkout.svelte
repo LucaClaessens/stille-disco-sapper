@@ -32,7 +32,7 @@
   $: steps = flow.length + 2;
 
   $: hasPrevious = flowIndex > 0;
-  $: hasNext = flowIndex < steps;
+  $: hasNext = flowIndex < steps - 1;
 
   $: from = $rentFrom;
   $: till = $rentTill;
@@ -50,6 +50,7 @@
   const updateValidity = (e) => {
     const { detail } = e;
     flowStepData = detail;
+    console.log({ flowStepData });
   };
 
   const updateCart = () => {
@@ -70,7 +71,7 @@
   };
 
   const checkout = async () => {
-    updateCart();
+    // updateCart();
     checkoutPending = true;
     const { cart } = await createOrder();
     checkoutPending = false;
@@ -115,14 +116,9 @@
 
 <div class="flex flex-col w-full h-full">
   <div class="flex-1 overflow-y-auto">
-    <!-- <CheckoutDatePicker
-      {...dateSelection}
-      active={flowIndex == 0}
-      bind:selected={selectedDates}
-    /> -->
     <CheckoutDatePicker
       {...dateSelection}
-      active={false}
+      active={flowIndex == 0}
       bind:selected={selectedDates}
     />
     {#each flow as checkoutStep, index (checkoutStep._key)}
@@ -133,8 +129,12 @@
         on:stateChange={updateValidity}
       />
     {/each}
-    <!-- <CheckoutMisc active={flowIndex == steps - 1} /> -->
-    <CheckoutMisc active={flowIndex == 0} {...miscProducts} {uiFields} />
+    <CheckoutMisc
+      active={flowIndex == steps - 1}
+      {...miscProducts}
+      {uiFields}
+      on:stateChange={updateValidity}
+    />
   </div>
   <div id="controls" class="flex flex-0">
     <div class="flex-1 flex flex-col justify-start items-start p-6">

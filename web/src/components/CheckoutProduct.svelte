@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import AvailabilityChip from "./AvailabilityChip.svelte";
   import { focusable } from "./../core/directives/focusable";
   import { onMount } from "svelte";
@@ -6,14 +7,14 @@
   import Image from "./Image.svelte";
 
   export let name = "name";
-  export let selectedAmount = 1;
   export let variations = [];
   export let active = false;
-  export let amountValue;
+  export let amountValue = 0;
   export let mounted = false;
   export let uiFields = {};
   export let image = {};
   export let info = "";
+  export let slug;
 
   onMount(() => {
     mounted = true;
@@ -23,9 +24,7 @@
   let availability = {};
   let amountDirty = false;
 
-  $: {
-    console.log({ variations, selectedVariation });
-  }
+  const dispatch = createEventDispatcher();
 
   const mockData = {
     products: [
@@ -38,9 +37,9 @@
     ],
   };
 
-  $: totalPrice = selectedAmount * price || 0;
+  $: totalPrice = amountValue * price || 0;
   $: selectedVariation = firstVariation();
-  $: amountValueValid = amountValue > 0 && amountValue <= maxSelectable;
+  $: amountValueValid = amountValue >= 0 && amountValue <= maxSelectable;
   $: updateProductAvailability(variations, active, mounted);
   $: itemsInStock = stockById(selectedVariation.id);
   $: stockById = (id) =>
@@ -75,10 +74,17 @@
 
   const firstVariation = () => variations[0];
 
-  export const subtract = () =>
-    selectedAmount > 0 ? selectedAmount-- : void 0;
+  const dispatchState = () =>
+    dispatch("stateChange", {
+      valid: Boolean(amountValueValid && selectedVariation),
+      productSlug: slug.current,
+      selectedVariation,
+      amountValue,
+    });
+
+  export const subtract = () => (amountValue > 0 ? amountValue-- : void 0);
   export const add = () =>
-    selectedAmount < maxSelectable ? selectedAmount++ : void 0;
+    amountValue < maxSelectable ? amountValue++ : void 0;
 </script>
 
 <div class="flex items-center">
@@ -102,17 +108,23 @@
           <button
             use:focusable
             class="absolute inset-y-0 left-0 flex items-center py-2 px-4 border-gray-300 border-r-2 border-solid"
-            on:click={() => subtract()}>-</button
+            on:click={() => {
+              subtract();
+              dispatchState();
+            }}>-</button
           >
           <input
             min="0"
             step="1"
             on:keyup={() => {
               amountDirty = true;
+              dispatchState();
             }}
-            on:change={() => {}}
+            on:change={() => {
+              dispatchState();
+            }}
             max={maxSelectable}
-            bind:value={selectedAmount}
+            bind:value={amountValue}
             type="number"
             class="text-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 pr-12 sm:text-sm {!amountValueValid &&
             amountDirty
@@ -123,7 +135,10 @@
           <button
             use:focusable
             class="absolute inset-y-0 right-0 flex items-center py-2 px-4 border-gray-300 border-l-2 border-solid"
-            on:click={() => add()}>+</button
+            on:click={() => {
+              add();
+              dispatchState();
+            }}>+</button
           >
         </div>
         {#if !amountValueValid && amountDirty}

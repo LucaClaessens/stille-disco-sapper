@@ -80,7 +80,7 @@
 
   const dispatchState = () =>
     dispatch("stateChange", {
-      valid: amountValueValid && selectedVariation,
+      valid: Boolean(amountValueValid && selectedVariation),
       productSlug: slug.current,
       selectedVariation,
       amountValue,
