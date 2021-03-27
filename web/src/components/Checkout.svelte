@@ -3,6 +3,7 @@
   import { rentFrom, rentTill, userShoppingCart } from "../stores/checkout";
   import { language } from "../stores/language";
   import { focusable } from "./../core/directives/focusable";
+  import AvailabilityChip from "./AvailabilityChip.svelte";
   import CheckoutDatePicker, { formatDate } from "./CheckoutDatePicker.svelte";
   import CheckoutMisc from "./CheckoutMisc.svelte";
   import CheckoutStep from "./CheckoutStep.svelte";
@@ -17,6 +18,7 @@
   export let dateSelection = {
     noDatesSelected: "No dates selected yet",
   };
+  export let miscProducts = {};
   export let flow = [];
 
   let selectedDates = [];
@@ -113,9 +115,14 @@
 
 <div class="flex flex-col w-full h-full">
   <div class="flex-1 overflow-y-auto">
-    <CheckoutDatePicker
+    <!-- <CheckoutDatePicker
       {...dateSelection}
       active={flowIndex == 0}
+      bind:selected={selectedDates}
+    /> -->
+    <CheckoutDatePicker
+      {...dateSelection}
+      active={false}
       bind:selected={selectedDates}
     />
     {#each flow as checkoutStep, index (checkoutStep._key)}
@@ -126,7 +133,8 @@
         on:stateChange={updateValidity}
       />
     {/each}
-    <CheckoutMisc active={flowIndex == steps.length} />
+    <!-- <CheckoutMisc active={flowIndex == steps - 1} /> -->
+    <CheckoutMisc active={flowIndex == 0} {...miscProducts} {uiFields} />
   </div>
   <div id="controls" class="flex flex-0">
     <div class="flex-1 flex flex-col justify-start items-start p-6">

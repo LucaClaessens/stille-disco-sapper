@@ -10,7 +10,11 @@ export default {
         {
             name: 'seo',
             type: 'seoFields',
-            title: 'SEO'
+            title: 'SEO',
+            options: {
+              collapsible: true,
+              collapsed: true,
+            }
         },
         {
             name: 'checkoutFlow',
@@ -28,7 +32,8 @@ export default {
                         name: 'product',
                         description: 'The product that we want to connect to this step',
                         type: 'reference',
-                        to: [{ type: 'product' }]
+                        to: [{ type: 'product'}],
+                        options: {filter:  'isRental != $rental', filterParams: {rental: false}}
                     },
                     {
                         name: 'heading',
@@ -94,7 +99,11 @@ export default {
                     title: 'Amount error',
                     description: 'Translation for the text `Amount must be between 1 and {maxAmount}`'
                 }
-            ]
+            ],
+            options: {
+              collapsible: true,
+              collapsed: true,
+            }
         },
         {
             name: 'dateSelection',
@@ -145,8 +154,55 @@ export default {
                     title: 'No Dates Selected text',
                     description: 'Placeholder text to show when no dates are selected yet, defaults to `no dates selected yet`'
                 }
-            ]
-        }
+            ],
+            options: {
+              collapsible: true,
+              collapsed: true,
+            }
+        },
+        {
+          name: 'miscProducts',
+          type: 'object',
+          title: 'Miscellaneous products',
+          fields: [
+              {
+                  name: 'image',
+                  type: 'mainImage',
+                  title: 'Date selection Image',
+                  description: 'The image to show on the last step, miscellanesous'
+              },
+              {
+                  name: 'heading',
+                  type: 'string',
+                  title: 'Tagline',
+                  description: 'Bigger text to describe what this step of the checkout does, defaults to `Any other products that you would like to buy?`'
+              },
+              {
+                  name: 'info',
+                  type: 'string',
+                  title: 'info',
+                  description: 'Information on what you can buy in the final step (rendered as subheading)'
+              },
+              {
+                name: 'products',
+                title: 'Products',
+                type: 'array',
+                of: [
+                  {
+                    name: 'product',
+                    description: 'Add a product that is for sale',
+                    type: 'reference',
+                    to: [{ type: 'product', }],
+                    options: {filter:  'isRental == $rental', filterParams: {rental: false}}
+                },
+                ]
+              }
+          ],
+          options: {
+            collapsible: true,
+            collapsed: true,
+          }
+      }
     ],
     preview: {
         select: {

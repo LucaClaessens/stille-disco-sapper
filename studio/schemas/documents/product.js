@@ -5,7 +5,15 @@ export default {
     type: 'document',
     i18n,
     title: 'Product',
+    initialValue: {
+      isRental: true
+    },
     fields: [
+      {
+        name: 'isRental',
+        title: 'Rental product',
+        type: 'boolean'
+      },
         {
             name: 'name',
             type: 'string',

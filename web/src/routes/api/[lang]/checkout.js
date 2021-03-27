@@ -10,7 +10,11 @@ export async function get(req, res) {
           checkoutFlow[]{
                 ...,
                 ...product->
-            }
+          },
+          miscProducts{
+            ...,
+            products[]->
+          }
         }`
         const settings = await client.fetch(filter + projection, { lang });
         res.end(JSON.stringify({ ...settings }));
