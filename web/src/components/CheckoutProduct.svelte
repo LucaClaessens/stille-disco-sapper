@@ -13,6 +13,7 @@
   export let mounted = false;
   export let uiFields = {};
   export let image = {};
+  export let info = "";
 
   onMount(() => {
     mounted = true;
@@ -80,7 +81,7 @@
     selectedAmount < maxSelectable ? selectedAmount++ : void 0;
 </script>
 
-<div class="flex rounded-md border-gray-700 border-2 md:border-0 border-solid">
+<div class="flex items-center">
   <div class="w-24 h-24 bg-red-pure">
     <Image
       alt={image.alt}
@@ -88,44 +89,52 @@
       classes={"w-full h-full"}
     />
   </div>
-  <div class="p-4 h-full flex-1">
-    <h6>{name}</h6>
-    <AvailabilityChip amount={itemsInStock} />
-    <div class="relative rounded-md">
-      <button
-        use:focusable
-        class="absolute inset-y-0 left-0 flex items-center py-2 px-4 border-gray-300 border-r-2 border-solid"
-        on:click={() => subtract()}>-</button
-      >
-      <input
-        min="0"
-        step="1"
-        on:keyup={() => {
-          amountDirty = true;
-        }}
-        on:change={() => {}}
-        max={maxSelectable}
-        bind:value={selectedAmount}
-        type="number"
-        class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 pr-12 sm:text-sm {!amountValueValid &&
-        amountDirty
-          ? 'border-red-pure'
-          : 'border-gray-300'} rounded-md"
-        placeholder="0"
-      />
-      <button
-        use:focusable
-        class="absolute inset-y-0 right-0 flex items-center py-2 px-4 border-gray-300 border-l-2 border-solid"
-        on:click={() => add()}>+</button
-      >
+  <div
+    class="px-4 flex flex-1 flex-col md:flex-row items-start md:items-center"
+  >
+    <div class="h-full flex-1">
+      <h6>{name}<span> <AvailabilityChip amount={itemsInStock} /></span></h6>
+      <p>{info}</p>
     </div>
-    {#if !amountValueValid && amountDirty}
-      <p class="text-sm text-red-pure">
-        {composeError(uiFields.amountError, maxSelectable)}
-      </p>
-    {/if}
-    <div class="flex justify-end">
-      &euro; {totalPrice.toFixed(2)}
+    <div class="flex items-center">
+      <div class="w-36">
+        <div class="relative rounded-md">
+          <button
+            use:focusable
+            class="absolute inset-y-0 left-0 flex items-center py-2 px-4 border-gray-300 border-r-2 border-solid"
+            on:click={() => subtract()}>-</button
+          >
+          <input
+            min="0"
+            step="1"
+            on:keyup={() => {
+              amountDirty = true;
+            }}
+            on:change={() => {}}
+            max={maxSelectable}
+            bind:value={selectedAmount}
+            type="number"
+            class="text-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 pr-12 sm:text-sm {!amountValueValid &&
+            amountDirty
+              ? 'border-red-pure'
+              : 'border-gray-300'} rounded-md"
+            placeholder="0"
+          />
+          <button
+            use:focusable
+            class="absolute inset-y-0 right-0 flex items-center py-2 px-4 border-gray-300 border-l-2 border-solid"
+            on:click={() => add()}>+</button
+          >
+        </div>
+        {#if !amountValueValid && amountDirty}
+          <p class="text-sm text-red-pure">
+            {composeError(uiFields.amountError, maxSelectable)}
+          </p>
+        {/if}
+      </div>
+      <div class="flex justify-end ml-6 w-16">
+        &euro; {totalPrice.toFixed(2)}
+      </div>
     </div>
   </div>
 </div>

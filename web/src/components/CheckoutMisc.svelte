@@ -20,14 +20,11 @@
 
   export let products = productsMock;
   export let heading = "Any other products that you would like to buy?";
-  export let variationDescriptor;
   export let active = false;
   export let info;
   export let details;
   export let image = {};
   export let uiFields = {};
-
-  let form;
 </script>
 
 <div
@@ -63,16 +60,14 @@
     {/if}
   </div>
   <div id="variationControl" class="md:flex-1">
-    <div class="p-6 md:p-12 max-w-lg">
+    <div class="p-6 md:p-12 w-full">
       <div class="mb-6 md:mb-12">
         <legend class=" font-medium text-2xl text-gray-900">{heading}</legend>
         <p class="text-base text-gray-500">{info}</p>
       </div>
-      <p class="text-sm text-gray-500">
-        {variationDescriptor}
-      </p>
-      <div class="mt-4 space-y-4 mb-6 md:mb-12">
+      <div class="mt-4 space-y-4 mb-6 md:mb-12 w-full">
         {#each products as product}
+          <hr />
           <CheckoutProduct {...product} {active} {uiFields} />
         {/each}
       </div>
