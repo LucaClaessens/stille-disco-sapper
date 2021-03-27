@@ -1,17 +1,7 @@
-<script context="module">
-  export function formatDate(v) {
-    let date = new Date(v);
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    return `${day}-${month}-${year}`;
-  }
-</script>
-
 <script>
   import DatePicker from "praecox-datepicker";
   import { onMount } from "svelte";
-  import { rentFrom, rentTill } from "../stores/checkout";
+  import { dateSelectionController } from "../stores/checkout/date-selection";
   import serializeImage from "../utils/image/serializeImage";
   import Image from "./Image.svelte";
   import ShrinkIn from "./ShrinkIn.svelte";
@@ -31,13 +21,9 @@
   export let inputInfo = "We chare a fixed fee per day you rent equipment";
   export let inputPlaceholder = "Select what days you want to rent equipment";
 
-  $: rentFrom.set(selected.length > 0 ? formatDate(selected[0]) : null);
-  $: rentTill.set(selected.length > 0 ? formatDate(selected[1]) : null);
-
-  $: formattedSelection =
-    selected.length === 0
-      ? ""
-      : `${formatDate(selected[0])} → ${formatDate(selected[1])}`;
+  $: datePickerState = $dateSelectionController;
+  $: datePickerState.setFrom(selected[0]);
+  $: datePickerState.setTo(selected[1]);
 
   function handleClick() {
     showDatePicker = !showDatePicker;
@@ -107,7 +93,7 @@
               type="text"
               name="date_from"
               id="date_from"
-              value={formattedSelection}
+              value={datePickerState.rangeFormatted}
               placeholder={inputPlaceholder}
               autocomplete="off"
               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
