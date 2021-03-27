@@ -10,6 +10,7 @@
   import CheckoutDatePicker from "./CheckoutDatePicker.svelte";
   import CheckoutMisc from "./CheckoutMisc.svelte";
   import CheckoutStep from "./CheckoutStep.svelte";
+  import CheckoutStepLayout from "./CheckoutStepLayout.svelte";
   import Icon from "./Icon.svelte";
 
   export let uiFields = {
@@ -108,25 +109,41 @@
 
 <div class="flex flex-col w-full h-full">
   <div class="flex-1 overflow-y-auto">
-    <CheckoutDatePicker
-      {...dateSelection}
+    <CheckoutStepLayout
+      details={dateSelection.details}
+      image={dateSelection.image}
       active={state.index == 0}
-      bind:selected={selectedDates}
-    />
+    >
+      <CheckoutDatePicker {...dateSelection} bind:selected={selectedDates} />
+    </CheckoutStepLayout>
     {#each flow as checkoutStep, index (checkoutStep._key)}
-      <CheckoutStep
-        {...checkoutStep}
-        {uiFields}
+      <CheckoutStepLayout
+        details={checkoutStep.details}
+        image={checkoutStep.image}
         active={state.index == index + 1}
+        let:active={stepActive}
+      >
+        <CheckoutStep
+          {...checkoutStep}
+          {uiFields}
+          on:stateChange={updateValidity}
+          active={stepActive}
+        />
+      </CheckoutStepLayout>
+    {/each}
+    <CheckoutStepLayout
+      details={miscProducts.details}
+      image={miscProducts.image}
+      active={state.index == state.totalSteps - 1}
+      let:active={miscActive}
+    >
+      <CheckoutMisc
+        active={miscActive}
+        {...miscProducts}
+        {uiFields}
         on:stateChange={updateValidity}
       />
-    {/each}
-    <CheckoutMisc
-      active={state.index == state.totalSteps - 1}
-      {...miscProducts}
-      {uiFields}
-      on:stateChange={updateValidity}
-    />
+    </CheckoutStepLayout>
   </div>
   <div id="controls" class="flex flex-0">
     <div class="flex-1 flex flex-col justify-start items-start p-6">

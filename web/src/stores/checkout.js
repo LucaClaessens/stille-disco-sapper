@@ -18,7 +18,7 @@ function getStepNameForIndex(index, uiFields, totalSteps, flow){
   ? uiFields.dateSelection
   : index === totalSteps - 1
   ? uiFields.miscItems
-  : flow[index]['name'];
+  : flow[index - 1]['name'];
 }
 
 export function checkoutService(flow, uiFields){
@@ -28,7 +28,7 @@ export function checkoutService(flow, uiFields){
 
   const hasNext = derived(
     flowIndex,
-    $index => $index < totalSteps
+    $index => $index < totalSteps - 1
   );
 
   const hasPrev = derived(
