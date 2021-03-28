@@ -37,7 +37,7 @@ const from = createDateStore();
 const to = createDateStore();
 const fromString = extrapolateDate(from);
 const toString = extrapolateDate(to);
-const rangeString = derived([fromString, toString], ([$from, $to]) => {
+export const rangeString = derived([fromString, toString], ([$from, $to]) => {
   if($from && $to) return `${$from} → ${$to}`;
   return null;
 })

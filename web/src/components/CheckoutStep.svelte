@@ -2,7 +2,6 @@
   import { createEventDispatcher } from "svelte";
   import { rentFrom, rentTill } from "../stores/checkout";
   import { focusable } from "./../core/directives/focusable";
-  import { language } from "./../stores/language";
   import slugify from "./../utils/slugify";
   import AvailabilityChip from "./AvailabilityChip.svelte";
 
@@ -14,6 +13,7 @@
   export let active;
   export let info;
   export let uiFields = {};
+  export let isRental;
 
   let form;
   let availability = {};
@@ -29,7 +29,6 @@
     ],
   };
 
-  $: lang = $language;
   $: from = $rentFrom;
   $: till = $rentTill;
 
@@ -78,6 +77,7 @@
       productSlug: slug.current,
       selectedVariation,
       amountValue,
+      isRental,
     });
 </script>
 

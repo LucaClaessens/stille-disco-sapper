@@ -10,17 +10,25 @@
 
   $: childrenValidStates = products.map(() => true);
   $: valid = childrenValidStates.every((v) => v === true);
+  $: productStates = {};
 
   const updateValidity = (e, i) => {
     const { detail } = e;
     childrenValidStates[i] = detail.valid;
+    productStates[detail.productSlug] = {
+      variationId: detail.selectedVariation.id,
+      amount: detail.amountValue,
+      isRental: false,
+    };
+    dispatchState(valid);
   };
 
   const dispatch = createEventDispatcher();
 
   const dispatchState = (valid) =>
     dispatch("stateChange", {
-      valid,
+      valid: valid,
+      productStates,
     });
 
   $: dispatchState(valid);

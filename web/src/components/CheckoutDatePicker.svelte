@@ -1,10 +1,10 @@
 <script>
   import DatePicker from "praecox-datepicker";
   import { onMount } from "svelte";
-  import { dateSelectionController } from "../stores/checkout/date-selection";
-  import serializeImage from "../utils/image/serializeImage";
-  import Image from "./Image.svelte";
-  import ShrinkIn from "./ShrinkIn.svelte";
+  import {
+    dateSelectionController,
+    rangeString,
+  } from "../stores/checkout/date-selection";
 
   let pickerDone = false;
   let showDatePicker = false;
@@ -77,7 +77,7 @@
             type="text"
             name="date_from"
             id="date_from"
-            value={datePickerState.rangeFormatted}
+            value={$rangeString}
             placeholder={inputPlaceholder}
             autocomplete="off"
             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"

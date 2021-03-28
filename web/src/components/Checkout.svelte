@@ -1,11 +1,6 @@
 <script>
   import { onDestroy } from "svelte";
-  import {
-    checkoutService,
-    rentFrom,
-    rentTill,
-    userShoppingCart,
-  } from "../stores/checkout";
+  import { checkoutService, userShoppingCart } from "../stores/checkout";
   import { focusable } from "./../core/directives/focusable";
   import CheckoutDatePicker from "./CheckoutDatePicker.svelte";
   import CheckoutMisc from "./CheckoutMisc.svelte";
@@ -38,31 +33,40 @@
     _cart = cart;
   });
 
-  const updateValidity = (e) => {
+  const updateState = (e) => {
     const { detail } = e;
     flowStepData = detail;
-    console.log({ flowStepData });
+    updateCart();
   };
 
   const updateCart = () => {
-    userShoppingCart.update((cart) => {
-      cart[flowStepData.productSlug] = {
-        variationId: flowStepData.selectedVariation.id,
-        amount: flowStepData.amountValue,
-      };
-      return cart;
-    });
-  };
-
-  const next = () => {
-    if (flowIndex > 0) {
-      updateCart();
+    if (state.hasNext) {
+      userShoppingCart.update((cart) => {
+        cart[flowStepData.productSlug] = {
+          variationId: flowStepData.selectedVariation.id,
+          amount: flowStepData.amountValue,
+          isRental: flowStepData.isRental,
+        };
+        return cart;
+      });
+    } else {
+      userShoppingCart.update((cart) => {
+        Object.entries(flowStepData.productStates).forEach(
+          ([key, variation]) => {
+            cart[key] = {
+              variationId: variation.variationId,
+              amount: variation.amount,
+              isRental: variation.isRental,
+            };
+          }
+        );
+        return cart;
+      });
     }
-    flowIndex++;
   };
 
   const checkout = async () => {
-    // updateCart();
+    //updateCart();
     checkoutPending = true;
     const { cart } = await createOrder();
     checkoutPending = false;
@@ -114,7 +118,11 @@
       image={dateSelection.image}
       active={state.index == 0}
     >
-      <CheckoutDatePicker {...dateSelection} bind:selected={selectedDates} />
+      <CheckoutDatePicker
+        {...dateSelection}
+        bind:selected={selectedDates}
+        range={state.datePicker.rangeFormatted}
+      />
     </CheckoutStepLayout>
     {#each flow as checkoutStep, index (checkoutStep._key)}
       <CheckoutStepLayout
@@ -126,7 +134,7 @@
         <CheckoutStep
           {...checkoutStep}
           {uiFields}
-          on:stateChange={updateValidity}
+          on:stateChange={updateState}
           active={stepActive}
         />
       </CheckoutStepLayout>
@@ -141,7 +149,7 @@
         active={miscActive}
         {...miscProducts}
         {uiFields}
-        on:stateChange={updateValidity}
+        on:stateChange={updateState}
       />
     </CheckoutStepLayout>
   </div>
