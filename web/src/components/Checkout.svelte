@@ -83,8 +83,8 @@
 
   const createOrder = async () => {
     const order = {
-      starts_at: `${from}T9:00:00.000Z`,
-      stops_at: `${till}T23:00:00.000Z`,
+      starts_at: `${state.datePicker.fromFormatted}T9:00:00.000Z`,
+      stops_at: `${state.datePicker.toFormatted}T23:00:00.000Z`,
     };
     const ids = cartToPayload();
 
