@@ -14,8 +14,6 @@ const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 const sanityDataset = process.env.SANITY_STUDIO_API_DATASET;
 
-console.log({mode});
-
 const onwarn = (warning, onwarn) =>
   (warning.code === 'CIRCULAR_DEPENDENCY' &&
     /[/\\]@sapper[/\\]/.test(warning.message)) ||

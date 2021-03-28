@@ -6,7 +6,6 @@ export default {
     i18n,
     title: 'Product',
     validation: Rule => Rule.custom(fields => {
-      console.log(fields);
       if(fields.isRental === false && fields.variations.length > 1) return "A non-rental product can only have one product variation for booqable integration compliance";
       return true;
     }),

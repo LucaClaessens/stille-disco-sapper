@@ -1,12 +1,11 @@
 <script>
   import { onDestroy } from "svelte";
-  import { rentFrom, rentTill, userShoppingCart } from "../stores/checkout";
-  import { language } from "../stores/language";
+  import { checkoutService, userShoppingCart } from "../stores/checkout";
   import { focusable } from "./../core/directives/focusable";
-  import AvailabilityChip from "./AvailabilityChip.svelte";
-  import CheckoutDatePicker, { formatDate } from "./CheckoutDatePicker.svelte";
+  import CheckoutDatePicker from "./CheckoutDatePicker.svelte";
   import CheckoutMisc from "./CheckoutMisc.svelte";
   import CheckoutStep from "./CheckoutStep.svelte";
+  import CheckoutStepLayout from "./CheckoutStepLayout.svelte";
   import Icon from "./Icon.svelte";
 
   export let uiFields = {
@@ -18,6 +17,7 @@
   export let dateSelection = {
     noDatesSelected: "No dates selected yet",
   };
+
   export let miscProducts = {};
   export let flow = [];
 
@@ -27,51 +27,46 @@
   let flowIndex = 0;
   let flowStepData = {};
   let checkoutPending = false;
-
-  $: currentStep = flowIndex + 1;
-  $: steps = flow.length + 2;
-
-  $: hasPrevious = flowIndex > 0;
-  $: hasNext = flowIndex < steps - 1;
-
-  $: from = $rentFrom;
-  $: till = $rentTill;
-  $: lang = $language;
-
-  $: formattedSelection =
-    selectedDates.length === 0
-      ? ""
-      : `${formatDate(selectedDates[0])} → ${formatDate(selectedDates[1])}`;
+  let state = {};
 
   const unsubscribe = userShoppingCart.subscribe((cart) => {
     _cart = cart;
   });
 
-  const updateValidity = (e) => {
+  const updateState = (e) => {
     const { detail } = e;
     flowStepData = detail;
-    console.log({ flowStepData });
+    updateCart();
   };
 
   const updateCart = () => {
-    userShoppingCart.update((cart) => {
-      cart[flowStepData.productSlug] = {
-        variationId: flowStepData.selectedVariation.id,
-        amount: flowStepData.amountValue,
-      };
-      return cart;
-    });
-  };
-
-  const next = () => {
-    if (flowIndex > 0) {
-      updateCart();
+    if (state.hasNext) {
+      userShoppingCart.update((cart) => {
+        cart[flowStepData.productSlug] = {
+          variationId: flowStepData.selectedVariation.id,
+          amount: flowStepData.amountValue,
+          isRental: flowStepData.isRental,
+        };
+        return cart;
+      });
+    } else {
+      userShoppingCart.update((cart) => {
+        Object.entries(flowStepData.productStates).forEach(
+          ([key, variation]) => {
+            cart[key] = {
+              variationId: variation.variationId,
+              amount: variation.amount,
+              isRental: variation.isRental,
+            };
+          }
+        );
+        return cart;
+      });
     }
-    flowIndex++;
   };
 
   const checkout = async () => {
-    // updateCart();
+    //updateCart();
     checkoutPending = true;
     const { cart } = await createOrder();
     checkoutPending = false;
@@ -88,8 +83,8 @@
 
   const createOrder = async () => {
     const order = {
-      starts_at: `${from}T9:00:00.000Z`,
-      stops_at: `${till}T23:00:00.000Z`,
+      starts_at: `${state.datePicker.fromFormatted}T9:00:00.000Z`,
+      stops_at: `${state.datePicker.toFormatted}T23:00:00.000Z`,
     };
     const ids = cartToPayload();
 
@@ -102,55 +97,77 @@
     return orderData;
   };
 
-  const prev = () => flowIndex--;
-  const propertyAt = (index, property) => {
-    return index === 0
-      ? uiFields.dateSelection
-      : index === steps - 1
-      ? uiFields.miscItems
-      : flow[index - 1][property];
-  };
+  const unsubscribeState = checkoutService(flow, uiFields).subscribe(
+    (_state) => {
+      state = _state;
+    }
+  );
+
+  $: {
+    console.log({ state });
+  }
 
   onDestroy(unsubscribe);
+  onDestroy(unsubscribeState);
 </script>
 
 <div class="flex flex-col w-full h-full">
   <div class="flex-1 overflow-y-auto">
-    <CheckoutDatePicker
-      {...dateSelection}
-      active={flowIndex == 0}
-      bind:selected={selectedDates}
-    />
-    {#each flow as checkoutStep, index (checkoutStep._key)}
-      <CheckoutStep
-        {...checkoutStep}
-        {uiFields}
-        active={flowIndex == index + 1}
-        on:stateChange={updateValidity}
+    <CheckoutStepLayout
+      details={dateSelection.details}
+      image={dateSelection.image}
+      active={state.index == 0}
+    >
+      <CheckoutDatePicker
+        {...dateSelection}
+        bind:selected={selectedDates}
+        range={state.datePicker.rangeFormatted}
       />
+    </CheckoutStepLayout>
+    {#each flow as checkoutStep, index (checkoutStep._key)}
+      <CheckoutStepLayout
+        details={checkoutStep.details}
+        image={checkoutStep.image}
+        active={state.index == index + 1}
+        let:active={stepActive}
+      >
+        <CheckoutStep
+          {...checkoutStep}
+          {uiFields}
+          on:stateChange={updateState}
+          active={stepActive}
+        />
+      </CheckoutStepLayout>
     {/each}
-    <CheckoutMisc
-      active={flowIndex == steps - 1}
-      {...miscProducts}
-      {uiFields}
-      on:stateChange={updateValidity}
-    />
+    <CheckoutStepLayout
+      details={miscProducts.details}
+      image={miscProducts.image}
+      active={state.index == state.totalSteps - 1}
+      let:active={miscActive}
+    >
+      <CheckoutMisc
+        active={miscActive}
+        {...miscProducts}
+        {uiFields}
+        on:stateChange={updateState}
+      />
+    </CheckoutStepLayout>
   </div>
   <div id="controls" class="flex flex-0">
     <div class="flex-1 flex flex-col justify-start items-start p-6">
       <span class="text-sm text-gray-500">
-        {formattedSelection || dateSelection.noDatesSelected}
+        {state.datePicker.rangeFormatted || dateSelection.noDatesSelected}
       </span>
       <span class="text-base md:text-xl font-medium capitalize"
         >{uiFields.step}
-        {currentStep}/{steps}: {propertyAt(flowIndex, "name")}</span
+        {state.current}/{state.totalSteps}: {state.stepName}</span
       >
     </div>
     <button
       use:focusable
       class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20 hover:opacity-75"
-      on:click={prev}
-      disabled={!hasPrevious}
+      on:click={state.prev}
+      disabled={!state.hasPrev}
     >
       <Icon>
         <path
@@ -161,13 +178,13 @@
         />
       </Icon>
     </button>
-    {#if hasNext}
+    {#if state.hasNext}
       <button
-        disabled={flowIndex > 0
+        disabled={state.current > 1
           ? !flowStepData.valid
           : selectedDates.length === 0}
         use:focusable
-        on:click={next}
+        on:click={state.next}
         class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20 hover:opacity-75"
       >
         <Icon>
