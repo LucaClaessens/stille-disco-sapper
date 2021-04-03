@@ -16,9 +16,9 @@ exports.handler = async function (event) {
             const { product_group } = groupData;
             const { products, base_price_in_cents, price_period } = product_group;
 
-            const availability = `https://${booqable.domain}.booqable.com/api/1/products/${products[0].id}/availability/?from=${from}&till=${till}&interval=month&api_key=${booqable.apiKey}`;
-            const availabilityData = await fetch(availability).then(res => res.json());
-            console.log({availabilityData});
+            // const availability = `https://${booqable.domain}.booqable.com/api/1/products/${products[0].id}/availability/?from=${from}&till=${till}&interval=month&api_key=${booqable.apiKey}`;
+            // const availabilityData = await fetch(availability).then(res => res.json());
+            // console.log({availability, availabilityData});
             return {
                 statusCode: 200,
                 body: JSON.stringify({ products, base_price_in_cents, price_period })
