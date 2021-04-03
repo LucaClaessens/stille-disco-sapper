@@ -29,6 +29,19 @@
   let checkoutPending = false;
   let state = {};
 
+  const formatDateOffset = (date) => {
+
+    var tzoffset = date.getTimezoneOffset() * 60000; //offset in milliseconds
+    var localTime = new Date(date.getTime() - tzoffset)
+      .toISOString()
+      .slice(0, 10);
+
+      return localTime;
+  };
+
+  $: from = `${formatDateOffset(state.datePicker.from || new Date())}T9:00:00.000Z`;
+  $: till = `${formatDateOffset(state.datePicker.to || new Date())}T23:00:00.000Z`;
+
   const unsubscribe = userShoppingCart.subscribe((cart) => {
     _cart = cart;
   });
@@ -43,7 +56,7 @@
     if (state.hasNext) {
       userShoppingCart.update((cart) => {
         cart[flowStepData.productSlug] = {
-          variationId: flowStepData.selectedVariation.id,
+          variationId: flowStepData.selectedVariation.variationId,
           amount: flowStepData.amountValue,
           isRental: flowStepData.isRental,
         };
@@ -57,6 +70,7 @@
               variationId: variation.variationId,
               amount: variation.amount,
               isRental: variation.isRental,
+              productId: variation.productId,
             };
           }
         );
@@ -66,7 +80,6 @@
   };
 
   const checkout = async () => {
-    //updateCart();
     checkoutPending = true;
     const { cart } = await createOrder();
     checkoutPending = false;
@@ -83,8 +96,8 @@
 
   const createOrder = async () => {
     const order = {
-      starts_at: `${state.datePicker.fromFormatted}T9:00:00.000Z`,
-      stops_at: `${state.datePicker.toFormatted}T23:00:00.000Z`,
+      starts_at: from,
+      stops_at: till,
     };
     const ids = cartToPayload();
 
@@ -103,9 +116,7 @@
     }
   );
 
-  $: {
-    console.log({ state });
-  }
+  $: console.log({ state });
 
   onDestroy(unsubscribe);
   onDestroy(unsubscribeState);
@@ -132,6 +143,8 @@
         let:active={stepActive}
       >
         <CheckoutStep
+          {from}
+          {till}
           {...checkoutStep}
           {uiFields}
           on:stateChange={updateState}

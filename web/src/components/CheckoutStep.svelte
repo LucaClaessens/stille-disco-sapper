@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { rentFrom, rentTill } from "../stores/checkout";
   import { focusable } from "./../core/directives/focusable";
   import slugify from "./../utils/slugify";
   import AvailabilityChip from "./AvailabilityChip.svelte";
@@ -14,6 +13,8 @@
   export let info;
   export let uiFields = {};
   export let isRental;
+  export let from = "";
+  export let till = "";
 
   let form;
   let availability = {};
@@ -28,9 +29,6 @@
       },
     ],
   };
-
-  $: from = $rentFrom;
-  $: till = $rentTill;
 
   $: selectedVariation = firstVariation();
   $: amountValueValid = amountValue > 0 && amountValue <= maxSelectable;
@@ -62,7 +60,9 @@
             if (!data.products) {
               availability[id] = mockData;
             } else {
+              const product = data.products[0];
               availability[id] = data;
+              selectedVariation.variationId = product.id;
             }
           });
       }

@@ -16,7 +16,7 @@
     const { detail } = e;
     childrenValidStates[i] = detail.valid;
     productStates[detail.productSlug] = {
-      variationId: detail.selectedVariation.id,
+      variationId: detail.selectedVariation.variationId,
       amount: detail.amountValue,
       isRental: false,
     };
