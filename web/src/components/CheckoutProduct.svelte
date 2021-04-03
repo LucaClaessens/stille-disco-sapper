@@ -94,7 +94,7 @@
 </script>
 
 <div class="flex items-center">
-  <div class="w-24 h-24 bg-red-pure">
+  <div class="w-24 h-24 bg-red-pure flex-none">
     <Image
       alt={image.alt}
       url={serializeImage(image, 200)}
