@@ -30,17 +30,20 @@
   let state = {};
 
   const formatDateOffset = (date) => {
-
     var tzoffset = date.getTimezoneOffset() * 60000; //offset in milliseconds
     var localTime = new Date(date.getTime() - tzoffset)
       .toISOString()
       .slice(0, 10);
 
-      return localTime;
+    return localTime;
   };
 
-  $: from = `${formatDateOffset(state.datePicker.from || new Date())}T9:00:00.000Z`;
-  $: till = `${formatDateOffset(state.datePicker.to || new Date())}T23:00:00.000Z`;
+  $: from = `${formatDateOffset(
+    state.datePicker.from || new Date()
+  )}T9:00:00.000Z`;
+  $: till = `${formatDateOffset(
+    state.datePicker.to || new Date()
+  )}T23:00:00.000Z`;
 
   const unsubscribe = userShoppingCart.subscribe((cart) => {
     _cart = cart;
@@ -115,8 +118,6 @@
       state = _state;
     }
   );
-
-  $: console.log({ state });
 
   onDestroy(unsubscribe);
   onDestroy(unsubscribeState);

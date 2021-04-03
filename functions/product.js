@@ -8,7 +8,6 @@ const booqable = {
 exports.handler = async function (event) {
     if (event.httpMethod === 'GET') {
         const { id, till, from} = event.queryStringParameters;
-        console.log({id, till, from});
 
         try {
             const endpoint = `https://${booqable.domain}.booqable.com/api/1/product_groups/${id}?api_key=${booqable.apiKey}`;
