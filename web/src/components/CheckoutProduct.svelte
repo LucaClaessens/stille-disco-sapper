@@ -26,17 +26,6 @@
 
   const dispatch = createEventDispatcher();
 
-  const mockData = {
-    products: [
-      {
-        stock_counts: {
-          total: 3,
-          unavailable: 0,
-        },
-      },
-    ],
-  };
-
   $: totalPrice = amountValue * price || 0;
   $: selectedVariation = firstVariation();
   $: amountValueValid = amountValue >= 0 && amountValue <= maxSelectable;
@@ -50,7 +39,21 @@
       return a + productItemsInStock;
     }, 0);
 
-  $: maxSelectable = Math.min(itemsInStock, selectedVariation.maxAmount);
+  $: maxSelectable = Math.min(
+    itemsInStock > -1 ? itemsInStock : Infinity,
+    selectedVariation.maxAmount
+  );
+
+  const createMockData = (total = 3) => ({
+    products: [
+      {
+        stock_counts: {
+          total,
+          unavailable: 0,
+        },
+      },
+    ],
+  });
 
   const composeError = (string, maxAmount) =>
     string.replace("{maxAmount}", maxAmount);
@@ -59,13 +62,16 @@
     if (variations.length > 0 && active && mounted) {
       for (const variation of variations) {
         const { id } = variation;
-        fetch(`/netlify/product?id=${id}&rental=false`)
+        fetch(`/netlify/product?id=${id}`)
           .then((res) => res.json())
           .then((data) => {
             if (!data.products) {
-              availability[id] = mockData;
+              availability[id] = createMockData(selectedVariation.maxAmount);
             } else {
+              const product = data.products[0];
               availability[id] = data;
+              price = product.base_price_as_decimal;
+              selectedVariation.variationId = product.id;
             }
           });
       }
@@ -88,7 +94,7 @@
 </script>
 
 <div class="flex items-center">
-  <div class="w-24 h-24 bg-red-pure">
+  <div class="w-24 h-24 bg-red-pure flex-none">
     <Image
       alt={image.alt}
       url={serializeImage(image, 200)}
@@ -99,7 +105,13 @@
     class="px-4 flex flex-1 flex-col md:flex-row items-start md:items-center"
   >
     <div class="h-full flex-1">
-      <h6>{name}<span> <AvailabilityChip amount={itemsInStock} /></span></h6>
+      <h6>
+        {name}<span
+          >{#if selectedVariation.isRental}<AvailabilityChip
+              amount={itemsInStock}
+            />{/if}</span
+        >
+      </h6>
       <p>{info}</p>
     </div>
     <div class="flex items-center">

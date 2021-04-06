@@ -76,11 +76,6 @@ export default () =>
         .icon(MdWallpaper)
         .child(S.list().title('Showcase').items([
           S.listItem()
-            .title('Sequence')
-            .icon(MdDesktopMac)
-            .schemaType('sequence')
-            .child(documentEditor('sequence', 'sequence', 'Sequence')),
-          S.listItem()
             .title('Gallery')
             .icon(MdPhoneAndroid)
             .schemaType('gallery')
