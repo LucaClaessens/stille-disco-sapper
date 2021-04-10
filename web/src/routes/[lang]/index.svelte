@@ -25,7 +25,8 @@
   export let content;
   const { events, rental, seo } = content;
 
-  const scaleText = (ref, match) => (ref === match ? "text-2xl" : "text-5xl");
+  const scaleText = (ref, match) =>
+    ref === match ? "text-2xl" : "text-2xl md:text-5xl";
 
   $: logoImage = $globalSettings.logoImage;
 </script>
