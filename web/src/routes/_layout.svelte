@@ -1,4 +1,4 @@
-<main class="h-full w-full overflow-hidden">
+<main class="h-full w-full">
   <slot />
 </main>
 

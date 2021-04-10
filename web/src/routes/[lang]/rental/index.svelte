@@ -1,14 +1,15 @@
 <script context="module">
   import BlockContent from "@movingbrands/svelte-portable-text";
-  import { onMount } from "svelte";
+  import FlexContainer from "./../../../components/FlexContainer.svelte";
   import serializeImage from "../../../utils/image/serializeImage";
   import Button from "./../../../components/Button.svelte";
   import FadeInBottom from "./../../../components/FadeInBottom.svelte";
   import Image from "./../../../components/Image.svelte";
-  import GallerySlide from "./../../../components/rental/GallerySlide.svelte";
+  import { fade } from "svelte/transition";
   import SEO from "./../../../components/SEO.svelte";
   import serializers from "./../../../components/serializers";
   import projectLanguage from "./../../../utils/i18n/projectLanguage";
+  import { Parallax, ParallaxLayer } from "svelte-parallax";
 
   let layout, _lang;
 
@@ -38,12 +39,9 @@
 
   let innerWidth;
 
-  let ScrollAnimationComponent;
+  let clientSide = process.browser;
 
-  onMount(async () => {
-    const module = await import("./../../../components/Scrollanimation.svelte");
-    ScrollAnimationComponent = module.default;
-  });
+  $: console.log(content.gallery);
 </script>
 
 <svelte:head>
@@ -52,9 +50,7 @@
 
 <svelte:window bind:innerWidth />
 
-<div
-  class="snap-end w-full h-auto md:h-full bg-gray-100 flex flex-col md:flex-row"
->
+<div class="w-full h-auto md:h-full bg-gray-100 flex flex-col md:flex-row">
   <div class="flex flex-col px-6 py-12 justify-center align-start max-w-md">
     <FadeInBottom>
       <h2 class="text-4xl mb-12 font-heading">
@@ -79,17 +75,51 @@
   </div>
 </div>
 
-{#if content.displayGallery}
-  {#each content.gallery as slide}
-    <GallerySlide {...slide} />
-  {/each}
-{:else}
-  <div class="w-screen bg-gray-100 min-h-full snap-start">
-    <svelte:component
-      this={ScrollAnimationComponent}
-      sequence={content.sequence}
-    />
-  </div>
+{#if clientSide}
+  <Parallax sections={content.gallery.length} style="background-color: white;">
+    {#each content.gallery as slide, i}
+      {#if slide.background}
+        <ParallaxLayer offset={i} rate={0.9} span={1}>
+          <FlexContainer
+            justify={slide.background.position.justify}
+            align={slide.background.position.align}
+          >
+            <img
+              loading="lazy"
+              in:fade={{ duration: 1000 }}
+              class="w-full md:h-full md:w-full object-cover"
+              src={serializeImage(slide.background.image, 2400)}
+              alt={slide.background.image.alt}
+            />
+          </FlexContainer>
+        </ParallaxLayer>
+      {/if}
+      {#if slide.foreground}
+        <ParallaxLayer offset={i} rate={1.25} span={1}>
+          <FlexContainer
+            justify={slide.foreground.position.justify}
+            align={slide.foreground.position.align}
+          >
+            <img
+              loading="lazy"
+              in:fade={{ duration: 1000 }}
+              class="w-full md:max-w-lg object-cover"
+              src={serializeImage(slide.foreground.image, 2400)}
+              alt={slide.foreground.image.alt}
+            />
+          </FlexContainer>
+        </ParallaxLayer>
+      {/if}
+      <ParallaxLayer offset={i - 0.5} rate={1.75} span={1}>
+        <FlexContainer
+          justify={slide.message.position.justify}
+          align={slide.message.position.align}
+        >
+          <h3 class="mb-3 text-xl font-heading">{@html slide.message.text}</h3>
+        </FlexContainer>
+      </ParallaxLayer>
+    {/each}
+  </Parallax>
 {/if}
 
 <BlockContent blocks={content.body} {serializers} />

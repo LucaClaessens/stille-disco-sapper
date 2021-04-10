@@ -49,7 +49,7 @@
       $hoveredSection,
       $activeSection,
       'events'
-    )} dark transition-all duration-500 flex justify-center items-center bg-black text-white overflow-y-auto"
+    )} dark transition-all duration-500 flex justify-center items-center bg-black text-white"
     data-section="events"
     on:click={select}
     on:mouseenter={hover}
@@ -72,7 +72,7 @@
       $hoveredSection,
       $activeSection,
       'rental'
-    )} transition-all duration-500 flex justify-center items-center overflow-y-auto"
+    )} transition-all duration-500 flex justify-center items-center"
   >
     {#if $activeSection !== "events"}
       <slot name="rental" />

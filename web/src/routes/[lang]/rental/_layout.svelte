@@ -21,10 +21,7 @@
 </script>
 
 <RegionLayout {lang} {path}>
-  <div
-    slot="rental"
-    class="overflow-y-auto snap-y md:snap snap-proximity w-full h-full bg-gray-100"
-  >
+  <div slot="rental" class="w-full h-full bg-gray-100">
     <Header {lang} {path} {...$navigationData} />
     <Banner {...$globalSettings.banner} />
     <slot />

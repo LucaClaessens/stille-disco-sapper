@@ -8,29 +8,14 @@ export async function get(req, res) {
             ...,
 		"gallery": *[_type == 'gallery'][0].gallery[]
 			{
-			img,
+			foreground,
+      background,
 			message{
-				align, 
-				justify,
-				"button": heading['button']{
-					...,
-					"text": text[$lang]['text']
-				},
-				"text": heading['text'][$lang]['text'],
+				position,
+				"text": text[$lang]['text'],
+      }
 			}
-            },
-          "sequence": *[_type == 'sequence'][0]{
-                images,
-                "messages": messages[]{
-                    startFrame,
-					endFrame,
-					"align": message.align,
-					"justify": message.justify,
-					"button": message.heading[$lang]['button'],
-					"text": message.heading[$lang]['text']
-                }
-            }
-          }`
+    }`
 		const settings = await client.fetch(filter + projection, { lang });
 		res.end(JSON.stringify({ ...settings }));
 	} catch (err) {

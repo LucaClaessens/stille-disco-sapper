@@ -40,6 +40,7 @@ import sequenceImage from './objects/sequenceImage'
 import spacer from './objects/spacer'
 import subtitlePortableText from './objects/subtitlePortableText'
 import textareaForm from './objects/textareaForm'
+import flexPositioner from './objects/flexPositioner';
 
 
 // Then we give our schema to the builder and provide the result to Sanity
@@ -86,6 +87,7 @@ export default createSchema({
     banner,
     checkoutPreview,
     productVariation,
-    spacer
+    spacer,
+    flexPositioner
   ])
 })
