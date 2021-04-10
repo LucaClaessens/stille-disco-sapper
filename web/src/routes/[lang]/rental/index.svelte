@@ -41,7 +41,7 @@
 
   let clientSide = process.browser;
 
-  $: console.log(content.gallery);
+  const OFFSET = 0.999;
 </script>
 
 <svelte:head>
@@ -79,7 +79,7 @@
   <Parallax sections={content.gallery.length} style="background-color: white;">
     {#each content.gallery as slide, i}
       {#if slide.background}
-        <ParallaxLayer offset={i} rate={0.9} span={1}>
+        <ParallaxLayer offset={i - i * 0.5} rate={0.5}>
           <FlexContainer
             justify={slide.background.position.justify}
             align={slide.background.position.align}
@@ -95,7 +95,7 @@
         </ParallaxLayer>
       {/if}
       {#if slide.foreground}
-        <ParallaxLayer offset={i} rate={1.25} span={1}>
+        <ParallaxLayer offset={i} rate={1.33} span={1}>
           <FlexContainer
             justify={slide.foreground.position.justify}
             align={slide.foreground.position.align}
@@ -110,12 +110,16 @@
           </FlexContainer>
         </ParallaxLayer>
       {/if}
-      <ParallaxLayer offset={i - 0.5} rate={1.75} span={1}>
+      <ParallaxLayer offset={i} rate={1.1} span={1}>
         <FlexContainer
           justify={slide.message.position.justify}
           align={slide.message.position.align}
         >
-          <h3 class="mb-3 text-xl font-heading">{@html slide.message.text}</h3>
+          <div class="p-12">
+            <h3 class="mb-3 text-xl font-heading">
+              {@html slide.message.text}
+            </h3>
+          </div>
         </FlexContainer>
       </ParallaxLayer>
     {/each}
