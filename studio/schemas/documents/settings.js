@@ -37,6 +37,12 @@ export default {
             ]
         },
         {
+          name: 'logoImage',
+          type: 'mainImage',
+          title: 'logo image',
+          required: true
+      },
+        {
             name: 'radio',
             type: 'object',
             title: 'Radio',

@@ -4,7 +4,7 @@
   import SEO from "./../../components/SEO.svelte";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
   import serializeImage from "./../../utils/image/serializeImage";
-
+  import { globalSettings } from "./../../stores/layout";
   export async function preload({ host, params, path }) {
     const { lang } = params;
 
@@ -23,9 +23,11 @@
   export let path;
   export let lang;
   export let content;
-  const { events, rental, seo, landingImage } = content;
+  const { events, rental, seo } = content;
 
   const scaleText = (ref, match) => (ref === match ? "text-2xl" : "text-5xl");
+
+  $: logoImage = $globalSettings.logoImage;
 </script>
 
 <svelte:head>
@@ -39,8 +41,8 @@
   <img
     loading="lazy"
     class="object-cover w-full h-full"
-    src={serializeImage(landingImage, 350)}
-    alt={landingImage.alt}
+    src={serializeImage(logoImage, 350)}
+    alt={logoImage.alt}
   />
 </div>
 

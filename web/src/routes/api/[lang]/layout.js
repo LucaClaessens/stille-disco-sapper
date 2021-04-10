@@ -28,6 +28,7 @@ export async function get(req, res) {
 					"settings": *[_type == "settings"][0]{
 						"banner": banner[$lang]['banner'],
 						"name": name[$lang]['name'],
+            logoImage,
 						radio{
 							defaultChannel,
 							channels{

@@ -4,19 +4,31 @@
   import Menu from "./../components/icons/Menu.svelte";
   import LanguagePicker from "./../components/LanguagePicker.svelte";
   import LinkButton from "./../components/LinkButton.svelte";
-  import { activeSection } from "./../stores/layout";
+  import { activeSection, globalSettings } from "./../stores/layout";
+  import serializeImage from "./../utils/image/serializeImage";
 
   export let path;
   export let lang;
   export let links = [];
   let menuExpanded = false;
+
+  $: logoImage = $globalSettings.logoImage;
 </script>
 
 <header
   class="snap-start w-full p-5 flex justify-between items-center dark:bg-black bg-white"
 >
   <LinkButton url={lang}>
-    <h1 class="font-heading" aria-label="Return to homepage">Stille disco</h1>
+    <h1 class="font-heading" aria-label="Return to homepage">
+      <div id="site-logo" class="w-12">
+        <img
+          loading="lazy"
+          class="object-cover w-full h-full"
+          src={serializeImage(logoImage, 100)}
+          alt={logoImage.alt}
+        />
+      </div>
+    </h1>
   </LinkButton>
   <div class="md:hidden">
     <Button on:click={() => (menuExpanded = true)}>
