@@ -1,4 +1,5 @@
 <script context="module">
+  import IntersectionObserver from "./../../../components/IntersectionObserver.svelte";
   import BlockContent from "@movingbrands/svelte-portable-text";
   import FlexContainer from "./../../../components/FlexContainer.svelte";
   import serializeImage from "../../../utils/image/serializeImage";
@@ -40,8 +41,25 @@
   let innerWidth;
 
   let clientSide = process.browser;
+  let bgColor = '';
 
-  const OFFSET = 0.999;
+  const updateIntersections = (intersecting, index) => {
+    console.log({intersecting: intersecting, index});
+    if (intersecting) {
+      switch (index) {
+      case 0:
+        bgColor = "bg-red-pure"; break;
+      case 1:
+      bgColor = "bg-green-pure"; break;
+      case 2:
+      bgColor = "bg-blue-pure"; break;
+      default:
+      bgColor = "bg-red-pure"; break;
+    }
+    }
+  };
+
+  $: console.log({bgColor})
 </script>
 
 <svelte:head>
@@ -78,52 +96,64 @@
 {#if clientSide}
   <Parallax sections={content.gallery.length} style="background-color: white;">
     {#each content.gallery as slide, i}
-      {#if slide.background}
-        <ParallaxLayer offset={i - i * 0.5} rate={0.5}>
-          <FlexContainer
-            justify={slide.background.position.justify}
-            align={slide.background.position.align}
-          >
-            <img
-              loading="lazy"
-              in:fade={{ duration: 1000 }}
-              class="w-full md:h-full md:w-full object-cover"
-              src={serializeImage(slide.background.image, 2400)}
-              alt={slide.background.image.alt}
-            />
-          </FlexContainer>
+        {#if slide.background}
+        <ParallaxLayer rate={0} offset={i} style="z-index:-1;">
+          <div class="w-full h-full {bgColor} opacity-50 transition-colors duration-500" />
         </ParallaxLayer>
-      {/if}
-      {#if slide.foreground}
-        <ParallaxLayer offset={i} rate={1.33} span={1}>
-          <FlexContainer
-            justify={slide.foreground.position.justify}
-            align={slide.foreground.position.align}
-          >
-            <img
-              loading="lazy"
-              in:fade={{ duration: 1000 }}
-              class="w-full md:max-w-lg object-cover"
-              src={serializeImage(slide.foreground.image, 2400)}
-              alt={slide.foreground.image.alt}
-            />
-          </FlexContainer>
-        </ParallaxLayer>
-      {/if}
-      <ParallaxLayer offset={i} rate={1.1} span={1}>
-        <FlexContainer
-          justify={slide.message.position.justify}
-          align={slide.message.position.align}
+          <ParallaxLayer offset={i} rate={0.5}>
+            <FlexContainer
+              justify={slide.background.position.justify}
+              align={slide.background.position.align}
+            >
+              <img
+                loading="lazy"
+                in:fade={{ duration: 1000 }}
+                class="w-full md:h-full md:w-full object-cover"
+                src={serializeImage(slide.background.image, 2400)}
+                alt={slide.background.image.alt}
+              />
+            </FlexContainer>
+          </ParallaxLayer>
+        {/if}
+        {#if slide.foreground}
+          <ParallaxLayer offset={i} rate={1.33}>
+            <FlexContainer
+              justify={slide.foreground.position.justify}
+              align={slide.foreground.position.align}
+            >
+              <img
+                loading="lazy"
+                in:fade={{ duration: 1000 }}
+                class="w-full md:max-w-lg object-cover"
+                src={serializeImage(slide.foreground.image, 2400)}
+                alt={slide.foreground.image.alt}
+              />
+            </FlexContainer>
+          </ParallaxLayer>
+        {/if}
+        <ParallaxLayer offset={i} rate={1.1}>
+          <IntersectionObserver
+          on:change={($event) => updateIntersections($event.detail, i)}
+          wrap={false}
         >
-          <div class="p-12">
-            <h3 class="mb-3 text-xl font-heading">
-              {@html slide.message.text}
-            </h3>
-          </div>
-        </FlexContainer>
-      </ParallaxLayer>
+          <FlexContainer
+            justify={slide.message.position.justify}
+            align={slide.message.position.align}
+          >
+            <div class="p-12">
+              <h3 class="mb-3 text-xl font-heading">
+                {@html slide.message.text}
+              </h3>
+            </div>
+          </FlexContainer>
+        </IntersectionObserver>
+        </ParallaxLayer>
     {/each}
   </Parallax>
 {/if}
 
+<BlockContent blocks={content.body} {serializers} /><BlockContent
+  blocks={content.body}
+  {serializers}
+/>
 <BlockContent blocks={content.body} {serializers} />

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { createEventDispatcher } from "svelte";
 
   export let once = false;
   export let top = 0;
@@ -9,7 +10,10 @@
   export let wrap = true;
   export let containerClasses = "";
 
+  const dispatch = createEventDispatcher();
+
   let intersecting = false;
+  let prevState = false;
   let container;
 
   onMount(() => {
@@ -22,6 +26,12 @@
           if (intersecting && once) {
             observer.unobserve(container);
           }
+
+          if (intersecting !== prevState) {
+            dispatch("change", intersecting);
+          }
+
+          prevState = intersecting;
         },
         {
           rootMargin,
