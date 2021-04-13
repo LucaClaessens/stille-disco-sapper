@@ -66,7 +66,14 @@
   >
     <div class="p-5 flex items-center justify-between">
       <LinkButton url={lang}>
-        <h1 class="font-heading">Stille disco</h1>
+        <div id="site-logo" class="w-12">
+          <img
+            loading="lazy"
+            class="object-cover w-full h-full"
+            src={serializeImage(logoImage, 48)}
+            alt={logoImage.alt}
+          />
+        </div>
       </LinkButton>
       <Button on:click={() => (menuExpanded = false)}>
         <span class="sr-only">Close menu</span>
