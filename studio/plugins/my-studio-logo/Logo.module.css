@@ -1,0 +1,35 @@
+.container {
+  position: relative;
+}
+.container img {
+  max-width: 72px;
+}
+.burst {
+  background: red;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.5rem;
+  color: white;
+  z-index: 3;
+}
+.burst:before,
+.burst:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background: red;
+  z-index: -1;
+}
+.burst:before {
+  transform: rotate(30deg);
+}
+.burst:after {
+  transform: rotate(60deg);
+}
