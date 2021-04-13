@@ -11,7 +11,7 @@
     from = "/netlify/*"
     to="/.netlify/functions/:splat"
     status=200
-[context.test.environment]
+[context.www-tst.environment]
   SANITY_STUDIO_API_DATASET = 'development'
   SANITY_STUDIO_ACTIVE_ENV = 'development'
   SANITY_STUDIO_PROJECT_NAME = 'stille disco (DEV)'
