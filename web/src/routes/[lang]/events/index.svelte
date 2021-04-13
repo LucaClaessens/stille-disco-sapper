@@ -105,7 +105,7 @@
         {activeEventIndex}
       />
     {:else}
-      <div class="w-full h-full flex justify-center items-center">
+      <div class="w-full h-full flex justify-start items-start">
         <p>{content.emptyStateText}</p>
       </div>
     {/if}

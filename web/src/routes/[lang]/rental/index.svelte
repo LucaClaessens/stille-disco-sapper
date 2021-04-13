@@ -62,8 +62,6 @@
       }
     }
   };
-
-  $: console.log({ bgColor });
 </script>
 
 <svelte:head>
@@ -140,7 +138,7 @@
       <ParallaxLayer offset={i} rate={1.1}>
         <IntersectionObserver
           on:change={($event) => updateIntersections($event.detail, i)}
-          wrap={false}
+          wrap={true}
         >
           <FlexContainer
             justify={slide.message.position.justify}
