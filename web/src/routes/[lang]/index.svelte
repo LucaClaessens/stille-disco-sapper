@@ -1,10 +1,11 @@
 <script context="module">
+  import { fade } from "svelte/transition";
   import RegionLayout, { hover } from "../../components/RegionLayout.svelte";
   import { hoveredSection } from "../../stores/layout";
   import SEO from "./../../components/SEO.svelte";
+  import { globalSettings } from "./../../stores/layout";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
   import serializeImage from "./../../utils/image/serializeImage";
-  import { globalSettings } from "./../../stores/layout";
   export async function preload({ host, params, path }) {
     const { lang } = params;
 
@@ -38,6 +39,7 @@
 <div
   id="site-logo"
   class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none w-24 md:w-80 transition-all"
+  transition:fade
 >
   <img
     loading="lazy"
