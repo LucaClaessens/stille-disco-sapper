@@ -37,7 +37,7 @@
 
 <div
   id="site-logo"
-  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none w-80"
+  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none w-24 md:w-80 transition-all"
 >
   <img
     loading="lazy"
@@ -53,7 +53,7 @@
     on:focus={hover}
     slot="events"
     href="{lang}/events"
-    class="overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+    class="z-0 overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
   >
     <div
       class="clip-events absolute w-full h-full flex justify-center items-center"
@@ -86,7 +86,7 @@
     on:focus={hover}
     slot="rental"
     href="{lang}/rental"
-    class="overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+    class="z-0 overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
   >
     <div
       class="clip-rental absolute w-full h-full flex justify-center items-center"
