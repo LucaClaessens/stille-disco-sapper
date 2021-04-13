@@ -29,3 +29,5 @@ export const getEnvSites = (env) => {
             }
         ]
 }
+
+export const getEnvFrontend = (env) => env === 'development' ? 'https://www-tst.stilledisco.eu' : 'https://www.stilledisco.eu';

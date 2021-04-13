@@ -1,4 +1,4 @@
-import { getEnvSites } from "./config/buildHooks";
+import { getEnvFrontend, getEnvSites } from "./config/dashboardConfig";
 
 export default {
   widgets: [
@@ -21,15 +21,20 @@ export default {
             value: 'https://github.com/LucaClaessens/stille-disco-sapper',
             category: 'Code'
           },
-          { title: 'Frontend', value: 'https://stille-disco-sapper.netlify.app', category: 'apps' }
+          { title: 'Frontend', value: getEnvFrontend(process.env.SANITY_STUDIO_ACTIVE_ENV), category: 'apps' }
         ]
       }
     },
-    { name: 'project-users', layout: { height: 'auto' } },
     {
       name: 'document-list',
-      options: { title: 'Recent blog posts', order: '_createdAt desc', types: ['post'] },
-      layout: { width: 'medium' }
-    }
+      options: { title: 'Recently added pages', order: '_createdAt desc', types: ['page'] },
+      layout: { width: 'small', height: 'small' }
+    },
+    {
+      name: 'document-list',
+      options: { title: 'Recently added products', order: '_createdAt desc', types: ['product'] },
+      layout: { width: 'small', height: 'small' }
+    },
+    { name: 'project-users', layout: { height: 'small' } }
   ]
 }
