@@ -42,7 +42,7 @@
   <img
     loading="lazy"
     class="object-cover w-full h-full"
-    src={serializeImage(logoImage, 350)}
+    src={serializeImage(logoImage, 320)}
     alt={logoImage.alt}
   />
 </div>
