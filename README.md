@@ -10,14 +10,14 @@ This repository contains the CMS and the frontend + backend code for the Stille 
 `TODO:` do we need more generic information?
 
 # Architecture
-## High-level overview
+### High-level overview
 The environment uses a headless architecture, meaning that content management and presentation are completely separated. The CMS is fully disconnected from the frontend. The biggest advantage to this approach is that the CMS can be expanded into a multi-channel solution that can also, for example, be used as a datasource for events.
 
 The frontend utilizes a serializing strategy provided by an SDK from the CMS provider, meaning it's not fully independent from the backend.
 
 The utilized stack is as follows:
 - content management with [Sanity Studio](https://www.sanity.io)
-- CI/CD, hosting, webhooks and serverless functions provided by [Netlify](https://www.netlify.com)
+- CI/CD, hosting, forms, webhooks and serverless functions provided by [Netlify](https://www.netlify.com)
 - Frontend built with [Sapper](https://sapper.svelte.dev/) and [Tailwind](https://tailwindcss.com/)
 - Packages and build/development scripts are managed with [Lerna](https://lerna.js.org/)
 
@@ -25,11 +25,11 @@ The utilized stack is as follows:
 ## Getting started
 To get started with local development, ensure [netlify CLI](https://docs.netlify.com/cli/get-started/#installation) is installed globally.
 
-Start off by running `npm install`, this will install packages for all projects.
+Start off by running `npm install`, this will install packages for all projects. As of now it's unfortunately required to use npm instead of yarn, because the system that caches node-modules in netlify is incompatible with yarn (read: using yarn seems to crash the CI/CD pipeline).
 
-After gaining login credentials to the stille disco project, ensure that you have linked the netlify CLI to the `stille-disco-sapper` project.
+After gaining login credentials to the stille disco project, ensure that you have linked the netlify CLI to the `stille-disco-sapper` project by using `netlify link`.
 
-Once taken care of, running `netlify dev` from the root directory of the project should spin up both the CMS and a development server, proxied by netlify so serverless functions can be accessable from the dev environment.
+Once that is taken care of, running `netlify dev` from the root directory of the project should spin up both the CMS and a development server, proxied by netlify so serverless functions can be accessable from the dev environment.
 
 If you run into issues, troubleshoot the [netlify dev docs](https://docs.netlify.com/cli/get-started/#netlify-dev).
 
@@ -39,7 +39,7 @@ The CMS, Serverless functions and Frontend all rely on environment variables tha
 During development, the netlify CLI takes care of injecting these variables into our development build.
 
 ### Global configuration: 
-Global configuration is stored in netlify's environment settings tab. Things like API keys and tokens should go here.
+Global configuration is stored in netlify's environment settings tab. Things like API keys and tokens should go here. These settings are accessible under `Site settings > Build & deploy > Environment`.
 
 ### Branch dependant configuration
 Branch dependant configuration is stored in the `netlify.toml` file residing in the project root. This allows for more granular control over what values will be injected at build time.
@@ -63,9 +63,15 @@ For more information, visit [the documentation](https://docs.netlify.com/functio
 ## Branch deployments
 Netlify automatically deploys new changes commited to master on GitHub. If you want to change deployment branch, do so in [build & deploy settings on Netlify](https://www.netlify.com/docs/continuous-deployment/#branches-deploys).
 
-## Moving forward and maintenance
-During the development of this project, sapper has been denied a v1.0 release, if any big changes in the frontend will be considered in the future, it might be worthwhile to migrate to [SvelteKit](https://kit.svelte.dev/), which now rendered Sapper as deprecated.
+## Forms
+Webforms that are filled in the frontend are handled by Netlify. The form settings are available under `Site settings > Forms`.
 
+Received forms are stored in netlify and can be configured to send outgoing notifications via either webhooks, slack or email. More info on how form submissions are integrated can be found in the [CMS Documentation](/studio/README.md#Forms).
+
+# Moving forward and maintenance
+
+### Sapper deprecation
+During the development of this project, sapper has been denied a v1.0 release, if any big changes in the frontend will be considered in the future, it might be worthwhile to migrate to [SvelteKit](https://kit.svelte.dev/), which now rendered Sapper as deprecated.
 # TODO
 
 - specify Sanity specifics in /studio
