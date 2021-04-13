@@ -41,25 +41,29 @@
   let innerWidth;
 
   let clientSide = process.browser;
-  let bgColor = '';
+  let bgColor = "";
 
   const updateIntersections = (intersecting, index) => {
-    console.log({intersecting: intersecting, index});
+    console.log({ intersecting: intersecting, index });
     if (intersecting) {
       switch (index) {
-      case 0:
-        bgColor = "bg-red-pure"; break;
-      case 1:
-      bgColor = "bg-green-pure"; break;
-      case 2:
-      bgColor = "bg-blue-pure"; break;
-      default:
-      bgColor = "bg-red-pure"; break;
-    }
+        case 0:
+          bgColor = "bg-red-pure";
+          break;
+        case 1:
+          bgColor = "bg-green-pure";
+          break;
+        case 2:
+          bgColor = "bg-blue-pure";
+          break;
+        default:
+          bgColor = "bg-red-pure";
+          break;
+      }
     }
   };
 
-  $: console.log({bgColor})
+  $: console.log({ bgColor });
 </script>
 
 <svelte:head>
@@ -96,43 +100,45 @@
 {#if clientSide}
   <Parallax sections={content.gallery.length} style="background-color: white;">
     {#each content.gallery as slide, i}
-        {#if slide.background}
+      {#if slide.background}
         <ParallaxLayer rate={0} offset={i} style="z-index:-1;">
-          <div class="w-full h-full {bgColor} opacity-50 transition-colors duration-500" />
+          <div
+            class="w-full h-full {bgColor} opacity-50 transition-colors duration-500"
+          />
         </ParallaxLayer>
-          <ParallaxLayer offset={i} rate={0.5}>
-            <FlexContainer
-              justify={slide.background.position.justify}
-              align={slide.background.position.align}
-            >
-              <img
-                loading="lazy"
-                in:fade={{ duration: 1000 }}
-                class="w-full md:h-full md:w-full object-cover"
-                src={serializeImage(slide.background.image, 2400)}
-                alt={slide.background.image.alt}
-              />
-            </FlexContainer>
-          </ParallaxLayer>
-        {/if}
-        {#if slide.foreground}
-          <ParallaxLayer offset={i} rate={1.33}>
-            <FlexContainer
-              justify={slide.foreground.position.justify}
-              align={slide.foreground.position.align}
-            >
-              <img
-                loading="lazy"
-                in:fade={{ duration: 1000 }}
-                class="w-full md:max-w-lg object-cover"
-                src={serializeImage(slide.foreground.image, 2400)}
-                alt={slide.foreground.image.alt}
-              />
-            </FlexContainer>
-          </ParallaxLayer>
-        {/if}
-        <ParallaxLayer offset={i} rate={1.1}>
-          <IntersectionObserver
+        <ParallaxLayer offset={i} rate={0.5}>
+          <FlexContainer
+            justify={slide.background.position.justify}
+            align={slide.background.position.align}
+          >
+            <img
+              loading="lazy"
+              in:fade={{ duration: 1000 }}
+              class="w-full md:h-full md:w-full object-cover"
+              src={serializeImage(slide.background.image, 2400)}
+              alt={slide.background.image.alt}
+            />
+          </FlexContainer>
+        </ParallaxLayer>
+      {/if}
+      {#if slide.foreground}
+        <ParallaxLayer offset={i} rate={1.33}>
+          <FlexContainer
+            justify={slide.foreground.position.justify}
+            align={slide.foreground.position.align}
+          >
+            <img
+              loading="lazy"
+              in:fade={{ duration: 1000 }}
+              class="w-full md:max-w-lg object-cover"
+              src={serializeImage(slide.foreground.image, 2400)}
+              alt={slide.foreground.image.alt}
+            />
+          </FlexContainer>
+        </ParallaxLayer>
+      {/if}
+      <ParallaxLayer offset={i} rate={1.1}>
+        <IntersectionObserver
           on:change={($event) => updateIntersections($event.detail, i)}
           wrap={false}
         >
@@ -147,13 +153,9 @@
             </div>
           </FlexContainer>
         </IntersectionObserver>
-        </ParallaxLayer>
+      </ParallaxLayer>
     {/each}
   </Parallax>
 {/if}
 
-<BlockContent blocks={content.body} {serializers} /><BlockContent
-  blocks={content.body}
-  {serializers}
-/>
 <BlockContent blocks={content.body} {serializers} />
