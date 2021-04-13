@@ -42,7 +42,7 @@
     {/if}
   </div>
   <div id="variationControl" class="md:flex-1">
-    <div class="p-6 md:p-12 max-w-xl">
+    <div class="p-6 md:p-12 max-w-3xl">
       <slot {active} />
     </div>
   </div>

@@ -56,7 +56,7 @@
 <div id="dateControl" class="md:flex-1">
   <div class="p-6 md:p-12 max-w-lg">
     <div class="mb-6 md:mb-12">
-      <legend class=" font-medium text-2xl text-gray-900">{tagline}</legend>
+      <h1 class=" font-medium text-2xl text-gray-900">{tagline}</h1>
     </div>
     <div class="col-span-6 sm:col-span-3 relative mb-12">
       <label

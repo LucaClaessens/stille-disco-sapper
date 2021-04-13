@@ -94,25 +94,26 @@
 </script>
 
 <div class="flex items-center">
-  <div class="w-24 h-24 bg-red-pure flex-none">
+  <div class="w-24 h-24 flex-none">
     <Image
       alt={image.alt}
       url={serializeImage(image, 200)}
       classes={"w-full h-full"}
+      cover={false}
     />
   </div>
   <div
     class="px-4 flex flex-1 flex-col md:flex-row items-start md:items-center"
   >
     <div class="h-full flex-1">
-      <h6>
+      <h3>
         {name}<span
           >{#if selectedVariation.isRental}<AvailabilityChip
               amount={itemsInStock}
             />{/if}</span
         >
-      </h6>
-      <p>{info}</p>
+      </h3>
+      <p class="text-sm">{info}</p>
     </div>
     <div class="flex items-center">
       <div class="w-36">

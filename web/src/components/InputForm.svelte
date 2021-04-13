@@ -9,7 +9,7 @@
 </script>
 
 <div>
-  <label for="enterprise-email" class="sr-only">{label}</label>
+  <label for={name} class="sr-only">{label}</label>
   <div class="mt-1 relative rounded-md">
     <input
       use:focusable

@@ -86,7 +86,7 @@
     <form bind:this={form} action="#">
       <fieldset>
         <div class="mb-6 md:mb-12">
-          <legend class=" font-medium text-2xl text-gray-900">{heading}</legend>
+          <h1 class=" font-medium text-2xl text-gray-900">{heading}</h1>
           <p class="text-base text-gray-500">{info}</p>
         </div>
         {#if variations.length > 1}

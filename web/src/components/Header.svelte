@@ -41,7 +41,7 @@
   <nav class="hidden md:flex space-x-10">
     <div class="flex items-center justify-end">
       <span class="ml-6">
-        <LanguagePicker {lang} {path} />
+        <LanguagePicker {lang} {path} mode="header" />
       </span>
       {#each links as link}
         {#if link.visibility == "all" || link.visibility === $activeSection}
@@ -107,7 +107,7 @@
       </div>
       <div class="py-1">
         <div class="p-6">
-          <LanguagePicker {lang} {path} />
+          <LanguagePicker {lang} {path} mode="header_opened" />
         </div>
       </div>
     </div>

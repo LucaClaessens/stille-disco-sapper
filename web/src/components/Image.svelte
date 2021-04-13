@@ -4,6 +4,7 @@
   export let url;
   export let alt;
   export let classes;
+  export let cover = true;
 </script>
 
 <IntersectionObserver let:intersecting once={true}>
@@ -13,9 +14,9 @@
         loading="lazy"
         src={url}
         {alt}
-        class="{intersecting
-          ? 'animate-shrink-in'
-          : ''} object-cover h-full w-full"
+        class="{intersecting ? 'animate-shrink-in' : ''} {cover == true
+          ? 'object-cover'
+          : 'object-contain'} h-full w-full"
       />
     {/if}
   </div>

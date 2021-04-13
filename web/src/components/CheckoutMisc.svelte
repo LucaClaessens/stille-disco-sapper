@@ -37,7 +37,7 @@
 <div id="miscControl" class="md:flex-1">
   <div class="p-6 md:p-12 w-full h-full flex flex-col">
     <div class="mb-6 md:mb-12 w-full">
-      <legend class=" font-medium text-2xl text-gray-900">{heading}</legend>
+      <h1 class=" font-medium text-2xl text-gray-900">{heading}</h1>
       <p class="text-base text-gray-500">{info}</p>
     </div>
     <div class="mt-4 space-y-4 mb-6 md:mb-12 w-full flex-1 overflow-y-auto">

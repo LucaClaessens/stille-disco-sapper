@@ -26,6 +26,11 @@
   export let globalData;
   export let lang;
 
+  // Bootstrap by setting locale
+  if (process.browser) {
+    document.querySelector("html").setAttribute("lang", lang);
+  }
+
   $: {
     updateStaticComponents(globalData);
   }

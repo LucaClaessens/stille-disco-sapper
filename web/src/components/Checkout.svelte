@@ -172,10 +172,10 @@
       <span class="text-sm text-gray-500">
         {state.datePicker.rangeFormatted || dateSelection.noDatesSelected}
       </span>
-      <span class="text-base md:text-xl font-medium capitalize"
-        >{uiFields.step}
-        {state.current}/{state.totalSteps}: {state.stepName}</span
-      >
+      <h2 class="text-base md:text-xl font-medium capitalize">
+        {uiFields.step}
+        {state.current}/{state.totalSteps}: {state.stepName}
+      </h2>
     </div>
     <button
       use:focusable
