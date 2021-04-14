@@ -178,6 +178,7 @@
       </h2>
     </div>
     <button
+      data-automation-id="prev"
       use:focusable
       class="disabled:opacity-50 flex justify-center items-center p-6 bg-blue-pure text-white w-20 hover:opacity-75"
       on:click={state.prev}
@@ -194,6 +195,7 @@
     </button>
     {#if state.hasNext}
       <button
+        data-automation-id="next"
         disabled={state.current > 1
           ? !flowStepData.valid
           : selectedDates.length === 0}
@@ -212,6 +214,7 @@
       </button>
     {:else}
       <button
+        data-automation-id="next"
         disabled={!flowStepData.valid}
         use:focusable
         on:click={checkout}

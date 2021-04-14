@@ -81,7 +81,7 @@
     });
 </script>
 
-<div id="variationControl" class="md:flex-1">
+<div id="variationControl" class="md:flex-1" data-checkout-step-active={active}>
   <div class="p-6 md:p-12 max-w-lg">
     <form bind:this={form} action="#">
       <fieldset>
@@ -109,7 +109,7 @@
                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                 />
                 <label
-                  for="push_everything"
+                  for="push_{slugify(variation.name)}"
                   class="ml-3 block text-sm font-medium text-gray-700"
                 >
                   {variation.info}
