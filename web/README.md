@@ -28,9 +28,6 @@ One thing to keep in mind is that an API route can not be equal to the name of a
 ### Testing
 The project is lacking a thorough testing strategy, but utilizes cypress to run integration and e2e tests to verify crucial paths and content are present. These tests are not integrated into githooks or CI/CD, and are only available as a quick way to automate manual testing.
 
+[Cypress](https://www.cypress.io/) is an advanced test runner that allows for easy validation of app behavior and supports features like time travelling, automatic waiting and off-the-shelf autoreloading.
 
-- specify Frontend specifics in /web
-   - SSR
-   - api routes
-   - BlockContent
-   - Unit tests, or the lack thereof
+Apart from the checkout funnel there is no complex component behavior, leaving unit tests out of the scope of the project for now.

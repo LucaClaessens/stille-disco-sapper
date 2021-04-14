@@ -68,7 +68,7 @@ Webforms that are filled in the frontend are handled by Netlify. The form settin
 
 Received forms are stored in netlify and can be configured to send outgoing notifications via either webhooks, slack or email. In the CMS, the `Form styled content block` can be configured with textarea and input area forms.
 
-![Existing form component types](./../assets/documentation/form_blocks.png "Existing form component types")
+![Existing form component types](https://raw.githubusercontent.com/LucaClaessens/stille-disco-sapper/www-tst/assets/documentation/form_blocks.png "Existing form component types")
 
 These forms are submitted to netlify based on the name property of the field. These have to be unique.
 
