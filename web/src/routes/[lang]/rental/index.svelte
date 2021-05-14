@@ -44,7 +44,6 @@
   let bgColor = "";
 
   const updateIntersections = (intersecting, index) => {
-    console.log({ intersecting: intersecting, index });
     if (intersecting) {
       switch (index) {
         case 0:

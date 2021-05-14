@@ -16,7 +16,7 @@
 </script>
 
 <RegionLayout {lang} {path}>
-  <div slot="events" class="w-full h-full flex flex-col">
+  <div slot="events" class="w-full h-full flex flex-col bg-black">
     <Header {lang} {path} {...$navigationData} />
     <Banner {...$globalSettings.banner} />
     <slot />

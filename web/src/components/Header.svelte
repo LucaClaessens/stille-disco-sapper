@@ -16,7 +16,7 @@
 </script>
 
 <header
-  class="snap-start w-full p-5 flex justify-between items-center dark:bg-black bg-white"
+  class="z-50 sticky top-0 md:relative snap-start w-full p-5 flex justify-between items-center bg-transparent"
 >
   <LinkButton url={lang}>
     <h1 class="font-heading" aria-label="Return to homepage">
@@ -55,7 +55,7 @@
 </header>
 
 <div
-  class="absolute z-50 top-0 inset-x-0 p-0 transition transform origin-top-right md:hidden {menuExpanded
+  class="fixed z-50 top-0 inset-x-0 p-0 transition transform origin-top-right md:hidden {menuExpanded
     ? ''
     : 'hidden'}"
 >
