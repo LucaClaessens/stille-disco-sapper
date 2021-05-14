@@ -69,31 +69,6 @@
 
 <svelte:window bind:innerWidth />
 
-<div class="w-full h-auto md:h-full bg-gray-100 flex flex-col md:flex-row">
-  <div class="flex flex-col px-6 py-12 justify-center align-start max-w-md">
-    <FadeInBottom>
-      <h2 class="text-4xl mb-12 font-heading">
-        {content.hero.tagline}
-      </h2>
-    </FadeInBottom>
-    <p class="mb-6">
-      {content.hero.body}
-    </p>
-    <span class="self-start">
-      <a href="{lang}/checkout">
-        <Button px={6} cta={true}>{content.hero.buttonText}</Button>
-      </a>
-    </span>
-  </div>
-  <div class="flex-1 bg-blue-pure h-2/3 md:h-auto">
-    <Image
-      alt={content.hero.image.alt}
-      url={serializeImage(content.hero.image, 1920)}
-      classes="w-full h-full"
-    />
-  </div>
-</div>
-
 {#if clientSide}
   <Parallax sections={content.gallery.length} style="background-color: white;">
     {#each content.gallery as slide, i}
