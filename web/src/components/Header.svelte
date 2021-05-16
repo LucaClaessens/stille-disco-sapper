@@ -6,27 +6,38 @@
   import LinkButton from "./../components/LinkButton.svelte";
   import { activeSection, globalSettings } from "./../stores/layout";
   import serializeImage from "./../utils/image/serializeImage";
+  import { send, receive } from "./../core/directives/crossfade";
 
   export let path;
   export let lang;
   export let links = [];
+
+  let y;
   let menuExpanded = false;
 
   $: logoImage = $globalSettings.logoImage;
+  $: section = $activeSection;
+  $: showLogo = section && y > 0;
 </script>
 
+<svelte:window bind:scrollY={y} />
+
 <header
-  class="z-50 sticky top-0 md:relative snap-start w-full p-5 flex justify-between items-center bg-transparent"
+  class="z-10 sticky top-0 snap-start w-full p-5 flex justify-between items-center bg-white dark:bg-black"
 >
   <LinkButton url={lang}>
     <h1 class="font-heading" aria-label="Return to homepage">
       <div id="site-logo" class="w-12">
-        <img
-          loading="lazy"
-          class="object-cover w-full h-full"
-          src={serializeImage(logoImage, 48)}
-          alt={logoImage.alt}
-        />
+        {#if showLogo}
+          <img
+            out:send={{ key: "logo" }}
+            in:receive={{ key: "logo" }}
+            loading="lazy"
+            class="object-cover w-full h-full"
+            src={serializeImage(logoImage, 48)}
+            alt={logoImage.alt}
+          />
+        {/if}
       </div>
     </h1>
   </LinkButton>
