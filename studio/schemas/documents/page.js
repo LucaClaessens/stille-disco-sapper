@@ -13,7 +13,7 @@ export default {
     },
     {
       name: 'slug',
-      type: 'slug',
+      type: 'string',
       title: 'Slug',
       description:
         'The route of the page, e.g. when parent is set to `Rental` and slug is `toc`, it would make `/{$language}/rental/toc`',
@@ -50,7 +50,7 @@ export default {
       return {
         title: seo.title,
         media: seo.image,
-        subtitle: `${parent ? parent + '/' : ''}${slug.current}`
+        subtitle: `${parent ? parent + '/' : ''}${slug}`
       }
     }
   }
