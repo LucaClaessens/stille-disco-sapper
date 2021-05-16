@@ -1,7 +1,9 @@
+import React from 'react'
+
 export default {
-  name: 'blockPortableText',
+  name: 'defaultPortableText',
   type: 'array',
-  title: 'Markup for block content',
+  title: 'Default, minimalistic, markup for block content',
   of: [
     {
       type: 'block',
@@ -29,6 +31,14 @@ export default {
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
+            name: 'color',
+            title: 'Color',
+            type: 'color',
+            blockEditor: {
+              icon: () => '🌈'
+            }
+          },
+          {
             name: 'link',
             type: 'object',
             title: 'URL',
@@ -45,19 +55,33 @@ export default {
             type: 'object',
             title: 'i18n URL (local)',
             description: 'url prefixed with /{lang}/',
+            blockEditor: {
+              icon: () => '🌎',
+              render: props => <span style={{ backgroundColor: 'yellow' }}>🌎{props.children}</span>
+            },
             fields: [
               {
-                title: 'URL',
                 name: 'href',
-                type: 'url'
+                type: 'string',
+                title: 'URL',
+                description:
+                  'The page to link to, if it is an external link, make sure to include the `https://` section, otherwise the browser will redirect to a route within the current website',
+                validation: Rule => Rule.error('You have to fill in a valid URL.').required()
               },
               {
-                title: 'Color',
-                name: 'textColor',
+                name: 'target',
                 type: 'string',
+                title: 'Target',
+                initialValue: '_self',
+                description:
+                  'Redirect target, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target',
                 options: {
-                  list: ['blue-pure', 'black', 'white', 'gray-100']
-                }
+                  list: [
+                    { title: 'The current tab', value: '_self' },
+                    { title: 'A new tab', value: '_blank' }
+                  ]
+                },
+                validation: Rule => Rule.error('You have to pick a target.').required()
               }
             ]
           }
@@ -65,25 +89,7 @@ export default {
       }
     },
     {
-      type: 'blockTitle'
-    },
-    {
-      type: 'blockSubtitle'
-    },
-    {
-      type: 'qaItem'
-    },
-    {
-      type: 'contactDetails'
-    },
-    {
-      type: 'qaBlock'
-    },
-    {
-      type: 'mainImage'
-    },
-    {
-      type: 'checkoutPreview'
+      type: 'button'
     },
     {
       type: 'spacer'

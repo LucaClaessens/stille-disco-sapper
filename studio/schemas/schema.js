@@ -5,14 +5,12 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import checkout from './documents/checkout'
 import events from './documents/events'
 import footer from './documents/footer'
-import gallery from "./documents/gallery"
 import landing from './documents/landing'
-import location from "./documents/location"
-import navigation from "./documents/navigation"
+import location from './documents/location'
+import navigation from './documents/navigation'
 import page from './documents/page'
 import product from './documents/product'
 import rental from './documents/rental'
-import sequence from "./documents/sequence"
 import settings from './documents/settings'
 import addressDetails from './objects/addressDetails'
 import banner from './objects/banner'
@@ -21,15 +19,19 @@ import blockNode from './objects/blockNode'
 import blockPortableText from './objects/blockPortableText'
 import blockSubtitle from './objects/blockSubtitle'
 import blockTitle from './objects/blockTitle'
+import button from './objects/button'
 import checkoutPreview from './objects/checkoutPreview'
 import contactDetails from './objects/contactDetails'
+import defaultPortableText from './objects/defaultPortableText'
+import flexPositioner from './objects/flexPositioner'
 import galleryImage from './objects/galleryImage'
-import galleryMessage from './objects/galleryMessage'
 import i18nLink from './objects/i18nLink'
 import inputForm from './objects/inputForm'
 import landingCategory from './objects/landingCategory'
 import link from './objects/link'
 import mainImage from './objects/mainImage'
+import marketingPagePortableText from './objects/marketingPagePortableText'
+import parallaxGalleryWrapper from './objects/parallaxGalleryWrapper'
 import productVariation from './objects/productVariation'
 import qaBlock from './objects/qaBlock'
 import qaBlockPortableText from './objects/qaBlockPortableText'
@@ -40,8 +42,6 @@ import sequenceImage from './objects/sequenceImage'
 import spacer from './objects/spacer'
 import subtitlePortableText from './objects/subtitlePortableText'
 import textareaForm from './objects/textareaForm'
-import flexPositioner from './objects/flexPositioner';
-
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -57,10 +57,10 @@ export default createSchema({
     navigation,
     footer,
     location,
-    sequence,
-    gallery,
     checkout,
     // portable texts
+    defaultPortableText,
+    marketingPagePortableText,
     qaBlockPortableText,
     blockPortableText,
     subtitlePortableText,
@@ -82,12 +82,13 @@ export default createSchema({
     textareaForm,
     landingCategory,
     galleryImage,
-    galleryMessage,
+    parallaxGalleryWrapper,
     radioChannel,
     banner,
     checkoutPreview,
     productVariation,
     spacer,
-    flexPositioner
+    flexPositioner,
+    button
   ])
 })

@@ -1,7 +1,7 @@
 export default {
-  name: 'blockPortableText',
+  name: 'marketingPagePortableText',
   type: 'array',
-  title: 'Markup for block content',
+  title: 'Markup for marketing pages',
   of: [
     {
       type: 'block',
@@ -63,6 +63,9 @@ export default {
           }
         ]
       }
+    },
+    {
+      type: 'parallaxGalleryWrapper'
     },
     {
       type: 'blockTitle'

@@ -13,7 +13,7 @@ export default {
     },
     {
       name: 'body',
-      type: 'blockPortableText',
+      type: 'marketingPagePortableText',
       title: 'Body of the page'
     }
   ],

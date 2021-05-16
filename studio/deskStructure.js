@@ -1,32 +1,56 @@
-import S from '@sanity/desk-tool/structure-builder';
-import { MdAddShoppingCart, MdDesktopMac, MdFolder, MdMenu, MdPermContactCalendar, MdPhoneAndroid, MdPublic, MdSettings, MdShoppingCart, MdViewStream, MdWallpaper } from "react-icons/md";
-import * as I18nS from 'sanity-plugin-intl-input/lib/structure';
-import { i18n } from './schemas/documentTranslation';
+import S from '@sanity/desk-tool/structure-builder'
+import {
+  MdAddShoppingCart,
+  MdDesktopMac,
+  MdFolder,
+  MdMenu,
+  MdPermContactCalendar,
+  MdPhoneAndroid,
+  MdPublic,
+  MdSettings,
+  MdShoppingCart,
+  MdViewStream,
+  MdWallpaper
+} from 'react-icons/md'
+import * as I18nS from 'sanity-plugin-intl-input/lib/structure'
+import { i18n } from './schemas/documentTranslation'
 
 const hiddenDocTypes = listItem =>
-  !['page', 'product', 'landing', 'rental', 'navigation', 'location', 'footer', 'settings', 'events', 'sequence', 'gallery', 'checkout'].includes(listItem.getId())
+  ![
+    'page',
+    'product',
+    'landing',
+    'rental',
+    'navigation',
+    'location',
+    'footer',
+    'settings',
+    'events',
+    'sequence',
+    'gallery',
+    'checkout'
+  ].includes(listItem.getId())
 
+const i18nDocumentEditor = (documentId, schemaType, title) =>
+  S.document(documentId)
+    .documentId(documentId)
+    .schemaType(schemaType)
+    .views(I18nS.getDocumentNodeViewsForSchemaType(schemaType))
+    .title(title)
 
-const i18nDocumentEditor = (documentId, schemaType, title) => S
-  .document(documentId)
-  .documentId(documentId)
-  .schemaType(schemaType)
-  .views(I18nS.getDocumentNodeViewsForSchemaType(schemaType))
-  .title(title)
+const documentEditor = (documentId, schemaType, title) =>
+  S.document(documentId)
+    .documentId(documentId)
+    .schemaType(schemaType)
+    .views(S.view.form())
+    .title(title)
 
-const documentEditor = (documentId, schemaType, title) => S
-  .document(documentId)
-  .documentId(documentId)
-  .schemaType(schemaType)
-  .views(S.view.form())
-  .title(title)
-
-export const getDefaultDocumentNode = (props) => {
+export const getDefaultDocumentNode = props => {
   if (props.schemaType === 'page' || props.schemaType === 'product') {
-    return S.document().views(I18nS.getDocumentNodeViewsForSchemaType(props.schemaType));
+    return S.document().views(I18nS.getDocumentNodeViewsForSchemaType(props.schemaType))
   }
-  return S.document();
-};
+  return S.document()
+}
 export default () =>
   S.list()
     .id('__root__')
@@ -60,6 +84,7 @@ export default () =>
               return params.type === 'page'
             })
         ),
+      S.divider(),
       S.listItem()
         .title('Navigation')
         .icon(MdMenu)
@@ -71,16 +96,6 @@ export default () =>
         .schemaType('footer')
         .child(documentEditor('footer', 'footer', 'Footer')),
       S.divider(),
-      S.listItem()
-        .title('Showcase')
-        .icon(MdWallpaper)
-        .child(S.list().title('Showcase').items([
-          S.listItem()
-            .title('Gallery')
-            .icon(MdPhoneAndroid)
-            .schemaType('gallery')
-            .child(documentEditor('gallery', 'gallery', 'Gallery')),
-        ])),
       S.listItem()
         .title('Checkout settings')
         .icon(MdShoppingCart)
