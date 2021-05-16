@@ -28,26 +28,11 @@
 
   const scaleText = (ref, match) =>
     ref === match ? "text-2xl" : "text-2xl md:text-5xl";
-
-  $: logoImage = $globalSettings.logoImage;
 </script>
 
 <svelte:head>
   <SEO {host} {path} {seo} {lang} />
 </svelte:head>
-
-<div
-  id="site-logo"
-  class="absolute top-2 left-1/2 z-50 -translate-x-1/2 transform pointer-events-none w-24 md:w-80 transition-all"
-  transition:fade
->
-  <img
-    loading="lazy"
-    class="object-cover w-full h-full"
-    src={serializeImage(logoImage, 320)}
-    alt={logoImage.alt}
-  />
-</div>
 
 <RegionLayout {lang} {path}>
   <a
@@ -77,7 +62,7 @@
         class="{scaleText(
           $hoveredSection,
           'rental'
-        )} z-50 transition-all duration-300 font-heading uppercase"
+        )} z-50 transition-all duration-700 font-heading uppercase"
       >
         {events.title}
       </h2>
@@ -110,7 +95,7 @@
         class="{scaleText(
           $hoveredSection,
           'events'
-        )} z-50 transition-all duration-300 font-heading uppercase"
+        )} z-50 transition-all duration-700 font-heading uppercase"
       >
         {rental.title}
       </h2>
@@ -120,7 +105,7 @@
 
 <style>
   .filter-blur {
-    filter: blur(15px);
+    filter: blur(8px);
   }
   .clip-events,
   .clip-rental {

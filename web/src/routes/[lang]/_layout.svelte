@@ -9,6 +9,7 @@
     navigationData,
   } from "./../../stores/layout";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
+  import Logo from "./../../components/Logo.svelte";
 
   export async function preload({ params, path }) {
     const { lang } = params;
@@ -57,5 +58,7 @@
 
   language.set(lang);
 </script>
+
+<Logo />
 
 <slot />

@@ -1,88 +1,119 @@
-import { i18nOptions } from '../documentTranslation';
+import { MdPhotoLibrary } from 'react-icons/md'
+import textColors from '../partials/textColors'
 
 const positionStrategy = () => ({
   name: 'position',
   required: true,
   type: 'flexPositioner',
   title: 'Position'
-});
+})
 
 const image = () => ({
-    name: 'image',
-    required: true,
-    type: 'mainImage',
-    title: 'Image'
+  name: 'image',
+  required: true,
+  type: 'mainImage',
+  title: 'Image'
+})
+
+const images = () => ({
+  name: 'images',
+  title: 'Images for layer',
+  required: true,
+  type: 'array',
+  of: [
+    {
+      type: 'object',
+      name: 'entry',
+      fields: [positionStrategy(), image()],
+      preview: {
+        select: {
+          media: 'image',
+          title: 'image.alt',
+          justify: 'position.justify',
+          align: 'position.align'
+        },
+        prepare: ({ media, title, justify, align }) => ({
+          media,
+          title,
+          subtitle: `justify: ${justify}, align: ${align}`
+        })
+      }
+    }
+  ]
+})
+
+const color = () => ({
+  name: 'color',
+  required: 'true',
+  type: 'string',
+  title: 'Background color',
+  options: {
+    list: [
+      { title: 'red', value: 'bg-red-pure' },
+      { title: 'green', value: 'bg-green-pure' },
+      { title: 'blue', value: 'bg-green-blue' }
+    ]
+  }
 })
 
 export default {
-    name: 'galleryImage',
-    type: 'object',
-    title: 'Gallery image',
-    fields: [
-        {
-            name: 'foreground',
-            type: 'object',
-            title: 'Foreground image',
-            options: {
-              collapsible: true,
-              collapsed: false,
-            },
-            fields: [
-              positionStrategy(),
-              image()
-            ]
-        },
-        {
-          name: 'background',
-          type: 'object',
-          title: 'Background image',
-          options: {
-            collapsible: true,
-            collapsed: false,
-          },
-          fields: [
-            positionStrategy(),
-            image()
-          ]
+  name: 'galleryImage',
+  type: 'object',
+  title: 'Gallery image',
+  fields: [
+    {
+      name: 'foreground',
+      type: 'object',
+      title: 'Foreground layer',
+      options: {
+        collapsible: true,
+        collapsed: false
       },
+      fields: [images()]
+    },
+    {
+      name: 'background',
+      type: 'object',
+      title: 'Background layer',
+      options: {
+        collapsible: true,
+        collapsed: false
+      },
+      fields: [images(), color()]
+    },
+    {
+      name: 'message',
+      required: true,
+      title: 'Block content layer',
+      type: 'object',
+      options: {
+        collapsible: true,
+        collapsed: false
+      },
+      fields: [
+        positionStrategy(),
         {
-            name: 'message',
-            required: true,
-            title: "Message",
-            type: 'object',
-            options: {
-              collapsible: true,
-              collapsed: false,
-            },
-            fields: [
-              positionStrategy(),
-              {
-                title: "Text",
-                name: 'text',
-                type: 'object',
-                options: i18nOptions,
-                fields: [
-                    {
-                        title: 'Text',
-                        name: 'text',
-                        type: 'text',
-                        required: true,
-                        description: 'Text that the message displays, you can write HTML here.'
-                    },
-                ]
-            },
-            ]
-        }
-    ],
-    preview: {
-        select: {
-            media: 'background.image',
+          title: 'Text',
+          name: 'text',
+          type: 'defaultPortableText',
+          required: true,
+          description: 'Portable text for the gallery message'
         },
-        prepare({ media }) {
-            return {
-                media,
-                title: 'Slide'
-            }
-        }
+        textColors()
+      ]
     }
+  ],
+  preview: {
+    select: {
+      fI: 'foreground.images',
+      bI: 'background.images'
+    },
+    prepare({ fI, bI }) {
+      return {
+        media: MdPhotoLibrary,
+        title: `${fI.length} foreground images.`,
+        subtitle: `${bI.length} background images.`
+      }
+    }
+  }
 }

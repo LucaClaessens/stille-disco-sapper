@@ -22,7 +22,8 @@
     "@sanity/production-preview",
     "intl-input",
     "asset-source-unsplash",
-    "my-studio-logo"
+    "my-studio-logo",
+    "@sanity/color-input"
   ],
   "parts": [
     {
