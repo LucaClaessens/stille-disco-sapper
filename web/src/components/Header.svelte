@@ -4,7 +4,7 @@
   import Menu from "./../components/icons/Menu.svelte";
   import LanguagePicker from "./../components/LanguagePicker.svelte";
   import LinkButton from "./../components/LinkButton.svelte";
-  import { activeSection, globalSettings } from "./../stores/layout";
+  import { activeSection, globalSettings, scaleLogo } from "./../stores/layout";
   import serializeImage from "./../utils/image/serializeImage";
   import { send, receive } from "./../core/directives/crossfade";
 
@@ -17,13 +17,13 @@
 
   $: logoImage = $globalSettings.logoImage;
   $: section = $activeSection;
-  $: showLogo = section && y > 0;
+  $: showLogo = (section && y > 0) || !$scaleLogo;
 </script>
 
 <svelte:window bind:scrollY={y} />
 
 <header
-  class="z-10 sticky top-0 snap-start w-full p-5 flex justify-between items-center bg-white dark:bg-black"
+  class="z-10 sticky top-0 snap-start w-full p-5 flex justify-between items-center bg-white dark:bg-black max-w-screen-2xl mx-auto"
 >
   <LinkButton url={lang}>
     <h1 class="font-heading" aria-label="Return to homepage">

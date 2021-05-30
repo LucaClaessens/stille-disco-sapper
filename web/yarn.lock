@@ -14,7 +14,7 @@
   "resolved" "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.13.15.tgz"
   "version" "7.13.15"
 
-"@babel/core@^7.0.0":
+"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.10.2", "@babel/core@^7.13.0", "@babel/core@^7.4.0-0", "@babel/core@7 || ^7.0.0-rc.2":
   "integrity" "sha512-6GXmNYeNjS2Uz+uls5jalOemgIhnTMeaXo+yBUA72kC2uX/8VW6XyhVIo2L8/q0goKQA3EVKx0KOQpVKSeWadQ=="
   "resolved" "https://registry.npmjs.org/@babel/core/-/core-7.13.15.tgz"
   "version" "7.13.15"
@@ -1152,7 +1152,7 @@
   "resolved" "https://registry.npmjs.org/at-least-node/-/at-least-node-1.0.0.tgz"
   "version" "1.0.0"
 
-"autoprefixer@^10.1.0":
+"autoprefixer@^10.0.2", "autoprefixer@^10.1.0":
   "integrity" "sha512-7H4AJZXvSsn62SqZyJCP+1AWwOuoYpUfK6ot9vm0e87XD6mT8lDywc9D9OTJPMULyGcvmIxzTAMeG2Cc+YX+fA=="
   "resolved" "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.2.5.tgz"
   "version" "10.2.5"
@@ -2057,6 +2057,11 @@
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
+
+"fsevents@~2.3.1":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
@@ -3384,7 +3389,7 @@
     "postcss" "^7.0.2"
     "postcss-values-parser" "^2.0.0"
 
-"postcss-load-config@^3.0.0":
+"postcss-load-config@^2.1.0 || ^3.0.0", "postcss-load-config@^3.0.0":
   "integrity" "sha512-/pDHe30UYZUD11IeG8GWx9lNtu1ToyTsZHnyy45B4Mrwr/Kb6NgYl7k753+05CJNKnjbwh4975amoPJ+TEjHNQ=="
   "resolved" "https://registry.npmjs.org/postcss-load-config/-/postcss-load-config-3.0.1.tgz"
   "version" "3.0.1"
@@ -3788,6 +3793,15 @@
     "source-map" "^0.6.1"
     "supports-color" "^5.4.0"
 
+"postcss@^7 || ^8", "postcss@^8.0.0", "postcss@^8.0.9", "postcss@^8.1.0", "postcss@^8.1.13", "postcss@^8.1.6", "postcss@^8.2.1", "postcss@^8.2.2":
+  "integrity" "sha512-b/h7CPV7QEdrqIxtAf2j31U5ef05uBDuvoXv6L51Q4rcS1jdlXAVKJv+atCFdUXYl9dyTHGyoMzIepwowRJjFw=="
+  "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.2.10.tgz"
+  "version" "8.2.10"
+  dependencies:
+    "colorette" "^1.2.2"
+    "nanoid" "^3.1.22"
+    "source-map" "^0.6.1"
+
 "postcss@^7.0.0":
   "integrity" "sha512-3QT8bBJeX/S5zKTTjTCIjRF3If4avAT6kqxcASlTWEtAFCb9NH0OUxNDfgZSWdP5fJnBYCMEWkIFfWeugjzYMg=="
   "resolved" "https://registry.npmjs.org/postcss/-/postcss-7.0.35.tgz"
@@ -3859,15 +3873,6 @@
     "chalk" "^2.4.2"
     "source-map" "^0.6.1"
     "supports-color" "^6.1.0"
-
-"postcss@^8.1.6", "postcss@^8.2.1", "postcss@^8.2.2":
-  "integrity" "sha512-b/h7CPV7QEdrqIxtAf2j31U5ef05uBDuvoXv6L51Q4rcS1jdlXAVKJv+atCFdUXYl9dyTHGyoMzIepwowRJjFw=="
-  "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.2.10.tgz"
-  "version" "8.2.10"
-  dependencies:
-    "colorette" "^1.2.2"
-    "nanoid" "^3.1.22"
-    "source-map" "^0.6.1"
 
 "praecox-datepicker@^1.0.4":
   "integrity" "sha512-tbYX8QZr/3OGDOTzQjIXJzSFt5EB9lboPUL/TEpRijW3caIY5FP4dGCyvuWLc+SOakQIcVOKxEwuE12rqNnfjw=="
@@ -4126,7 +4131,7 @@
   dependencies:
     "estree-walker" "^0.6.1"
 
-"rollup@^2.2.0":
+"rollup@^1.20.0", "rollup@^1.20.0 || ^2.0.0", "rollup@^1.20.0||^2.0.0", "rollup@^2.2.0", "rollup@>=0.60.0 <3", "rollup@>=0.66.0 <2", "rollup@>=1.19.2":
   "integrity" "sha512-vPD+JoDj3CY8k6m1bLcAFttXMe78P4CMxoau0iLVS60+S9kLsv2379xaGy4NgYWu+h2WTlucpoLPAoUoixFBag=="
   "resolved" "https://registry.npmjs.org/rollup/-/rollup-2.45.1.tgz"
   "version" "2.45.1"
@@ -4494,7 +4499,7 @@
     "detect-indent" "^6.0.0"
     "strip-indent" "^3.0.0"
 
-"svelte@^3.20.1":
+"svelte@*", "svelte@^3.0.0", "svelte@^3.14.1", "svelte@^3.20.1", "svelte@^3.23.0", "svelte@^3.5.0", "svelte@>1.44.0":
   "integrity" "sha512-TRF30F4W4+d+Jr2KzUUL1j8Mrpns/WM/WacxYlo5MMb2E5Qy2Pk1Guj6GylxsW9OnKQl1tnF8q3hG/hQ3h6VUA=="
   "resolved" "https://registry.npmjs.org/svelte/-/svelte-3.37.0.tgz"
   "version" "3.37.0"

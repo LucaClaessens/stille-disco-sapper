@@ -23,12 +23,20 @@ export default {
       }
     },
     {
+      name: 'scaleLogo',
+      type: 'boolean',
+      required: 'true',
+      title: 'Scale the logo',
+      description: 'When true, the logo will show bigger before scrolling the page'
+    },
+    {
       name: 'parent',
       type: 'string',
       title: 'Parent page',
       description: "The category to file this page under, e.g. 'rental'.",
       options: {
         list: [
+          { title: 'No parent (root)', value: '' },
           { title: 'Events', value: 'events' },
           { title: 'Rental', value: 'rental' }
         ]

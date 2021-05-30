@@ -1,10 +1,9 @@
-import client from "../../../../sanityClient";
+import client from "../../../sanityClient";
 
 export async function get(req, res) {
   try {
-    const { lang, collection, slug } = req.params;
-    const filter =
-      '*[_type == "page" && _lang == $lang && slug == $slug && parent == $collection][0]';
+    const { lang, slug } = req.params;
+    const filter = '*[_type == "page" && _lang == $lang && slug == $slug][0]';
     const projection = `{
             ...,
             body[]{
@@ -16,7 +15,6 @@ export async function get(req, res) {
     const settings = await client.fetch(filter + projection, {
       lang,
       slug,
-      collection,
     });
     res.end(JSON.stringify({ ...settings }));
   } catch (err) {

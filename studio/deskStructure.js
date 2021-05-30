@@ -1,16 +1,13 @@
 import S from '@sanity/desk-tool/structure-builder'
 import {
   MdAddShoppingCart,
-  MdDesktopMac,
   MdFolder,
   MdMenu,
   MdPermContactCalendar,
-  MdPhoneAndroid,
   MdPublic,
   MdSettings,
   MdShoppingCart,
-  MdViewStream,
-  MdWallpaper
+  MdViewStream
 } from 'react-icons/md'
 import * as I18nS from 'sanity-plugin-intl-input/lib/structure'
 import { i18n } from './schemas/documentTranslation'

@@ -1,5 +1,7 @@
 <script context="module">
   import BlockContent from "@movingbrands/svelte-portable-text";
+  import { onMount } from "svelte";
+  import { scaleLogo } from "../../../stores/layout";
   import SEO from "./../../../components/SEO.svelte";
   import serializers from "./../../../components/serializers";
   import projectLanguage from "./../../../utils/i18n/projectLanguage";
@@ -29,6 +31,10 @@
   export let host;
   export let path;
   export let lang;
+
+  onMount(() => {
+    scaleLogo.set(true);
+  });
 </script>
 
 <svelte:head>

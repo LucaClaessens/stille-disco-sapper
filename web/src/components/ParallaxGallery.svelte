@@ -76,9 +76,12 @@
               align={slide.message.position.align}
             >
               <div class="p-12">
-                <h3 class="mb-3 text-xl font-heading {slide.message.textColor}">
+                <h2
+                  class="mb-3 text-2xl font-heading {slide.message.textColor}"
+                  style="text-align:{slide.message.position.align};"
+                >
                   <BlockContent blocks={slide.message.text} {serializers} />
-                </h3>
+                </h2>
               </div>
             </FlexContainer>
           </IntersectionObserver>

@@ -1,5 +1,5 @@
 <script>
-  import { globalSettings, activeSection } from "./../stores/layout";
+  import { globalSettings, activeSection, scaleLogo } from "./../stores/layout";
   import serializeImage from "./../utils/image/serializeImage";
   import { send, receive } from "./../core/directives/crossfade";
 
@@ -7,7 +7,7 @@
 
   $: logoImage = $globalSettings.logoImage;
   $: section = $activeSection;
-  $: showLogo = !(section && y > 0);
+  $: showLogo = !(section && y > 0) && $scaleLogo;
 </script>
 
 <svelte:window bind:scrollY={y} />

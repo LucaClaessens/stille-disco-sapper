@@ -93,6 +93,9 @@ export default {
     },
     {
       type: 'spacer'
+    },
+    {
+      type: 'youtube'
     }
   ]
 }

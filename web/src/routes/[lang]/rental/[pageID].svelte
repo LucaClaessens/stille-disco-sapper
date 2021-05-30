@@ -3,6 +3,7 @@
   import SEO from "./../../../components/SEO.svelte";
   import serializers from "./../../../components/serializers";
   import projectLanguage from "./../../../utils/i18n/projectLanguage";
+  import { scaleLogo as scaleHeaderLogo } from "./../../../stores/layout";
 
   export async function preload({ host, params, path }) {
     const { lang, pageID } = params;
@@ -24,7 +25,9 @@
   export let lang;
   export let content;
 
-  const { seo } = content;
+  const { seo, scaleLogo = false } = content;
+
+  scaleHeaderLogo.set(scaleLogo);
 </script>
 
 <svelte:head>

@@ -51,7 +51,7 @@ const color = () => ({
     list: [
       { title: 'red', value: 'bg-red-pure' },
       { title: 'green', value: 'bg-green-pure' },
-      { title: 'blue', value: 'bg-green-blue' }
+      { title: 'blue', value: 'bg-blue-pure' }
     ]
   }
 })

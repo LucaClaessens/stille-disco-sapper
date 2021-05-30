@@ -16,6 +16,8 @@ const fetchEvents = async (currentIndex = 0) => {
     },
   }).then((res) => res.json());
 
+  console.log({ endpoint });
+
   const { pageIndex, lastPageIndex, events } = response;
 
   if (pageIndex < lastPageIndex) {

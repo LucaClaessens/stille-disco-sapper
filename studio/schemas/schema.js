@@ -42,6 +42,7 @@ import sequenceImage from './objects/sequenceImage'
 import spacer from './objects/spacer'
 import subtitlePortableText from './objects/subtitlePortableText'
 import textareaForm from './objects/textareaForm'
+import youtube from './objects/youtube'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -89,6 +90,7 @@ export default createSchema({
     productVariation,
     spacer,
     flexPositioner,
-    button
+    button,
+    youtube
   ])
 })

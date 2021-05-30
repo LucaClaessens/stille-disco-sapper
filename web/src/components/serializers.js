@@ -18,6 +18,7 @@ import Spacer from "./Spacer.svelte";
 import TextareaForm from "./TextareaForm.svelte";
 import Button from "./Button.svelte";
 import Color from "./Color.svelte";
+import Youtube from "./Youtube.svelte";
 
 export default {
   marks: {
@@ -118,6 +119,11 @@ export default {
     }),
     button: ({ node, children }) => ({
       component: Button,
+      childNodes: children,
+      props: node,
+    }),
+    youtube: ({ node, children }) => ({
+      component: Youtube,
       childNodes: children,
       props: node,
     }),
