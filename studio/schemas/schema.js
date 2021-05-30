@@ -12,37 +12,50 @@ import page from './documents/page'
 import product from './documents/product'
 import rental from './documents/rental'
 import settings from './documents/settings'
-import addressDetails from './objects/addressDetails'
-import banner from './objects/banner'
-import blockNode from './objects/blockNode'
-// Object types
-import blockPortableText from './objects/blockPortableText'
-import blockSubtitle from './objects/blockSubtitle'
-import blockTitle from './objects/blockTitle'
-import button from './objects/button'
-import checkoutPreview from './objects/checkoutPreview'
-import contactDetails from './objects/contactDetails'
-import defaultPortableText from './objects/defaultPortableText'
-import flexPositioner from './objects/flexPositioner'
-import galleryImage from './objects/galleryImage'
-import i18nLink from './objects/i18nLink'
-import inputForm from './objects/inputForm'
-import landingCategory from './objects/landingCategory'
-import link from './objects/link'
-import mainImage from './objects/mainImage'
-import marketingPagePortableText from './objects/marketingPagePortableText'
-import parallaxGalleryWrapper from './objects/parallaxGalleryWrapper'
-import productVariation from './objects/productVariation'
-import qaBlock from './objects/qaBlock'
-import qaBlockPortableText from './objects/qaBlockPortableText'
-import qaItem from './objects/qaItem'
-import radioChannel from './objects/radioChannel'
-import seoFields from './objects/seoFields'
-import sequenceImage from './objects/sequenceImage'
-import spacer from './objects/spacer'
-import subtitlePortableText from './objects/subtitlePortableText'
-import textareaForm from './objects/textareaForm'
-import youtube from './objects/youtube'
+// blocks
+import checkoutPreviewBlock from './objects/blocks/checkoutPreview'
+import contactDetailsBlock from './objects/blocks/contactDetails'
+import faqBlock from './objects/blocks/faqBlock'
+import formBlock from './objects/blocks/formBlock'
+import parallaxGalleryWrapperBlock from './objects/blocks/parallaxGalleryWrapper'
+// components
+import addressDetails from './objects/components/addressDetails'
+import banner from './objects/components/banner'
+import blockNode from './objects/components/blockNode'
+import blockSubtitle from './objects/components/blockSubtitle'
+import blockTitle from './objects/components/blockTitle'
+import button from './objects/components/button'
+import galleryImage from './objects/components/galleryImage'
+import i18nLink from './objects/components/i18nLink'
+import input from './objects/components/input'
+import landingCategory from './objects/components/landingCategory'
+import link from './objects/components/link'
+import mainImage from './objects/components/mainImage'
+import productVariation from './objects/components/productVariation'
+import qaItem from './objects/components/qaItem'
+import radioChannel from './objects/components/radioChannel'
+import sequenceImage from './objects/components/sequenceImage'
+import spacer from './objects/components/spacer'
+import textarea from './objects/components/textarea'
+import youtube from './objects/components/youtube'
+// layouts
+import layoutFullWidth from './objects/layout/layoutFullWidth'
+import layoutOneOne from './objects/layout/layoutOneOne'
+import layoutOneTwo from './objects/layout/layoutOneTwo'
+import layoutTwoOne from './objects/layout/layoutTwoOne'
+// portable texts
+import blockPortableText from './objects/portableText/blockPortableText'
+import defaultPortableText from './objects/portableText/defaultPortableText'
+import faqBlockPortableText from './objects/portableText/faqBlockPortableText'
+import formBlockPortableText from './objects/portableText/formBlockPortableText'
+import layoutPortableText from './objects/portableText/layoutPortableText'
+import marketingPagePortableText from './objects/portableText/marketingPagePortableText'
+import subtitlePortableText from './objects/portableText/subtitlePortableText'
+import textPortableText from './objects/portableText/textPortableText'
+// utils
+import backgroundColor from './objects/util/backgroundColor'
+import flexPositioner from './objects/util/flexPositioner'
+import seoFields from './objects/util/seoFields'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -59,34 +72,45 @@ export default createSchema({
     footer,
     location,
     checkout,
+    // layout elements
+    layoutFullWidth,
+    layoutOneOne,
+    layoutTwoOne,
+    layoutOneTwo,
+    //blocks
+    checkoutPreviewBlock,
+    parallaxGalleryWrapperBlock,
+    contactDetailsBlock,
+    formBlock,
+    faqBlock,
     // portable texts
+    textPortableText,
+    layoutPortableText,
     defaultPortableText,
     marketingPagePortableText,
-    qaBlockPortableText,
+    formBlockPortableText,
+    faqBlockPortableText,
     blockPortableText,
     subtitlePortableText,
-    //references
+    //utils
+    backgroundColor,
     // reusable schemas
     seoFields,
     mainImage,
     sequenceImage,
-    contactDetails,
     addressDetails,
     i18nLink,
     link,
     blockNode,
     blockTitle,
     blockSubtitle,
-    qaBlock,
     qaItem,
-    inputForm,
-    textareaForm,
+    input,
+    textarea,
     landingCategory,
     galleryImage,
-    parallaxGalleryWrapper,
     radioChannel,
     banner,
-    checkoutPreview,
     productVariation,
     spacer,
     flexPositioner,

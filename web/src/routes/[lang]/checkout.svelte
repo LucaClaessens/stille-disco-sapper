@@ -1,5 +1,5 @@
 <script context="module">
-  import Checkout from "../../components/Checkout.svelte";
+  import Checkout from "../../components/checkout/Checkout.svelte";
   import SEO from "../../components/SEO.svelte";
   import projectLanguage from "../../utils/i18n/projectLanguage";
 

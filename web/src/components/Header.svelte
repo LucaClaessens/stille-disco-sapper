@@ -22,48 +22,52 @@
 
 <svelte:window bind:scrollY={y} />
 
-<header
-  class="z-10 sticky top-0 snap-start w-full p-5 flex justify-between items-center bg-white dark:bg-black max-w-screen-2xl mx-auto"
+<div
+  class="z-10 sticky top-0 snap-start w-full items-center bg-white dark:bg-black"
 >
-  <LinkButton url={lang}>
-    <h1 class="font-heading" aria-label="Return to homepage">
-      <div id="site-logo" class="w-12">
-        {#if showLogo}
-          <img
-            out:send={{ key: "logo" }}
-            in:receive={{ key: "logo" }}
-            loading="lazy"
-            class="object-cover w-full h-full"
-            src={serializeImage(logoImage, 48)}
-            alt={logoImage.alt}
-          />
-        {/if}
-      </div>
-    </h1>
-  </LinkButton>
-  <div class="md:hidden">
-    <Button on:click={() => (menuExpanded = true)}>
-      <span class="sr-only">Open menu</span>
-      <Icon>
-        <Menu />
-      </Icon>
-    </Button>
-  </div>
-  <nav class="hidden md:flex space-x-10">
-    <div class="flex items-center justify-end">
-      <span class="ml-6">
-        <LanguagePicker {lang} {path} mode="header" />
-      </span>
-      {#each links as link}
-        {#if link.visibility == "all" || link.visibility === $activeSection}
-          <span class="ml-6">
-            <LinkButton url="/{lang}{link.href}" text={link.text} />
-          </span>
-        {/if}
-      {/each}
+  <header
+    class="p-5 flex justify-between items-center max-w-screen-2xl mx-auto font-heading"
+  >
+    <LinkButton url={lang}>
+      <h1 class="font-heading" aria-label="Return to homepage">
+        <div id="site-logo" class="w-12">
+          {#if showLogo}
+            <img
+              out:send={{ key: "logo" }}
+              in:receive={{ key: "logo" }}
+              loading="lazy"
+              class="object-cover w-full h-full"
+              src={serializeImage(logoImage, 48)}
+              alt={logoImage.alt}
+            />
+          {/if}
+        </div>
+      </h1>
+    </LinkButton>
+    <div class="md:hidden">
+      <Button on:click={() => (menuExpanded = true)}>
+        <span class="sr-only">Open menu</span>
+        <Icon>
+          <Menu />
+        </Icon>
+      </Button>
     </div>
-  </nav>
-</header>
+    <nav class="hidden md:flex space-x-10">
+      <div class="flex items-center justify-end">
+        <span class="ml-6">
+          <LanguagePicker {lang} {path} mode="header" />
+        </span>
+        {#each links as link}
+          {#if link.visibility == "all" || link.visibility === $activeSection}
+            <span class="ml-6">
+              <LinkButton url="/{lang}{link.href}" text={link.text} />
+            </span>
+          {/if}
+        {/each}
+      </div>
+    </nav>
+  </header>
+</div>
 
 <div
   class="fixed z-50 top-0 inset-x-0 p-0 transition transform origin-top-right md:hidden {menuExpanded

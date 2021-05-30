@@ -44,7 +44,7 @@ export default {
     },
     {
       name: 'body',
-      type: 'marketingPagePortableText',
+      type: 'layoutPortableText',
       title: 'Body of the page'
     }
   ],

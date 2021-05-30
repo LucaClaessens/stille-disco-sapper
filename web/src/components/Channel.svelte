@@ -31,26 +31,30 @@
   on:mouseenter={() => dispatch("focus", { key })}
   on:focus={() => dispatch("focus", { key })}
   id="channel-{key}"
-  class="hover:opacity-75 transition-all bg-{key}-pure w-full h-{scale} flex items-center justify-between text-{textColor} px-6 {mdClasses}"
+  class="hover:opacity-75 transition-all bg-{key}-pure w-full text-{textColor}"
 >
-  {#if active}
-    <span
-      class="mr-6 {breakMd ? 'md:transform md:rotate-90 md:p-3' : ''}"
-      in:fade={{ delay: 200 }}
-    >
-      <Icon solid={true}>
-        <PlayButton />
-      </Icon>
-    </span>
-    <div class="flex-1" in:fade={{ delay: 200 }}>
-      <!-- svelte-ignore a11y-distracting-elements -->
-      <marquee
-        class="w-full {breakMd
-          ? 'md-invert md:transform md:rotate-90 md:w-screen-oppose md:h-9 md:origin-top-left md:w-full md:translate-x-8'
-          : ''}">{text}</marquee
+  <div
+    class="container mx-auto flex items-center justify-between px-6 {mdClasses} h-{scale}"
+  >
+    {#if active}
+      <span
+        class="mr-6 {breakMd ? 'md:transform md:rotate-90 md:p-3' : ''}"
+        in:fade={{ delay: 200 }}
       >
-    </div>
-  {/if}
+        <Icon solid={true}>
+          <PlayButton />
+        </Icon>
+      </span>
+      <div class="flex-1" in:fade={{ delay: 200 }}>
+        <!-- svelte-ignore a11y-distracting-elements -->
+        <marquee
+          class="w-full {breakMd
+            ? 'md-invert md:transform md:rotate-90 md:w-screen-oppose md:h-9 md:origin-top-left md:w-full md:translate-x-8'
+            : ''}">{text}</marquee
+        >
+      </div>
+    {/if}
+  </div>
 </a>
 
 <style>

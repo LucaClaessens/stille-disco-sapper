@@ -1,11 +1,12 @@
 <script>
   import { Parallax, ParallaxLayer } from "svelte-parallax";
-  import { fade, slide } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import serializeImage from "../utils/image/serializeImage";
   import FlexContainer from "./FlexContainer.svelte";
   import IntersectionObserver from "./IntersectionObserver.svelte";
   import serializers from "./serializers";
   import BlockContent from "@movingbrands/svelte-portable-text";
+  import Spacer from "./Spacer.svelte";
 
   export let gallery;
 
@@ -27,13 +28,19 @@
       {#each gallery as slide, i}
         {#if slide.background}
           <ParallaxLayer rate={0} offset={i} style="z-index:-1;">
+            <Spacer
+              height={slide.spacer}
+              classList="{bgColor} transition-colors duration-500"
+            />
             <div
-              class="w-full h-full {bgColor} opacity-50 transition-colors duration-500"
+              class="w-full h-full {bgColor} transition-colors duration-500"
             />
           </ParallaxLayer>
           {#each slide.background.images as entry}
-            <ParallaxLayer offset={i} rate={0.5}>
+            <ParallaxLayer offset={i} rate={entry.rate || 0.5}>
+              <Spacer height={slide.spacer} />
               <FlexContainer
+                container={true}
                 justify={entry.position.justify}
                 align={entry.position.align}
               >
@@ -50,8 +57,10 @@
         {/if}
         {#if slide.foreground}
           {#each slide.foreground.images as entry}
-            <ParallaxLayer offset={i} rate={1.33}>
+            <ParallaxLayer offset={i} rate={entry.rate || 1.33}>
+              <Spacer height={slide.spacer} />
               <FlexContainer
+                container={true}
                 justify={entry.position.justify}
                 align={entry.position.align}
               >
@@ -66,12 +75,14 @@
             </ParallaxLayer>
           {/each}
         {/if}
-        <ParallaxLayer offset={i} rate={1.1}>
+        <ParallaxLayer offset={i} rate={slide.message.rate || 1.1}>
           <IntersectionObserver
             on:change={($event) => updateIntersections($event.detail, i)}
             wrap={true}
           >
+            <Spacer height={slide.spacer} />
             <FlexContainer
+              container={true}
               justify={slide.message.position.justify}
               align={slide.message.position.align}
             >

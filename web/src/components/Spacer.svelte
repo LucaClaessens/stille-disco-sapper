@@ -1,5 +1,6 @@
 <script>
-  let height;
+  export let height = 0;
+  export let classList;
 </script>
 
-<div class="w-full h-{height}" />
+<div class="spacer w-full h-{height} {classList}" />

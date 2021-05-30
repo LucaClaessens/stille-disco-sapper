@@ -14,6 +14,8 @@
 </script>
 
 <script>
+  import Image from "../Image.svelte";
+
   export let startDate;
   export let publicity;
   export let venue;
@@ -33,9 +35,18 @@
   >
 </div>
 <div class="py-6">
-  <div
-    class="bg-gradient-to-br from-red-pure via-green-pure to-blue-pure w-full h-64"
-  />
+  {#if !publicity.media.images || publicity.media.images.length == 0}
+    <div
+      class="bg-gradient-to-br from-red-pure via-green-pure to-blue-pure w-full h-64"
+    />
+  {:else}
+    <Image
+      cover={false}
+      classes="h-64"
+      url={publicity.media.images[0].url}
+      alt={publicity.media.images[0].name}
+    />
+  {/if}
   <p class="py-6">
     {@html publicity.text_html}
   </p>

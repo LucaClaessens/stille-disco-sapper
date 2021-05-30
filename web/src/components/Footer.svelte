@@ -11,7 +11,7 @@
   const year = new Date().getFullYear();
 </script>
 
-<footer class="w-full p-6 bg-gray-900 text-gray-50 dark">
+<footer class="w-full p-6 bg-gray-900 text-gray-50 dark font-heading">
   <div class="xl:container w-full mx-auto">
     <nav class="py-6">
       <ul>
@@ -22,8 +22,7 @@
                 href={link.href.startsWith("http")
                   ? link.href
                   : `/${lang}${link.href}`}
-                target={link.target}
-              >{link.text}</Link
+                target={link.target}>{link.text}</Link
               >
             </li>
           {/if}

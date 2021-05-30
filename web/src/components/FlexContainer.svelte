@@ -1,6 +1,7 @@
 <script>
   export let justify;
   export let align;
+  export let container = false;
 
   $: j = () => {
     switch (justify) {
@@ -23,8 +24,10 @@
         return "items-end";
     }
   };
+
+  $: c = () => (container ? "container mx-auto" : "");
 </script>
 
-<div class="w-full h-full flex {j()} {a()}">
+<div class="w-full h-full flex {j()} {a()} {c()}">
   <slot />
 </div>

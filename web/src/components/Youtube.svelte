@@ -19,17 +19,20 @@
     player.playVideo();
   }
   const dispatch = createEventDispatcher();
-  window.addEventListener("iframeApiReady", function (e) {
-    player = new YT.Player(divId, {
-      height: "390",
-      width: "640",
-      videoId,
-      events: {
-        onReady: playerIsReady,
-        onStateChange: playerStateChange,
-      },
+
+  if (process.browser) {
+    window.addEventListener("iframeApiReady", function (e) {
+      player = new YT.Player(divId, {
+        width: "100%",
+        videoId,
+        events: {
+          onReady: playerIsReady,
+          onStateChange: playerStateChange,
+        },
+      });
     });
-  });
+  }
+
   function playerStateChange({ data }) {
     dispatch("PlayerStateChange", data);
     let strReturn = "";

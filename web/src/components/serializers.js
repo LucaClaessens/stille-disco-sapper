@@ -5,20 +5,24 @@ import serializeImage from "./../utils/image/serializeImage";
 import Block from "./Block.svelte";
 import BlockSubtitle from "./BlockSubtitle.svelte";
 import BlockTitle from "./BlockTitle.svelte";
-import CheckoutPreview from "./CheckoutPreview.svelte";
+import CheckoutPreview from "./checkout/CheckoutPreview.svelte";
 import ContactSection from "./ContactSection.svelte";
 import I18nLink from "./I18nLink.svelte";
 import Image from "./Image.svelte";
-import InputForm from "./InputForm.svelte";
+import Input from "./inputs/Input.svelte";
 import Link from "./Link.svelte";
 import ParallaxGallery from "./ParallaxGallery.svelte";
-import QABlock from "./QABlock.svelte";
+import FormBlock from "./layout/FormBlock.svelte";
 import QAItem from "./QAItem.svelte";
 import Spacer from "./Spacer.svelte";
-import TextareaForm from "./TextareaForm.svelte";
+import Textarea from "./inputs/Textarea.svelte";
 import Button from "./Button.svelte";
 import Color from "./Color.svelte";
 import Youtube from "./Youtube.svelte";
+import LayoutFullwidth from "./layout/LayoutFullwidth.svelte";
+import LayoutOneOne from "./layout/LayoutOneOne.svelte";
+import LayoutOneTwo from "./layout/LayoutOneTwo.svelte";
+import LayoutTwoOne from "./layout/LayoutTwoOne.svelte";
 
 export default {
   marks: {
@@ -39,6 +43,41 @@ export default {
     }),
   },
   types: {
+    layoutFullWidth: ({ node, children }) => ({
+      component: LayoutFullwidth,
+      childNodes: children,
+      props: {
+        backgroundColor: node.backgroundColor,
+        content: node.content,
+      },
+    }),
+    layoutOneOne: ({ node, children }) => ({
+      component: LayoutOneOne,
+      childNodes: children,
+      props: {
+        backgroundColor: node.backgroundColor,
+        contentLeft: node.contentLeft,
+        contentRight: node.contentRight,
+      },
+    }),
+    layoutOneTwo: ({ node, children }) => ({
+      component: LayoutOneTwo,
+      childNodes: children,
+      props: {
+        backgroundColor: node.backgroundColor,
+        contentLeft: node.contentLeft,
+        contentRight: node.contentRight,
+      },
+    }),
+    layoutTwoOne: ({ node, children }) => ({
+      component: LayoutTwoOne,
+      childNodes: children,
+      props: {
+        backgroundColor: node.backgroundColor,
+        contentLeft: node.contentLeft,
+        contentRight: node.contentRight,
+      },
+    }),
     mainImage: ({ node, children }) => ({
       component: Image,
       childNodes: children,
@@ -47,13 +86,13 @@ export default {
         alt: node.alt,
       },
     }),
-    textareaForm: ({ node, children }) => ({
-      component: TextareaForm,
+    textarea: ({ node, children }) => ({
+      component: Textarea,
       childNodes: children,
       props: node,
     }),
-    inputForm: ({ node, children }) => ({
-      component: InputForm,
+    input: ({ node, children }) => ({
+      component: Input,
       childNodes: children,
       props: node,
     }),
@@ -77,8 +116,8 @@ export default {
       childNodes: children,
       props: node,
     }),
-    qaBlock: ({ node, children }) => ({
-      component: QABlock,
+    formBlock: ({ node, children }) => ({
+      component: FormBlock,
       childNodes: children,
       props: node,
     }),

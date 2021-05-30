@@ -1,12 +1,11 @@
 <script context="module">
-  import BlockContent from "@movingbrands/svelte-portable-text";
   import SEO from "./../../components/SEO.svelte";
-  import serializers from "./../../components/serializers";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
   import Banner from "../../components/Banner.svelte";
   import Footer from "../../components/Footer.svelte";
   import Header from "../../components/Header.svelte";
   import Radio from "../../components/Radio.svelte";
+  import BlockContentWrapper from "../../components/BlockContentWrapper.svelte";
   import {
     footerData,
     globalSettings,
@@ -19,7 +18,6 @@
     try {
       const res = await this.fetch(`api/${projectLanguage(lang)}/${pageID}`);
       const content = await res.json();
-      console.log(`api/${projectLanguage(lang)}/${pageID}`, { content });
       return { content, lang, host, path };
     } catch (err) {
       this.error(500, err);
@@ -46,7 +44,7 @@
 <Banner {...$globalSettings.banner} />
 
 {#if content.body}
-  <BlockContent blocks={content.body} {serializers} />
+  <BlockContentWrapper blocks={content.body} />
 {:else}
   <div class="w-full h-full flex justify-center items-center flex-col">
     <p />
