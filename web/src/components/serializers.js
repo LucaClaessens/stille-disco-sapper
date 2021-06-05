@@ -23,6 +23,7 @@ import LayoutFullwidth from "./layout/LayoutFullwidth.svelte";
 import LayoutOneOne from "./layout/LayoutOneOne.svelte";
 import LayoutOneTwo from "./layout/LayoutOneTwo.svelte";
 import LayoutTwoOne from "./layout/LayoutTwoOne.svelte";
+import ButtonWithLink from "./ButtonWithLink.svelte";
 
 export default {
   marks: {
@@ -158,6 +159,11 @@ export default {
     }),
     button: ({ node, children }) => ({
       component: Button,
+      childNodes: children,
+      props: node,
+    }),
+    linkButton: ({ node, children }) => ({
+      component: ButtonWithLink,
       childNodes: children,
       props: node,
     }),

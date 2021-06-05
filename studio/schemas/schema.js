@@ -30,6 +30,7 @@ import i18nLink from './objects/components/i18nLink'
 import input from './objects/components/input'
 import landingCategory from './objects/components/landingCategory'
 import link from './objects/components/link'
+import linkButton from './objects/components/linkButton'
 import mainImage from './objects/components/mainImage'
 import productVariation from './objects/components/productVariation'
 import qaItem from './objects/components/qaItem'
@@ -115,6 +116,7 @@ export default createSchema({
     spacer,
     flexPositioner,
     button,
+    linkButton,
     youtube
   ])
 })

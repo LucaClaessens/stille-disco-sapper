@@ -89,7 +89,7 @@ export default {
       }
     },
     {
-      type: 'button'
+      type: 'linkButton'
     },
     {
       type: 'spacer'
