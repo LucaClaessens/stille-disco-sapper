@@ -18,9 +18,17 @@
 
   $: lang = $language;
 
-  $: action = referral.slug
-    ? `/${lang}/${referral.parent}/${referral.slug.current}`
-    : null;
+  $: action = parseAction(referral);
+
+  const parseAction = (referral) => {
+    if (!referral.slug) {
+      return null;
+    }
+    if (!referral.parent) {
+      return `/${lang}/${referral.slug}`;
+    }
+    return `/${lang}/${referral.parent}/${referral.slug}`;
+  };
 </script>
 
 <section
@@ -38,28 +46,30 @@
 
         <BlockContentWrapper blocks={content} />
 
-        <div class="mt-4">
-          <div class="flex items-start">
-            <div class="flex items-center h-5">
-              <input
-                use:focusable
-                bind:checked
-                id="statement"
-                name="statement"
-                type="checkbox"
-                class="h-4 w-4 text-blue-pure border-gray-300 rounded"
-              />
-            </div>
-            <div class="ml-3 text-sm">
-              <label for="statement" class="font-medium text-gray-500">
-                I agree to the <Link
-                  href="/en/privacy-policy"
-                  textColor="blue-pure">privacy statement</Link
-                >
-              </label>
+        {#if privacyStatementRequired}
+          <div class="mt-4">
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  use:focusable
+                  bind:checked
+                  id="statement"
+                  name="statement"
+                  type="checkbox"
+                  class="h-4 w-4 text-blue-pure border-gray-300 rounded"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="statement" class="font-medium text-gray-500">
+                  I agree to the <Link
+                    href="/en/privacy-policy"
+                    textColor="blue-pure">privacy statement</Link
+                  >
+                </label>
+              </div>
             </div>
           </div>
-        </div>
+        {/if}
 
         <div class="text-right mt-12">
           <Button
