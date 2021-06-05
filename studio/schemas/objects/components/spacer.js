@@ -1,19 +1,19 @@
 export default {
   name: 'spacer',
-  type: 'string',
+  type: 'object',
   title: 'Spacer',
-  options: {
-    list: [
-      { title: 'none', value: '' },
-      { title: 'small', value: '6' },
-      { title: 'medium', value: '12' },
-      { title: 'large', value: '24' },
-      { title: 'huge', value: '48' }
-    ]
-  },
+  fields: [
+    {
+      name: 'height',
+      type: 'string',
+      options: {
+        list: ['none', 'small', 'medium', 'large', 'huge']
+      }
+    }
+  ],
   preview: {
     select: {
-      size: 'spacer'
+      size: 'height'
     },
     prepare({ size }) {
       return {
