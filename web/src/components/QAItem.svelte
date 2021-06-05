@@ -6,8 +6,8 @@
   export let answer;
 </script>
 
-<div class="bg-gray-100">
-  <article class=" p-6 max-w-lg md:ml-6">
+<div>
+  <article class="p-6 md:px-0 max-w-lg md:ml-6">
     <h3 class="text-2xl mb-6 font-heading">
       {question}
     </h3>

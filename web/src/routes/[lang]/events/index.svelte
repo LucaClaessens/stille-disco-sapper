@@ -58,7 +58,9 @@
   <SEO {host} {path} seo={content.seo} {lang} />
 </svelte:head>
 
-<div class="w-full h-full overflow-y-auto flex flex-col align-top">
+<div
+  class="w-full h-full overflow-y-auto flex flex-col align-top pt-24 md:pt-0"
+>
   <div class="container mx-auto">
     {#if activeEventIndex === -1}
       <span in:fly={{ duration: 500, y: -500 }}>

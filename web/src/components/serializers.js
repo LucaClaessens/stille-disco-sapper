@@ -24,6 +24,7 @@ import LayoutOneOne from "./layout/LayoutOneOne.svelte";
 import LayoutOneTwo from "./layout/LayoutOneTwo.svelte";
 import LayoutTwoOne from "./layout/LayoutTwoOne.svelte";
 import ButtonWithLink from "./ButtonWithLink.svelte";
+import FaqBlock from "./layout/FaqBlock.svelte";
 
 export default {
   marks: {
@@ -119,6 +120,11 @@ export default {
     }),
     formBlock: ({ node, children }) => ({
       component: FormBlock,
+      childNodes: children,
+      props: node,
+    }),
+    faqBlock: ({ node, children }) => ({
+      component: FaqBlock,
       childNodes: children,
       props: node,
     }),
