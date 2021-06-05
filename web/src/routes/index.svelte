@@ -25,6 +25,7 @@
 
 {#each languageParams as param}
   <a href={param} class="hidden">{param}</a>
+  <a href="{param}/checkout" class="hidden">{param}</a>
 {/each}
 
 <div
