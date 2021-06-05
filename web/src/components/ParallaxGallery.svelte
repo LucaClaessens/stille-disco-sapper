@@ -29,7 +29,7 @@
         {#if slide.background}
           <ParallaxLayer rate={0} offset={i} style="z-index:-1;">
             <Spacer
-              height={slide.spacer?.height}
+              height={(slide.spacer && slide.spacer.height) || "none"}
               classList="{bgColor} transition-colors duration-500"
             />
             <div
@@ -38,7 +38,9 @@
           </ParallaxLayer>
           {#each slide.background.images as entry}
             <ParallaxLayer offset={i} rate={entry.rate || 0.5}>
-              <Spacer height={slide.spacer?.height} />
+              <Spacer
+                height={(slide.spacer && slide.spacer.height) || "none"}
+              />
               <FlexContainer
                 container={true}
                 justify={entry.position.justify}
@@ -58,7 +60,9 @@
         {#if slide.foreground}
           {#each slide.foreground.images as entry}
             <ParallaxLayer offset={i} rate={entry.rate || 1.33}>
-              <Spacer height={slide.spacer?.height} />
+              <Spacer
+                height={(slide.spacer && slide.spacer.height) || "none"}
+              />
               <FlexContainer
                 container={true}
                 justify={entry.position.justify}
@@ -80,7 +84,7 @@
             on:change={($event) => updateIntersections($event.detail, i)}
             wrap={true}
           >
-            <Spacer height={slide.spacer?.height} />
+            <Spacer height={(slide.spacer && slide.spacer.height) || "none"} />
             <FlexContainer
               container={true}
               justify={slide.message.position.justify}
