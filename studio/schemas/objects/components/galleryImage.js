@@ -80,6 +80,15 @@ export default {
       name: 'foreground',
       type: 'object',
       title: 'Foreground layer',
+      validation: Rule =>
+        Rule.custom(data => {
+          for (const image of data.images) {
+            if (!image.position || !image.position.justify || !image.position.align) {
+              return 'Een foto mist positieinformatie!'
+            }
+            return true
+          }
+        }),
       options: {
         collapsible: true,
         collapsed: false
