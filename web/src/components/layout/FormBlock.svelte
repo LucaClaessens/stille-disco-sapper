@@ -1,13 +1,13 @@
 <script>
+  import { focusable } from "../../core/directives/focusable";
+  import { language } from "../../stores/language";
   import BlockContentWrapper from "../BlockContentWrapper.svelte";
   import Button from "../Button.svelte";
   import Link from "../Link.svelte";
-  import { language } from "../../stores/language";
-  import { focusable } from "../../core/directives/focusable";
 
   export let backgroundColor = "bg-white";
   export let title = "_TITLE_";
-  export let subtitle = "_SUBTITLE_";
+  export let subtitle = "";
   export let content = {};
   export let formId = "";
   export let referral = {};
@@ -40,9 +40,11 @@
       <form name={formId} {action} method="POST" netlify>
         <input type="hidden" name="form-name" value={formId} />
 
-        <div class="mb-4">
-          <BlockContentWrapper blocks={subtitle} />
-        </div>
+        {#if subtitle}
+          <div class="mb-4">
+            <BlockContentWrapper blocks={subtitle} />
+          </div>
+        {/if}
 
         <BlockContentWrapper blocks={content} />
 
