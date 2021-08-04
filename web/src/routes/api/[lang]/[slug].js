@@ -3,7 +3,8 @@ import client from "../../../sanityClient";
 export async function get(req, res) {
   try {
     const { lang, slug } = req.params;
-    const filter = '*[_type == "page" && _lang == $lang && slug == $slug][0]';
+    const filter =
+      '*[_type == "page" && _lang == $lang && slug == $slug] | order(dateTime(_updatedAt) desc)[0]';
     const projection = `{
             ...,
             body[]{
