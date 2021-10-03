@@ -55,9 +55,9 @@
     on:mouseenter={hover}
     on:mouseleave={leave}
   >
-    {#if $activeSection !== "rental"}
-      <slot name="events" />
-    {/if}
+    <!-- {#if $activeSection !== "rental"} -->
+    <slot name="events" />
+    <!-- {/if} -->
   </div>
   {#if $activeSection !== "rental"}
     <Radio active={$activeSection !== null} />
@@ -74,8 +74,8 @@
       'rental'
     )} transition-all duration-700 flex justify-center items-center"
   >
-    {#if $activeSection !== "events"}
-      <slot name="rental" />
-    {/if}
+    <!-- {#if $activeSection !== "events"} -->
+    <slot name="rental" />
+    <!-- {/if} -->
   </div>
 </div>
