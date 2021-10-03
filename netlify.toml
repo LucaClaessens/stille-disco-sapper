@@ -7,6 +7,10 @@
     autoLaunch = true
 [build]
     functions = "/.netlify/functions/"
+## This rule redirects the FAQ link provided on packaging
+[[redirects]]
+    from = "/tutorial"
+    to = "/en/tutorialfaq"
 [[redirects]]
     from = "/netlify/*"
     to="/.netlify/functions/:splat"
