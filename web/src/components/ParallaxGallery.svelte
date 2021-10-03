@@ -12,6 +12,11 @@
 
   let clientSide = process.browser;
   let bgColor = "";
+  let desktop = clientSide && window.matchMedia("(min-width: 768px)").matches;
+
+  const handleResize = () => {
+    desktop = window.innerWidth > 768;
+  };
 
   const updateIntersections = (intersecting, index) => {
     if (intersecting) {
@@ -22,25 +27,44 @@
   };
 </script>
 
+<svelte:window on:resize={handleResize} />
+
 <section id="parallax-gallery">
   {#if clientSide}
     <Parallax sections={gallery.length} style="background-color: white;">
       {#each gallery as slide, i}
         {#if slide.background}
           <ParallaxLayer rate={0} offset={i} style="z-index:-1;">
-            <Spacer
-              height={(slide.spacer && slide.spacer.height) || "none"}
-              classList="{bgColor} transition-colors duration-500"
-            />
+            {#if desktop}
+              <Spacer
+                height={(slide.spacer && slide.spacer.height) || "none"}
+                classList="{bgColor} transition-colors duration-500"
+              />
+            {:else}
+              <Spacer
+                height={(slide.spacersm && slide.spacersm.height) ||
+                  (slide.spacer && slide.spacer.height) ||
+                  "none"}
+                classList="{bgColor} transition-colors duration-500"
+              />
+            {/if}
             <div
               class="w-full h-full {bgColor} transition-colors duration-500"
             />
           </ParallaxLayer>
           {#each slide.background.images as entry}
             <ParallaxLayer offset={i} rate={entry.rate || 0.5}>
-              <Spacer
-                height={(slide.spacer && slide.spacer.height) || "none"}
-              />
+              {#if desktop}
+                <Spacer
+                  height={(slide.spacer && slide.spacer.height) || "none"}
+                />
+              {:else}
+                <Spacer
+                  height={(slide.spacersm && slide.spacersm.height) ||
+                    (slide.spacer && slide.spacer.height) ||
+                    "none"}
+                />
+              {/if}
               <FlexContainer
                 container={true}
                 justify={entry.position.justify}
@@ -60,9 +84,17 @@
         {#if slide.foreground}
           {#each slide.foreground.images as entry}
             <ParallaxLayer offset={i} rate={entry.rate || 1.33}>
-              <Spacer
-                height={(slide.spacer && slide.spacer.height) || "none"}
-              />
+              {#if desktop}
+                <Spacer
+                  height={(slide.spacer && slide.spacer.height) || "none"}
+                />
+              {:else}
+                <Spacer
+                  height={(slide.spacersm && slide.spacersm.height) ||
+                    (slide.spacer && slide.spacer.height) ||
+                    "none"}
+                />
+              {/if}
               <FlexContainer
                 container={true}
                 justify={entry.position.justify}
@@ -84,7 +116,17 @@
             on:change={($event) => updateIntersections($event.detail, i)}
             wrap={true}
           >
-            <Spacer height={(slide.spacer && slide.spacer.height) || "none"} />
+            {#if desktop}
+              <Spacer
+                height={(slide.spacer && slide.spacer.height) || "none"}
+              />
+            {:else}
+              <Spacer
+                height={(slide.spacersm && slide.spacersm.height) ||
+                  (slide.spacer && slide.spacer.height) ||
+                  "none"}
+              />
+            {/if}
             <FlexContainer
               container={true}
               justify={slide.message.position.justify}

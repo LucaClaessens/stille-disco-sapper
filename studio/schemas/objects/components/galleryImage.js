@@ -73,8 +73,14 @@ export default {
     {
       name: 'spacer',
       type: 'spacer',
-      title: 'Spacing',
+      title: 'Spacing (desktop)',
       description: 'Vertical spacing on top of this slide'
+    },
+    {
+      name: 'spacersm',
+      type: 'spacer',
+      title: 'Spacing (mobile)',
+      description: 'Vertical spacing on top of this slide, when set, overrides the desktop value'
     },
     {
       name: 'foreground',
