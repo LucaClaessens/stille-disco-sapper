@@ -31,6 +31,6 @@
 >
   <option value="en">English</option>
   <option value="nl">Nederlands</option>
-  <option value="fr">Francais</option>
+  <!-- <option value="fr">Francais</option> -->
   <option value="de">Deutsch</option>
 </select>
