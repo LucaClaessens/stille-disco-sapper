@@ -86,7 +86,7 @@
     checkoutPending = true;
     const { cart } = await createOrder();
     checkoutPending = false;
-    window.open(cart.checkout_url, "_blank");
+    window.open(cart.checkout_url, "_self");
   };
 
   const cartToPayload = () => {
