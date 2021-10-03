@@ -4,33 +4,43 @@
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName("script")[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = () =>
-      window.dispatchEvent(new Event("iframeApiReady"));
   }
 </script>
 
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onDestroy } from "svelte";
   export let videoId;
   let player;
   let divId = "player_" + parseInt(Math.random() * 109999);
+  let playtimeInterval;
+  let iFrameApiInterval;
+  let iFrameApiReady =
+    process.browser &&
+    document.querySelector("#www-widgetapi-script") &&
+    window.YT;
+
   export function play() {
     player.playVideo();
   }
+
   const dispatch = createEventDispatcher();
 
   if (process.browser) {
-    window.addEventListener("iframeApiReady", function (e) {
-      player = new YT.Player(divId, {
-        width: "100%",
-        videoId,
-        events: {
-          onReady: playerIsReady,
-          onStateChange: playerStateChange,
-        },
-      });
-    });
+    window.onYouTubeIframeAPIReady = () => (iFrameApiReady = true);
+
+    iFrameApiInterval = setInterval(() => {
+      if (iFrameApiReady) {
+        player = new YT.Player(divId, {
+          width: "100%",
+          videoId,
+          events: {
+            onReady: playerIsReady,
+            onStateChange: playerStateChange,
+          },
+        });
+        clearInterval(iFrameApiInterval);
+      }
+    }, 100);
   }
 
   function playerStateChange({ data }) {
@@ -58,10 +68,15 @@
   }
   function playerIsReady() {
     dispatch("Ready");
-    setInterval(() => {
-      dispatch("currentPlayTime", player.getCurrentTime());
+    playtimeInterval = setInterval(() => {
+      dispatch("currentPlayTime", player ? player.getCurrentTime() : 0);
     }, 1000);
   }
+
+  onDestroy(() => {
+    clearInterval(playtimeInterval);
+    player = null;
+  });
 </script>
 
 <div id={divId} />
