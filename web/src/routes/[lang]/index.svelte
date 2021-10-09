@@ -1,9 +1,8 @@
 <script context="module">
-  import { fade } from "svelte/transition";
   import RegionLayout, { hover } from "../../components/RegionLayout.svelte";
   import { hoveredSection } from "../../stores/layout";
   import SEO from "./../../components/SEO.svelte";
-  import { globalSettings } from "./../../stores/layout";
+  import { scaleLogo as scaleHeaderLogo } from "./../../stores/layout";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
   import serializeImage from "./../../utils/image/serializeImage";
   export async function preload({ host, params, path }) {
@@ -24,7 +23,9 @@
   export let path;
   export let lang;
   export let content;
-  const { events, rental, seo } = content;
+  const { events, rental, seo, scaleLogo = true } = content;
+
+  scaleHeaderLogo.set(scaleLogo);
 
   const scaleText = (ref, match) =>
     ref === match ? "text-2xl" : "text-2xl md:text-5xl";
