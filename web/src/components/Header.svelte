@@ -112,6 +112,7 @@
         {#each links as link}
           {#if link.visibility == "all" || link.visibility === $activeSection}
             <LinkButton
+              on:click={() => (menuExpanded = false)}
               layout="block px-6 py-3 mb-3"
               role="menuitem"
               url="/{lang}{link.href}"

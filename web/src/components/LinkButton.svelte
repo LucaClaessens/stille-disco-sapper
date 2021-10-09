@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import { focusable } from "./../core/directives/focusable";
   import { activePath } from "./../stores/layout";
 
@@ -6,12 +7,14 @@
   export let text;
   export let role = "none";
   export let layout = "inline-flex";
+  const dispatch = createEventDispatcher();
 
   $: active = $activePath === url;
 </script>
 
 <a
   use:focusable
+  on:click={(event) => dispatch("click", { target: event.target })}
   {role}
   href={url}
   class="{layout} bg-white dark:bg-black rounded-md p-2 items-center justify-center hover:text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-300 {active
