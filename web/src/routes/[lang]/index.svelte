@@ -1,6 +1,9 @@
 <script context="module">
-  import RegionLayout, { hover } from "../../components/RegionLayout.svelte";
-  import { hoveredSection } from "../../stores/layout";
+  import RegionLayout, {
+    hover,
+    leave,
+  } from "../../components/RegionLayout.svelte";
+  import { hoveredSection, onHomepage } from "../../stores/layout";
   import SEO from "./../../components/SEO.svelte";
   import { scaleLogo as scaleHeaderLogo } from "./../../stores/layout";
   import projectLanguage from "./../../utils/i18n/projectLanguage";
@@ -29,6 +32,10 @@
 
   const scaleText = (ref, match) =>
     ref === match ? "text-2xl" : "text-2xl md:text-5xl";
+
+  $: _oh = $onHomepage;
+
+  $: _oh ? hoveredSection.set(null) : void 0;
 </script>
 
 <svelte:head>
@@ -39,6 +46,7 @@
   <a
     aria-label={events.label}
     on:focus={hover}
+    on:click={leave}
     slot="events"
     href="{lang}/events"
     class="z-0 overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
@@ -72,6 +80,7 @@
   <a
     aria-label={rental.label}
     on:focus={hover}
+    on:click={leave}
     slot="rental"
     href="{lang}/rental"
     class="z-0 overflow-hidden relative w-full h-full bg-black text-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"

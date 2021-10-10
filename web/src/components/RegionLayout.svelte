@@ -9,6 +9,9 @@
       hoveredSection.set(closestNode.dataset.section);
     }
   }
+  export function leave() {
+    hoveredSection.set(null);
+  }
 </script>
 
 <script>
@@ -18,7 +21,6 @@
 
   export let lang;
 
-  const leave = () => hoveredSection.set(null);
   const select = (event) => {
     const { target } = event;
     if (target.dataset.section) {

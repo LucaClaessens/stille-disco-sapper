@@ -1,11 +1,11 @@
 <script>
+  import BlockContent from "@movingbrands/svelte-portable-text";
   import { Parallax, ParallaxLayer } from "svelte-parallax";
   import { fade } from "svelte/transition";
   import serializeImage from "../utils/image/serializeImage";
   import FlexContainer from "./FlexContainer.svelte";
   import IntersectionObserver from "./IntersectionObserver.svelte";
   import serializers from "./serializers";
-  import BlockContent from "@movingbrands/svelte-portable-text";
   import Spacer from "./Spacer.svelte";
 
   export let gallery;
