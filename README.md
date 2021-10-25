@@ -85,7 +85,7 @@ These forms are submitted to netlify based on the name property of the field. Th
 
 The 'Events' page is built to integrate with Stager, a one-stop-shop for event management. The connection between Stille Disco and stager is set up by calling an endpoint exposed by stager, via the following file: `functions/events.js`, here we authenticate by using a token that we've generated within stager ([read more on how to, here](https://intercom.help/stager/nl/articles/3187655-publiceren-naar-eigen-website)).
 
-The api call looks for events that are published to the `Stille Disco Website` channel, configurable within an event under the `Publicity` page, as follows:
+The api call looks for events that are published to the `Website Stille Disco` channel, configurable within an event under the `Publicity` page, as follows:
 
 ![publish](https://github.com/LucaClaessens/stille-disco-sapper/blob/www-tst/assets/documentation/stager-publish.png "Publish to website")
 
