@@ -52,7 +52,7 @@
               class="w-full h-full {bgColor} transition-colors duration-500"
             />
           </ParallaxLayer>
-          {#each slide.background.images as entry}
+          {#each slide.background.images.filter((i) => i.position) as entry}
             <ParallaxLayer offset={i} rate={entry.rate || 0.5}>
               {#if desktop}
                 <Spacer
@@ -82,7 +82,7 @@
           {/each}
         {/if}
         {#if slide.foreground}
-          {#each slide.foreground.images as entry}
+          {#each slide.foreground.images.filter((i) => i.position) as entry}
             <ParallaxLayer offset={i} rate={entry.rate || 1.33}>
               {#if desktop}
                 <Spacer

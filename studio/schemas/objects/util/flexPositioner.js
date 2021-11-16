@@ -7,10 +7,7 @@ export default {
   fields: [
     {
       name: 'justify',
-      validation: Rule =>
-        Rule.required()
-          .min(1)
-          .error('Een waarde is verplicht!'),
+      validation: Rule => Rule.required().error('Een waarde is verplicht!'),
       required: true,
       type: 'string',
       title: 'Justification',
@@ -21,10 +18,7 @@ export default {
     },
     {
       name: 'align',
-      validation: Rule =>
-        Rule.required()
-          .min(1)
-          .error('Een waarde is verplicht!'),
+      validation: Rule => Rule.required().error('Een waarde is verplicht!'),
       required: true,
       type: 'string',
       title: 'Alignment',
